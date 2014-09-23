@@ -13,7 +13,8 @@ angular
 		'ngResource',
 		'ngSanitize',
 		'ui.router',
-		'ui.bootstrap'
+		'ui.bootstrap',
+		'projetobrasil.ufc.interface'
 	])
 	.config(function($stateProvider, $urlRouterProvider){
 

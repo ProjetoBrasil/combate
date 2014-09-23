@@ -2,30 +2,39 @@
 	<br>
 	<br>
 	<br>
-	<div class="row">
+	<div class="row" ng-controller="BarrasCtrl">
 		<div class="col-md-6">
-			<progressbar class="progress-striped" value="22" type="warning">22%</progressbar>
+			<progressbar class="progress-striped" value="100-barraA.hits*5" type="warning">{{20-barraA.hits}}</progressbar>
 		</div>
 		<div class="col-md-6">
-			<progressbar class="progress-striped reverse-progress" value="22" type="warning">22%</progressbar>
-		</div>
-	</div>
-	<div class="row text-center">
-		<div class="col-md-6">
-			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
-		</div>
-		<div class="col-md-6">
-			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
+			<progressbar class="progress-striped reverse-progress" value="100-barraB.hits*5" type="warning">{{20-barraB.hits}}</progressbar>
 		</div>
 	</div>
-	<div class="row text-center">
-		<div class="col-md-6">
-			<p>Proposta 01</p>
-			<button class="btn btn-primary">Votar</button>
+	<div class="row text-center" ng-controller="CandidatosCtrl">
+		<div class="col-md-6" id="avatar-candidato-A">
+			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
 		</div>
-		<div class="col-md-6">
-			<p>Proposta 02</p>
-			<button class="btn btn-primary">Votar</button>
+		<div class="col-md-6" id="avatar-candidato-B">
+			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
+		</div>
+	</div>
+	<div class="row text-center" ng-controller="PropostasCtrl">
+		<br>
+		<br>
+		<br>
+		<div class="col-md-6 col-md-offset-3 well">
+			<div class="col-md-12">
+				<p>{{proposta1.texto}}</p>
+				<button class="btn btn-primary" ng-click="escolherProposta('A')">
+					Votar
+				</button>
+			</div>
+			<div class="col-md-12">
+				<p>{{proposta2.texto}}</p>
+				<button class="btn btn-primary"  ng-click="escolherProposta('B')">
+					Votar
+				</button>
+			</div>
 		</div>
 	</div>
 </div>
