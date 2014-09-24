@@ -20,8 +20,8 @@ angular
 	])
 
 	.run(['$rootScope', function($rootScope){
-
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org:4242/v1/';
+		$rootScope.idsCandidatos = ['test', 'test2'];
 	}])
 
 	.config(function($stateProvider, $urlRouterProvider){

@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.propostas.controllers', [])
-	.controller('PropostasCtrl', ['$scope', '$rootScope','PropostasServ', function ($scope, $rootScope, PropostasServ){
+	.controller('PropostasCtrl',
+		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo',
+		function ($scope, $rootScope, PropostasServ, Jogo){
 
 		// TODO:
 		// - Escolher o tema a ser questionado
@@ -39,18 +41,6 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				$scope.proposta1 = data[0];
 				$scope.proposta2 = data[1];
 			});
-
-			/*$scope.proposta1 = {
-				titulo: 'Proposta 1',
-				politicians_id: 'A',
-				id: '0001'
-			};
-
-			$scope.proposta2 = {
-				titulo: 'Proposta 2',
-				politicians_id: 'B',
-				id: '0002'
-			};*/
 		};
 
 		$scope.carregaPropostasIniciais();
@@ -60,7 +50,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.$on('propostaEscolhida', $scope.popBuffer);
 
 		$scope.escolherProposta = function(idAutor){
-			$rootScope.$broadcast('propostaEscolhida', idAutor);
+			Jogo.atualizaPlacar(idAutor);
 		};
 
 	}]);
