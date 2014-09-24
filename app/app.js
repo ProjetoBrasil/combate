@@ -14,6 +14,7 @@ angular
 		'ngSanitize',
 		'ui.router',
 		'ui.bootstrap',
+		'angular-lodash',
 		'projetobrasil.ufc.interface'
 	])
 	.config(function($stateProvider, $urlRouterProvider){
@@ -23,6 +24,7 @@ angular
 		$stateProvider
 				.state('home', {
 					url: '/',
-					templateUrl: 'modules/interface/interface.html'
+					templateUrl: 'modules/interface/interface.html',
+					controller: 'InterfaceCtrl'
 				});
 	});
