@@ -1,29 +1,12 @@
 angular.module('projetobrasil.ufc.interface.controllers', [])
-	.controller('PropostasCtrl', ['$scope', '$rootScope', function ($scope, $rootScope){
-
-		$scope.proposta1 = {
-			texto: 'Proposta 1',
-			idAutor: 'A'
-		};
-
-		$scope.proposta2 = {
-			texto: 'Proposta 2',
-			idAutor: 'B'
-		};
-
-		$scope.escolherProposta = function(idAutor){
-			$rootScope.$broadcast('propostaEscolhida', idAutor);
-		};
-
-	}])
 	.controller('CandidatosCtrl', ['$scope', function ($scope){
 
 		$scope.candidatoA = {
-			id: 'B'
+			id: 'test'
 		};
 
 		$scope.candidatoB = {
-			id: 'B'
+			id: 'test2'
 		};
 
 		$scope.$on('propostaEscolhida', function(event, idAutor){
@@ -40,7 +23,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 		};
 
 		$scope.$on('propostaEscolhida', function(event, idAutor){
-			if(idAutor === 'A'){
+			if(idAutor === 'test'){
 				$scope.barraA.hits++;
 			}else{
 				$scope.barraB.hits++;
