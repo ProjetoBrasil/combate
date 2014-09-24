@@ -1,4 +1,13 @@
-angular.module('projetobrasil.ufc.interface.controllers', [])
+'use strict';
+
+angular.module('projetobrasil.ufc.interface.controllers', [
+		'projetobrasil.ufc.jogo.services'
+	])
+	.controller('InterfaceCtrl', ['$scope', 'GerenciadorJogo', function ($scope, Jogo){
+
+		Jogo.inicializaJogo();
+
+	}])
 	.controller('PropostasCtrl', ['$scope', '$rootScope', function ($scope, $rootScope){
 
 		$scope.proposta1 = {
@@ -31,19 +40,16 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			angular.element('#avatar-candidato-'+idAutor).addClass('candidato-ativo');
 		});
 	}])
-	.controller('BarrasCtrl', ['$scope', function ($scope){
+	.controller('BarrasCtrl', ['$scope', 'GerenciadorJogo', function ($scope, Jogo){
 		$scope.barraA = {
-			hits : 10
+			hits : Jogo.placarCandidato(0)
 		};
 		$scope.barraB = {
-			hits : 15
+			hits : Jogo.placarCandidato(1)
 		};
 
-		$scope.$on('propostaEscolhida', function(event, idAutor){
-			if(idAutor === 'A'){
-				$scope.barraA.hits++;
-			}else{
-				$scope.barraB.hits++;
-			}
+		$scope.$on('propostaEscolhida', function(){
+			$scope.barraA.hits = Jogo.placarCandidato(0);
+			$scope.barraB.hits = Jogo.placarCandidato(1);
 		});
 	}]);
