@@ -15,8 +15,15 @@ angular
 		'ui.router',
 		'ui.bootstrap',
 		'angular-lodash',
-		'projetobrasil.ufc.interface'
+		'projetobrasil.ufc.interface',
+		'projetobrasil.ufc.propostas'
 	])
+
+	.run(['$rootScope', function($rootScope){
+
+		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org:4242/v1/';
+	}])
+
 	.config(function($stateProvider, $urlRouterProvider){
 
 		$urlRouterProvider.otherwise('/');
