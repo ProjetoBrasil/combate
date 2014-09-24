@@ -14,7 +14,8 @@ angular
 		'ngSanitize',
 		'ui.router',
 		'ui.bootstrap',
-		'projetobrasil.ufc.interface'
+		'projetobrasil.ufc.interface',
+		'projetobrasil.ufc.login'
 	])
 	.config(function($stateProvider, $urlRouterProvider){
 
