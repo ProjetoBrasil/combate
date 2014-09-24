@@ -1,21 +1,4 @@
 angular.module('projetobrasil.ufc.interface.controllers', [])
-	.controller('PropostasCtrl', ['$scope', '$rootScope', function ($scope, $rootScope){
-
-		$scope.proposta1 = {
-			texto: 'Proposta 1',
-			idAutor: 'A'
-		};
-
-		$scope.proposta2 = {
-			texto: 'Proposta 2',
-			idAutor: 'B'
-		};
-
-		$scope.escolherProposta = function(idAutor){
-			$rootScope.$broadcast('propostaEscolhida', idAutor);
-		};
-
-	}])
 	.controller('CandidatosCtrl', ['$scope', function ($scope){
 
 		$scope.candidatoA = {

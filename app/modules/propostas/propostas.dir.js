@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('projetobrasil.ufc.interface.directives', []);
+angular.module('projetobrasil.ufc.propostas.directives', []);
 
 // A diretiva deve ser "tudo"
 // Eu outro módulo terá no HTML apenas a tag <propostas>
