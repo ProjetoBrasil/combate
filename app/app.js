@@ -26,4 +26,7 @@ angular
 					url: '/',
 					templateUrl: 'modules/interface/interface.html'
 				});
+	})
+	.run(function($rootScope){
+		 $rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 	});

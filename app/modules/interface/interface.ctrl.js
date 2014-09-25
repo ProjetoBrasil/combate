@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('projetobrasil.ufc.interface.controllers', [])
 	.controller('PropostasCtrl', ['$scope', '$rootScope', function ($scope, $rootScope){
 

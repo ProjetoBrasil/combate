@@ -2,7 +2,7 @@
 
 angular
 	.module('projetobrasil.ufc.login.services', [])
-.factory('UserLogin', ['$rootScope', '$http', '$cookies', function($rootScope, $http, $cookies){
+.factory('UserLogin', ['$rootScope', '$http', function($rootScope, $http){
 
 	var isUserLogged = false;
 	var loggedUserData = {};
@@ -50,7 +50,7 @@ angular
 		},
 		logout: function(success, error){
 			 $http.get($rootScope.apiBaseUrl+'user/logout')
-			 .success(function(data, status, headers){
+			 .success(function(data){
 					isUserLogged = false;
 					loggedUserData = {};
 					$rootScope.$broadcast('logout');
