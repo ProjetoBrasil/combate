@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="container-jogo">
 	<br>
 	<br>
 	<br>
@@ -10,13 +10,8 @@
 			<progressbar class="progress-striped reverse-progress" value="100-(p2.golpesSofridos * maxGolpesPorRound)" type="warning">{{maxGolpesPorRound-p2.golpesSofridos}}</progressbar>
 		</div>
 	</div>
-	<div class="row text-center" ng-controller="CandidatosCtrl">
-		<div class="col-md-6" id="avatar-candidato-A">
-			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
-		</div>
-		<div class="col-md-6" id="avatar-candidato-B">
-			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
-		</div>
+	<div class="row text-center" ng-controller="PersonagemCtrl">
+		<canvas id="arena" width="1000" height="400"></canvas>
 	</div>
 	<div class="row text-center" ng-controller="PropostasCtrl">
 		<br>
