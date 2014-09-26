@@ -2,8 +2,8 @@
 
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
-		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo',
-		function ($scope, $rootScope, PropostasServ, Jogo){
+		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', '$timeout',
+		function ($scope, $rootScope, PropostasServ, Jogo, $timeout){
 
 		// TODO:
 		// - Escolher o tema a ser questionado
@@ -17,6 +17,8 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		// - Verificar se o usuário está logado
 		// - Comunicar a jogada para o módulo Jogo
 		// - Comunidar a jogada para o módulo Personagens
+
+		$scope.mostrarBox = true;
 
 		// Copia o valor do buffer para a proposta corrente e requisita novas propostas para armazenar no buffers
 		$scope.popBuffer = function() {
@@ -50,7 +52,11 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.$on('propostaEscolhida', $scope.popBuffer);
 
 		$scope.escolherProposta = function(idAutor){
+			$scope.mostrarBox = false;
 			Jogo.atualizaPlacar(idAutor);
+			$timeout(function (argument) {
+				$scope.mostrarBox = true;
+			}, 3000);
 		};
 
 	}]);
