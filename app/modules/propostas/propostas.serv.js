@@ -6,7 +6,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 	'$rootScope', '$resource',
 	function($rootScope, $resource){
 		return {
-			getPropostas: function() {
+			getPropostas: function(tema) {
 				return $resource($rootScope.apiBaseUrl + 'ufc/proposals/rand', {}, {
 					query: { method: 'GET', params: {}, isArray: true}
 				});
@@ -27,8 +27,8 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 					'Política Econômica',
 					'Política Externa e Defesa Nacional',
 					'Políticas Sociais',
-					'Saúde',
-					'Outros'
+					'Saúde'
+					//'Outros' // Dilma não possui proposta nesse tema
 				];
 			},
 			getCor: function(theme) {
