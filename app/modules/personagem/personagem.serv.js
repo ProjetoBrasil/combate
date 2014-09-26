@@ -1,92 +1,83 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.personagem.services', [])
-	.factory('personagem', ['$rootScope', '$document', function ($rootScope, $document) {
+	.factory('Personagens', ['$rootScope', '$document', function ($rootScope, $document) {
 
 		var gerenciador = {};
-
-		var personagens = {
-		}
-		var spriteSheets = {};
-		var sprites = {};
+		var personagens = {};
 
 		var canvas = $document.find('#arena')[0];
 		var arena = new createjs.Stage(canvas);
 
+		var frameSize = [390,410];
 
 		gerenciador.inicializa = function(){
 			var nomes = $rootScope.nomesCandidatos;
-			nomes.forEach(function(c){
-
+			_.each(nomes, function(c, indice){
 				personagens[c] = {};
-
 				personagens[c].spriteSheets = {};
-				personagens[c].spriteSheets.ginga = new createjs.SpriteSheet({
-					'frames': {
-						'width': 380,
-						'height': 400,
-						'numFrames': 8,
-						'regX': 0,
-						'regY': 0
+				personagens[c].spriteSheets = new createjs.SpriteSheet({
+					frames: {
+						width: frameSize[0],
+						height: frameSize[1],
+						numFrames: 14,
+						regX: 0,
+						regY: 0
 					},
-					'animations': {'ginga': [0, 7, false, 0.5]},
-					'images': ['/images/'+c+'_sprite_ginga.png']
-				});
-				personagens[c].spriteSheets.ataque = new createjs.SpriteSheet({
-					'frames': {
-						'width': 360,
-						'height': 400,
-						'numFrames': 5,
-						'regX': 0,
-						'regY': 0
+					animations: {
+						ginga: {
+							frames: [0,1,2,3,4,5,6,7],
+							next: 'ginga',
+							speed: 1
+						},
+						ataque: {
+							frames : [8,9,10,9,8],
+							next: 'ginga',
+							speed: 1
+						},
+						dano: {
+							frames : [11,12,13,12,11],
+							next: 'ginga',
+							speed: 1
+						}
 					},
-					'animations': {'ataque': [0, 4, 'ginga', 0.5]},
-					'images': ['/images/'+c+'_sprite_ataque.png']
-				});
-				personagens[c].spriteSheets.dano = new createjs.SpriteSheet({
-					'frames': {
-						'width': 437,
-						'height': 400,
-						'numFrames': 5,
-						'regX': 0,
-						'regY': 0
-					},
-					'animations': {'dano': [0, 4, 'ginga', 0.5]},
-					'images': ['/images/'+c+'_sprite_dano.png']
+					images: ['/images/'+c+'_sprite.png']
 				});
 
 				personagens[c].sprites = {};
-				personagens[c].sprites.ginga = new createjs.Sprite(personagens[c].spriteSheets.ginga, 'ginga');
-				personagens[c].sprites.ataque = new createjs.Sprite(personagens[c].spriteSheets.ataque, 'ataque');
-				personagens[c].sprites.dano = new createjs.Sprite(personagens[c].spriteSheets.dano, 'dano');
+				personagens[c].sprites.ginga = new createjs.Sprite(personagens[c].spriteSheets, 'ginga');
+				personagens[c].sprites.ataque = new createjs.Sprite(personagens[c].spriteSheets, 'ataque');
+				personagens[c].sprites.dano = new createjs.Sprite(personagens[c].spriteSheets, 'dano');
+
+				if(indice === 1){
+					console.log(personagens[c]);
+					_.each(personagens[c].sprites, function(s){
+						s.x = arena.canvas.width - frameSize[0];
+					});
+				}
 			});
+
+			createjs.Ticker.setFPS(10);
+			createjs.Ticker.addEventListener('tick', arena);
+
+			arena.addChild(personagens.dilma.sprites.ginga);
+			arena.addChild(personagens.marina.sprites.ginga);
+
+			// arena.addEventListener('click', gerenciador.ataque);
+			// arena.addEventListener('doubleclick', gerenciador.dano);
+
+		};
+
+		gerenciador.ataque = function(nome){
+			personagens[nome].sprites.ginga.gotoAndPlay('ataque');
+		};
+
+		gerenciador.dano = function(nome){
+			personagens[nome].sprites.ginga.gotoAndPlay('dano');
 		};
 
 
+		gerenciador.inicializa();
 
-		// var ss = new createjs.SpriteSheet({
-		//     'frames': {
-		//         'width': 375,
-		//         'height': 550,
-		//         'numFrames': 8,
-		//         'regX': 0,
-		//         'regY': 0
-		//     },
-		//     'animations': {'ginga': [1, 8]},
-		//     'images': ['/images/sprite_dilma.png']
-		// });
-		// ss.getAnimation('ginga').speed = 0.1;
-
-		// var canvas = document.getElementById('dilma');
-		// var stage = new createjs.Stage(canvas);
-		// var sprite = new createjs.Sprite(ss, 'ginga');
-		// sprite.scaleY = sprite.scaleX = 0.4;
-
-		// createjs.Ticker.setFPS(60);
-		// createjs.Ticker.addEventListener('tick', stage);
-
-		// stage.addChild(sprite);
-
-
-		return({});
+		return(gerenciador);
 	}]);
