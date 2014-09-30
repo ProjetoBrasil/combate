@@ -2,8 +2,8 @@
 
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
-		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo',
-		function ($scope, $rootScope, PropostasServ, Jogo){
+		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens',
+		function ($scope, $rootScope, PropostasServ, Jogo, Personagens){
 
 		// TODO:
 		// - Escolher o tema a ser questionado
@@ -49,8 +49,9 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 
 		$scope.$on('propostaEscolhida', $scope.popBuffer);
 
-		$scope.escolherProposta = function(idAutor){
+		$scope.escolherProposta = function(idAutor, temaProposta){
 			Jogo.atualizaPlacar(idAutor);
+			Personagens.ataque(idAutor, 'meio_ambiente');
 		};
 
 	}]);
