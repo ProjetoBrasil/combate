@@ -11,7 +11,7 @@ angular.module('projetobrasil.ufc.propostas.directives', [])
 	return {
 		restrict: 'E',
 		templateUrl: 'modules/propostas/box-propostas.html',
-		link: function (scope, element, attrs) {
+		link: function () {
 
 		}
 	};

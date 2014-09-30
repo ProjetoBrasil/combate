@@ -71,7 +71,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 		};
 
-		gerenciador.ataque = function(nome, tema){
+		gerenciador.ataque = function(nome, tema, sucesso){
 			personagens[nome].sprites.ginga.gotoAndPlay('ataque');
 			var lado = personagens[nome].lado;
 			var golpe = new createjs.Bitmap('/images/golpes/'+tema+'_'+lado+'.png');
@@ -130,6 +130,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				return hit;
 			}
 			golpeia(golpe.scale, golpe.x, golpe.angle);
+			sucesso(); // Chamar ao fim do evento de golpe
 
 		};
 
