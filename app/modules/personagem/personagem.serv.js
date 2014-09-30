@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.personagem.services', [])
-	.factory('Personagens', ['$rootScope', '$document', function ($rootScope, $document) {
+	.factory('Personagens', ['$rootScope', '$document', 'PropostasServ', function ($rootScope, $document, PropostasServ) {
 
 		var gerenciador = {};
 		var personagens = {};
@@ -74,7 +74,9 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		gerenciador.ataque = function(nome, tema, sucesso){
 			personagens[nome].sprites.ginga.gotoAndPlay('ataque');
 			var lado = personagens[nome].lado;
-			var golpe = new createjs.Bitmap('/images/golpes/'+tema+'_'+lado+'.png');
+			var pastaTema = PropostasServ.getNomePastaTema(tema);
+			pastaTema = 'meio_ambiente'; // REMOVE ME
+			var golpe = new createjs.Bitmap('/images/golpes/'+pastaTema+'_'+lado+'.png');
 			var stepsGolpe = 20;
 
 			golpe.scale = 0;
