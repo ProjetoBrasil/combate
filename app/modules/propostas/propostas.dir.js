@@ -1,8 +1,18 @@
 'use strict';
 
-angular.module('projetobrasil.ufc.propostas.directives', []);
+angular.module('projetobrasil.ufc.propostas.directives', [])
 
-// A diretiva deve ser "tudo"
-// Eu outro módulo terá no HTML apenas a tag <propostas>
-// A diretiva trata do resto (podem ser passados atributos)
-// Se vira aí, Bruno! Heuhuahuahea.
+/*
+ * Essa diretiva somente inclui o HTML do box de propostas, assume que há um
+ * controlador 'PropostasCtrl' que define uma funçao $scope.escolherProposta(idAutor)
+ * que ocorre ao clique de uma proposta
+ */
+.directive('boxpropostas', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'modules/propostas/box-propostas.html',
+		link: function (scope, element, attrs) {
+
+		}
+	};
+}]);
