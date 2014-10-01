@@ -17,7 +17,7 @@ angular
 		'angular-lodash',
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.propostas',
-		'projetobrasil.ufc.personagem'
+		'projetobrasil.ufc.personagem',
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.login'
 	])
