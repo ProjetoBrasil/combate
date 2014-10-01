@@ -6,7 +6,7 @@ $verde-claro-borda: rgb(82, 120, 130);
 
 .box-propostas {
 	position: absolute;
-	top: 40%;
+	top: 35%;
 	left: 34%;
 	width: 35%;
 	background-color: $verde-escuro;
@@ -17,10 +17,9 @@ $verde-claro-borda: rgb(82, 120, 130);
 	background-color: $azul-escuro;
 	color: $marrom;
 	text-transform: uppercase;
-	line-height: 30px;
+	height: 60px;
+	line-height: 60px;
 	font-weight: bold;
-	padding-top: 8px;
-	padding-bottom: 5px;
 }
 .box-propostas .chamada p {
 	margin: 0;
@@ -33,11 +32,13 @@ $verde-claro-borda: rgb(82, 120, 130);
 	padding-top: 40px;
 	padding-bottom: 40px;
 	border-bottom: 1px solid $verde-claro-borda;
+	font-size: 36px;
+	font-weight: bold;
 }
 
 .box-propostas .proposta {
 	color: white;
-	height: 90px;
+	height: 105px;
 	border-bottom: 1px solid $verde-claro-borda;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -56,9 +57,6 @@ $verde-claro-borda: rgb(82, 120, 130);
 .box-propostas .proposta:hover {
 	background-color: $amarelo;
 	color: $verde-escuro;
-}
-.box-propostas .proposta .titulo {
-
 }
 
 .box-propostas .proposta .titulo,
