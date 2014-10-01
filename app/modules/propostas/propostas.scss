@@ -1,41 +1,91 @@
+$verde-escuro: rgb(9, 63, 77);
+$amarelo: rgb(210, 209, 7);
+$azul-escuro: rgb(7, 33, 42);
+$marrom: rgb(204, 176, 143);
+$verde-claro-borda: rgb(82, 120, 130);
+
 .box-propostas {
 	position: absolute;
-	top: 50%;
-	left: 36%;
-	width: 30%;
-	background-color: rgb(6, 36, 59);
-	padding: 10px;
+	top: 40%;
+	left: 34%;
+	width: 35%;
+	background-color: $verde-escuro;
+	padding: 0;
 }
 
 .box-propostas .chamada {
-	color: rgb(255, 193, 34);
+	background-color: $azul-escuro;
+	color: $marrom;
 	text-transform: uppercase;
+	line-height: 30px;
 	font-weight: bold;
-	background-color: rgb(15, 72, 116);
+	padding-top: 8px;
+	padding-bottom: 5px;
+}
+.box-propostas .chamada p {
+	margin: 0;
+}
+
+.box-propostas .tema {
+	color: #ffffff;
+	text-transform: uppercase;
+	margin: 0;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid $verde-claro-borda;
 }
 
 .box-propostas .proposta {
-	background-color: rgb(8, 175, 138);
 	color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	padding: 5px;
 	height: 90px;
+	border-bottom: 1px solid $verde-claro-borda;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	cursor: pointer;
+	/* Desabilita a seleção de texto */
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.box-propostas .proposta:first-of-type {
+	margin-bottom: 0;
+}
+.box-propostas .proposta:hover {
+	background-color: $amarelo;
+	color: $verde-escuro;
+}
+.box-propostas .proposta .titulo {
+
 }
 
-.box-propostas .proposta .titulo, .box-propostas .proposta .letra-opcao {
+.box-propostas .proposta .titulo,
+.box-propostas .proposta .letra-opcao {
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
 }
 
 .box-propostas .proposta .letra-opcao {
-	background-color: white;
-	color: #282940;
+	background-color: $amarelo;
+	color: $verde-escuro;
 	font-weight: bold;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	/* Faz círculo */
+	-moz-border-radius: 100%;
+	-webkit-border-radius: 100%;
+	border-radius: 100%;
+	/* Posiciona verticalmente centralizado */
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 24px;
 }
-
-.box-propostas .tema {
-	color: rgb(8, 175, 138);
-	text-transform: lowercase;
+.box-propostas .proposta:hover .letra-opcao {
+	background-color: $verde-escuro;
+	color: $amarelo;
 }

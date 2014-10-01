@@ -58,6 +58,8 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				$scope.proposta1 = data[0];
 				$scope.proposta2 = data[1];
 				$scope.temaPropostasVisiveis = temaPropostasIniciais;
+				$scope.proposta1.titulo = "Investir em tecnologia da informação e comunicação para modernizar o trabalho das equipes do PSF junto aos indivíduos, famílias e comunidades";
+				$scope.proposta2.titulo = "Investir em tecnologia da informação e comunicação para modernizar o trabalho das equipes do PSF junto aos indivíduos, famílias e comunidades";
 				//$scope.$apply();
 			});
 		};
