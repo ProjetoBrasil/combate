@@ -18,6 +18,8 @@ angular
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.propostas',
 		'projetobrasil.ufc.personagem'
+		'projetobrasil.ufc.interface',
+		'projetobrasil.ufc.login'
 	])
 
 	.run(['$rootScope', function($rootScope){
@@ -36,4 +38,7 @@ angular
 					templateUrl: 'modules/interface/interface.html',
 					controller: 'InterfaceCtrl'
 				});
+	})
+	.run(function($rootScope){
+		 $rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 	});
