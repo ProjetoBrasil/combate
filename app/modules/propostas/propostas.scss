@@ -2,5 +2,40 @@
 	position: absolute;
 	top: 50%;
 	left: 36%;
-	width: 30%
+	width: 30%;
+	background-color: rgb(6, 36, 59);
+	padding: 10px;
+}
+
+.box-propostas .chamada {
+	color: rgb(255, 193, 34);
+	text-transform: uppercase;
+	font-weight: bold;
+	background-color: rgb(15, 72, 116);
+}
+
+.box-propostas .proposta {
+	background-color: rgb(8, 175, 138);
+	color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	height: 90px;
+}
+
+.box-propostas .proposta .titulo, .box-propostas .proposta .letra-opcao {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.box-propostas .proposta .letra-opcao {
+	background-color: white;
+	color: #282940;
+	font-weight: bold;
+}
+
+.box-propostas .tema {
+	color: rgb(8, 175, 138);
+	text-transform: lowercase;
 }

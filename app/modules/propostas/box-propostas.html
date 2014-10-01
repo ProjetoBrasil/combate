@@ -1,23 +1,14 @@
-<div class="text-center box-propostas" ng-show="mostrarBox" ng-controller="PropostasCtrl">
-	<div>
-		<h3 class="page-header">{{temaPropostasVisiveis}}</h3>
-		<div class="well clearfix">
-
-			<div class="col-md-12">
-				<p>{{proposta1.titulo}}</p>
-				<button class="btn btn-primary" ng-click="escolherProposta(proposta1.politicians_id)">
-					Votar
-				</button>
-			</div>
-			<br>
-			<hr>
-			<br>
-			<div class="col-md-12">
-				<p>{{proposta2.titulo}}</p>
-				<button class="btn btn-primary" ng-click="escolherProposta(proposta2.politicians_id)">
-					Votar
-				</button>
-			</div>
+<div class="text-center box-propostas row" ng-show="mostrarBox" ng-controller="PropostasCtrl">
+	<p class="chamada">O que você faria se fosse presidente?</p>
+	<h3 class="tema">{{temaPropostasVisiveis}}</h3>
+	<div class="clearfix">
+		<div class="proposta col-md-10 col-md-offset-1" ng-click="escolherProposta(proposta1.politicians_id)">
+			<div class="letra-opcao col-md-1 text-center">A</div>
+			<div class="titulo col-md-10">{{proposta1.titulo}}</div>
+		</div>
+		<div class="proposta col-md-10 col-md-offset-1" ng-click="escolherProposta(proposta2.politicians_id)">
+			<div class="letra-opcao col-md-1 text-center">B</div>
+			<div class="titulo col-md-10">{{proposta2.titulo}}</div>
 		</div>
 	</div>
 </div>
