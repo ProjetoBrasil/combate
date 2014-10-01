@@ -2,14 +2,7 @@
 	<br>
 	<br>
 	<br>
-	<div class="row" ng-controller="BarrasCtrl">
-		<div class="col-md-6">
-			<progressbar class="progress-striped" value="100-(p1.golpesSofridos * maxGolpesPorRound)" type="warning">{{maxGolpesPorRound-p1.golpesSofridos}}</progressbar>
-		</div>
-		<div class="col-md-6">
-			<progressbar class="progress-striped reverse-progress" value="100-(p2.golpesSofridos * maxGolpesPorRound)" type="warning">{{maxGolpesPorRound-p2.golpesSofridos}}</progressbar>
-		</div>
-	</div>
+	<barra-de-vida></barra-de-vida>
 	<a href="http://www.projetobrasil.org/" target="_blank">
 		<div class="logo-background">
 			<img src="images/rsz_logo-projeto-brasil.png" alt="Logo do Projeto Brasil">
