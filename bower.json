@@ -11,7 +11,8 @@
     "angular-ui-router": "~0.2.11",
     "angular-bootstrap": "~0.11.0",
     "lodash": "~2.4.1",
-    "angular-lodash": "~0.1.0"
+    "angular-lodash": "~0.1.0",
+    "easeljs": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

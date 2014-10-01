@@ -1,0 +1,16 @@
+<div class="text-center box-propostas row" ng-show="mostrarBox" ng-controller="PropostasCtrl">
+	<div class="col-md-12 chamada">
+		<p>O que você faria se fosse presidente?</p>
+	</div>
+	<h3 class="col-md-12 tema">{{temaPropostasVisiveis}}</h3>
+	<div class="clearfix">
+		<div class="proposta col-md-12" ng-click="escolherProposta(proposta1.politicians_id)">
+			<div class="letra-opcao col-md-1 text-center">A</div>
+			<div class="titulo col-md-10">{{proposta1.titulo}}</div>
+		</div>
+		<div class="proposta col-md-12" ng-click="escolherProposta(proposta2.politicians_id)">
+			<div class="letra-opcao col-md-1 text-center">B</div>
+			<div class="titulo col-md-10">{{proposta2.titulo}}</div>
+		</div>
+	</div>
+</div>

@@ -16,12 +16,14 @@ angular
 		'ui.bootstrap',
 		'angular-lodash',
 		'projetobrasil.ufc.interface',
-		'projetobrasil.ufc.propostas'
+		'projetobrasil.ufc.propostas',
+		'projetobrasil.ufc.personagem'
 	])
 
 	.run(['$rootScope', function($rootScope){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org:4242/v1/';
 		$rootScope.idsCandidatos = ['test', 'test2'];
+		$rootScope.nomesCandidatos = ['dilma', 'marina'];
 	}])
 
 	.config(function($stateProvider, $urlRouterProvider){

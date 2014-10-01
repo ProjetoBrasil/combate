@@ -2,55 +2,81 @@
 
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
-		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo',
-		function ($scope, $rootScope, PropostasServ, Jogo){
-
-		// TODO:
-		// - Escolher o tema a ser questionado
+		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens', '$timeout',
+		function ($scope, $rootScope, PropostasServ, Jogo, Personagens, $timeout){
 
 		// DONE:
 		// - Solicitar as propostas do servidor, uma a uma
 		// - Exibir as propostas para o usuário (a posição deve variar.. uma vez a do candidato A tá em cima, na outra é o candidato B. Sempre aleatorio) -> A aleatoriedade será feita no backend, o frontend deve verificar a id do candidato da proposta selecionada
 		// - Pegar a escolha do usuário e preparar para comunicar
+		// - Escolher o tema a ser questionado -> aleatório
 
 		// Esperar os serviços ficarem prontos (já pode esboçar as funções)
 		// - Verificar se o usuário está logado
 		// - Comunicar a jogada para o módulo Jogo
-		// - Comunidar a jogada para o módulo Personagens
+		// - Comunicar a jogada para o módulo Personagens
+
+		$scope.mostrarBox = true;
+		var temas = PropostasServ.getTemas();
+
+		/**
+		 * @return número aleatório entre [0, MAX] (contidos)
+		 */
+		function geraNumeroAleatorio() {
+			var MAX = 15;
+			return Math.floor(Math.random() * (MAX + 1));
+		}
 
 		// Copia o valor do buffer para a proposta corrente e requisita novas propostas para armazenar no buffers
 		$scope.popBuffer = function() {
 			$scope.proposta1 = $scope.bufferPropostas[0];
 			$scope.proposta2 = $scope.bufferPropostas[1];
+			$scope.temaPropostasVisiveis = $scope.bufferTema;
 			$scope.atualizaBuffer();
 		};
 
 		// Requisita novas propostas para adicionar ao buffer
 		$scope.atualizaBuffer = function() {
-			PropostasServ.getPropostas().query(function(data){
+			var temaPropostasBuffer = temas[geraNumeroAleatorio()];
+			PropostasServ.getPropostas(temaPropostasBuffer).query(function(data) {
+				console.log('Propostas fresquinhas carregadas do backend no buffer');
 				if (!$scope.bufferPropostas){
 					$scope.bufferPropostas = [];
 				}
 				$scope.bufferPropostas[0] = data[0];
 				$scope.bufferPropostas[1] = data[1];
+				$scope.bufferTema = temaPropostasBuffer;
 			});
 		};
 
 		$scope.carregaPropostasIniciais = function() {
-			PropostasServ.getPropostas().query(function(data){
+			var temaPropostasIniciais = temas[geraNumeroAleatorio()];
+			console.log(temas);
+			console.log(temaPropostasIniciais);
+			PropostasServ.getPropostas(temaPropostasIniciais).query(function(data) {
+				console.log('Propostas iniciais carregadas do backend');
 				$scope.proposta1 = data[0];
 				$scope.proposta2 = data[1];
+				$scope.temaPropostasVisiveis = temaPropostasIniciais;
+				$scope.proposta1.titulo = "Investir em tecnologia da informação e comunicação para modernizar o trabalho das equipes do PSF junto aos indivíduos, famílias e comunidades";
+				$scope.proposta2.titulo = "Investir em tecnologia da informação e comunicação para modernizar o trabalho das equipes do PSF junto aos indivíduos, famílias e comunidades";
+				//$scope.$apply();
 			});
 		};
 
 		$scope.carregaPropostasIniciais();
-
 		$scope.atualizaBuffer();
 
-		$scope.$on('propostaEscolhida', $scope.popBuffer);
-
 		$scope.escolherProposta = function(idAutor){
-			Jogo.atualizaPlacar(idAutor);
+			$scope.mostrarBox = false;
+			Personagens.ataque(idAutor, $scope.temaPropostasVisiveis, function () {
+				Jogo.atualizaPlacar(idAutor);
+				$scope.popBuffer();
+				//$timeout(function () {
+					$scope.mostrarBox = true;
+				//}, 2500);
+
+			});
 		};
 
 	}]);

@@ -4,7 +4,8 @@ angular.module('projetobrasil.ufc.interface.controllers', [
 		'projetobrasil.ufc.interface.directives',
 		'projetobrasil.ufc.jogo.services'
 	])
-	.controller('InterfaceCtrl', [ function (){
+	.controller('InterfaceCtrl', ['$scope', '$window', function ($scope, $window){
+		$scope.canvasWidth = $window.innerWidth > 1280 ? 1280 : $window.innerWidth;
 	}])
 	.controller('CandidatosCtrl', [ function (){
 	}])

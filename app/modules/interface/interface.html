@@ -1,33 +1,19 @@
-<div class="container">
+<div class="container container-jogo">
 	<br>
 	<br>
 	<br>
 	<barra-de-vida></barra-de-vida>
-	<div class="row text-center" ng-controller="CandidatosCtrl">
-		<div class="col-md-6" id="avatar-candidato-A">
-			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
+	<a href="http://www.projetobrasil.org/" target="_blank">
+		<div class="logo-background">
+			<img src="images/rsz_logo-projeto-brasil.png" alt="Logo do Projeto Brasil">
 		</div>
-		<div class="col-md-6" id="avatar-candidato-B">
-			<img src="images/avatar.jpeg" class="candidato-avatar" alt="">
-		</div>
-	</div>
-	<div class="row text-center" ng-controller="PropostasCtrl">
-		<br>
-		<br>
-		<br>
-		<div class="col-md-6 col-md-offset-3 well">
-			<div class="col-md-12">
-				<p>{{proposta1.titulo}}</p>
-				<button class="btn btn-primary" ng-click="escolherProposta(proposta1.politicians_id)">
-					Votar
-				</button>
-			</div>
-			<div class="col-md-12">
-				<p>{{proposta2.titulo}}</p>
-				<button class="btn btn-primary"  ng-click="escolherProposta(proposta2.politicians_id)">
-					Votar
-				</button>
-			</div>
-		</div>
+	</a>
+</div>
+<div class="canvas-box">
+	<canvas id="arena" width="{{canvasWidth}}" height="400"></canvas>
+</div>
+<div class="container container-jogo">
+	<div class="row">
+		<boxpropostas></boxpropostas>
 	</div>
 </div>
