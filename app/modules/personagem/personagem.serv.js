@@ -9,7 +9,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		var canvas = $document.find('#arena')[0];
 		var arena = new createjs.Stage(canvas);
 
-		var frameSize = { width: 390, height: 410 };
+		var frameSize = { width: 476, height: 500 };
 		var tamFigurasGolpe = { width: 856, height: 600 };
 
 		gerenciador.inicializa = function(){
@@ -139,7 +139,6 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		gerenciador.dano = function(nome){
 			personagens[nome].sprites.ginga.gotoAndPlay('dano');
 		};
-
 
 		gerenciador.inicializa();
 
