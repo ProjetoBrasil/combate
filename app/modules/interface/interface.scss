@@ -7,13 +7,14 @@
 	background-color: green;
 }
 
-#container-jogo{
+.container-jogo{
 	min-width: 1024px;
+	max-width: 1280px;
 }
 
 body {
 	/* Permite redimensionamento da janela */
-	background: url('../images/background.jpg') no-repeat center center fixed;
+	background: url('../images/background.jpg') bottom center no-repeat fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -27,4 +28,18 @@ body {
 	bottom: 0;
 	left: 46%;
 	padding: 3px 3px 7px;
+}
+
+.canvas-box{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+
+	canvas{
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
 }
