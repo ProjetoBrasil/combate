@@ -5,19 +5,32 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 		var gerenciador = {};
 		var personagens = {};
+		var pow = {};
 
 		var canvas = $document.find('#arena')[0];
 		var arena = new createjs.Stage(canvas);
 
 		var frameSize = { width: 476, height: 500 };
-		var tamFigurasGolpe = { width: 856, height: 600 };
+		var tamFigurasGolpe = { height: 195 };
 
 		gerenciador.inicializa = function(){
+			gerenciador.criaSpritesPersonagens();
+			// gerenciador.inicializaEfeitos();
+
+			createjs.Ticker.setFPS(10);
+			createjs.Ticker.addEventListener('tick', arena);
+
+			_.each(personagens, function(p){
+				arena.addChild(p.sprites.ginga);
+			});
+		};
+
+		gerenciador.criaSpritesPersonagens = function(){
 			var ids = $rootScope.idsCandidatos;
-			_.each(ids, function(c, indice){
-				personagens[c] = {};
-				personagens[c].spriteSheets = {};
-				personagens[c].spriteSheets = new createjs.SpriteSheet({
+			_.each(ids, function(id, indice){
+				personagens[id] = {};
+				personagens[id].spriteSheets = {};
+				personagens[id].spriteSheets = new createjs.SpriteSheet({
 					frames: {
 						width: frameSize.width,
 						height: frameSize.height,
@@ -42,98 +55,105 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 							speed: 1
 						}
 					},
-					images: ['/images/'+c+'_sprite.png']
+					images: ['/images/'+id+'_sprite.png']
 				});
 
-				personagens[c].sprites = {};
-				personagens[c].sprites.ginga = new createjs.Sprite(personagens[c].spriteSheets, 'ginga');
-				personagens[c].sprites.ataque = new createjs.Sprite(personagens[c].spriteSheets, 'ataque');
-				personagens[c].sprites.dano = new createjs.Sprite(personagens[c].spriteSheets, 'dano');
+				personagens[id].sprites = {};
+				personagens[id].sprites.ginga = new createjs.Sprite(personagens[id].spriteSheets, 'ginga');
+				personagens[id].sprites.ataque = new createjs.Sprite(personagens[id].spriteSheets, 'ataque');
+				personagens[id].sprites.dano = new createjs.Sprite(personagens[id].spriteSheets, 'dano');
 
 				if(indice === 1){
-					personagens[c].lado = 'direita';
-					_.each(personagens[c].sprites, function(s){
+					personagens[id].lado = 'direita';
+					_.each(personagens[id].sprites, function(s){
 						s.x = arena.canvas.width - frameSize.width;
 					});
+					personagens[id].adversario = ids[0];
 				}else{
-					personagens[c].lado = 'esquerda';
+					personagens[id].lado = 'esquerda';
+					personagens[id].adversario = ids[1];
 				}
 			});
-
-			createjs.Ticker.setFPS(10);
-			createjs.Ticker.addEventListener('tick', arena);
-
-			_.each(personagens, function(p){
-				arena.addChild(p.sprites.ginga);
-			});
-
-			arena.addEventListener('click', gerenciador.ataque);
-
 		};
 
-		gerenciador.ataque = function(nome, tema, sucesso){
-			personagens[nome].sprites.ginga.gotoAndPlay('ataque');
-			var lado = personagens[nome].lado;
-			var pastaTema = PropostasServ.getNomePastaTema(tema);
-			pastaTema = 'meio_ambiente'; // REMOVE ME
-			var golpe = new createjs.Bitmap('/images/golpes/'+pastaTema+'_'+lado+'.png');
-			var stepsGolpe = 20;
+		gerenciador.inicializaEfeitos = function(){
+			pow.spriteSheets = new createjs.SpriteSheet({
+				frames: {
+					width: 574,
+					height: 496,
+					numFrames: 3,
+					regX: 287,
+					regY: 248
+				},
+				animations: {
+					pow: {
+						frames: [0,1,2,1,0],
+						speed: 1
+					}
+				}
+			});
+			pow.sprites = new createjs.Sprite(pow.spriteSheets, 'pow');
+			arena.addChild(pow.sprites);
+		};
+
+		gerenciador.ataque = function(id, tema, sucesso){
+			personagens[id].sprites.ginga.gotoAndPlay('ataque');
+			var lado = personagens[id].lado;
+			var imagemTema = PropostasServ.getNomePastaTema(tema);
+			var golpe = new createjs.Bitmap('/images/golpes/'+imagemTema+'.png');
+			var stepsGolpe = 40;
+			var ajuste = 20;
 
 			golpe.scale = 0;
 			golpe.angle = 0;
+			golpe.regX = 0;
+			golpe.regY = 0;
 			if(lado === 'esquerda'){
-				golpe.x = (frameSize.width / 2) + 20;
+				golpe.x = (frameSize.width / 2) + ajuste;
 			}else{
-				golpe.x = arena.canvas.width - (frameSize.width / 2) - 20;
+				golpe.x = arena.canvas.width - (frameSize.width / 2) - ajuste;
 			}
 
-			golpe.y = arena.canvas.height/2 - (golpe.scale * tamFigurasGolpe.height/2);
+			golpe.y = arena.canvas.height/2 - (golpe.scale * (tamFigurasGolpe.height/2));
 			arena.addChild(golpe);
+
 			var index = arena.getChildIndex(golpe);
 
-			function golpeia(scale, posX, angle){
+			function golpeia(scale, posX, angle, regX, regY){
 				if(scale >= 1){
+					// pow.sprites.gotoAndPlay('pow');
+					gerenciador.dano(id);
 					arena.removeChildAt(index);
+					sucesso();
 					return;
 				}
 
 				var newScale = scale + (1/stepsGolpe);
 				var newX = posX;
-				if(lado === 'esquerda') {
+
+				if(lado === 'esquerda'){
 					newX += (arena.canvas.width - frameSize.width) / stepsGolpe;
-				} else {
+				}else{
 					newX -= (arena.canvas.width - frameSize.width) / stepsGolpe;
 				}
 
 				var newY = arena.canvas.height/2 - (newScale * tamFigurasGolpe.height/2);
+				var newAngle = Math.sin(angle + 0.04) * 360;
 
-				// FIX-ME: tirar ao máximo o espaço em branco das imagens para melhorar animação de rotação
-				// var newAngle = Math.sin(angle + 0.04) * 360;
-				var newAngle = 0;
-
-				golpe.setTransform(newX, newY, newScale, newScale, newAngle);
+				golpe.setTransform(newX, newY, newScale, newScale, newAngle, 0, 0, regX, regY);
+				var newRegX = golpe.image.width/2;
+				var newRegY = golpe.image.height/2;
 
 				window.setTimeout(function(){
-					golpeia(newScale, newX, newAngle);
-				}, 80);
+					golpeia(newScale, newX, newAngle, newRegX, newRegY);
+				}, 50);
 			}
-
-			function acertou(lado, posX){
-				var hit = false;
-				if(lado === 'esquerda'){
-					hit = posX > (arena.canvas.width - frameSize.width);
-				}else{
-					hit = posX < frameSize.width;
-				}
-				return hit;
-			}
-			golpeia(golpe.scale, golpe.x, golpe.angle);
-			sucesso(); // Chamar ao fim do evento de golpe
-
+			golpeia(golpe.scale, golpe.x, golpe.angle, golpe.regX, golpe.regY);
 		};
 
-		gerenciador.dano = function(nome){
-			personagens[nome].sprites.ginga.gotoAndPlay('dano');
+		gerenciador.dano = function(id){
+			var idAdversario = personagens[id].adversario;
+			personagens[idAdversario].sprites.ginga.gotoAndPlay('dano');
 		};
 
 		gerenciador.inicializa();
