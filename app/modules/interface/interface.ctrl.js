@@ -58,7 +58,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [
 			x4a = x3a - 30;
 			y4a = '50';
     	$scope.coordenadasA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
-    })
+    });
 
     $scope.$watch('p2.golpesSofridos', function(){
     	console.log('Mudou!');
@@ -73,6 +73,6 @@ angular.module('projetobrasil.ufc.interface.controllers', [
 			} else {
     		$scope.coordenadasB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
     	}
-    })
+    });
 
   }]);
