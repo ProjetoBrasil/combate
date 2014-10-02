@@ -33,10 +33,15 @@ angular
 		$urlRouterProvider.otherwise('/');
 
 		$stateProvider
-				.state('home', {
-					url: '/',
+				.state('jogo', {
+					url: '/jogo',
 					templateUrl: 'modules/interface/interface.html',
 					controller: 'InterfaceCtrl'
+				})
+				.state('home', {
+					url: '/',
+					templateUrl: 'modules/home/home.html',
+					controller: 'HomeCtrl'
 				});
 	})
 	.run(function($rootScope){
