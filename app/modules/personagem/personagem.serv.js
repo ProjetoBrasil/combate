@@ -5,6 +5,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 		var gerenciador = {};
 		var personagens = {};
+		var pow = {};
 
 		var canvas = $document.find('#arena')[0];
 		var arena = new createjs.Stage(canvas);
@@ -13,6 +14,18 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		var tamFigurasGolpe = { height: 195 };
 
 		gerenciador.inicializa = function(){
+			gerenciador.criaSpritesPersonagens();
+			// gerenciador.inicializaEfeitos();
+
+			createjs.Ticker.setFPS(10);
+			createjs.Ticker.addEventListener('tick', arena);
+
+			_.each(personagens, function(p){
+				arena.addChild(p.sprites.ginga);
+			});
+		};
+
+		gerenciador.criaSpritesPersonagens = function(){
 			var ids = $rootScope.idsCandidatos;
 			_.each(ids, function(id, indice){
 				personagens[id] = {};
@@ -61,16 +74,26 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 					personagens[id].adversario = ids[1];
 				}
 			});
+		};
 
-			createjs.Ticker.setFPS(10);
-			createjs.Ticker.addEventListener('tick', arena);
-
-			_.each(personagens, function(p){
-				arena.addChild(p.sprites.ginga);
+		gerenciador.inicializaEfeitos = function(){
+			pow.spriteSheets = new createjs.SpriteSheet({
+				frames: {
+					width: 574,
+					height: 496,
+					numFrames: 3,
+					regX: 287,
+					regY: 248
+				},
+				animations: {
+					pow: {
+						frames: [0,1,2,1,0],
+						speed: 1
+					}
+				}
 			});
-
-			arena.addEventListener('click', gerenciador.ataque);
-
+			pow.sprites = new createjs.Sprite(pow.spriteSheets, 'pow');
+			arena.addChild(pow.sprites);
 		};
 
 		gerenciador.ataque = function(id, tema, sucesso){
@@ -98,6 +121,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 			function golpeia(scale, posX, angle, regX, regY){
 				if(scale >= 1){
+					// pow.sprites.gotoAndPlay('pow');
 					gerenciador.dano(id);
 					arena.removeChildAt(index);
 					sucesso();
@@ -114,7 +138,6 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				}
 
 				var newY = arena.canvas.height/2 - (newScale * tamFigurasGolpe.height/2);
-
 				var newAngle = Math.sin(angle + 0.04) * 360;
 
 				golpe.setTransform(newX, newY, newScale, newScale, newAngle, 0, 0, regX, regY);
@@ -123,20 +146,9 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 				window.setTimeout(function(){
 					golpeia(newScale, newX, newAngle, newRegX, newRegY);
-				}, 80);
-			}
-
-			function acertou(lado, posX){
-				var hit = false;
-				if(lado === 'esquerda'){
-					hit = posX > (arena.canvas.width - frameSize.width);
-				}else{
-					hit = posX < frameSize.width;
-				}
-				return hit;
+				}, 50);
 			}
 			golpeia(golpe.scale, golpe.x, golpe.angle, golpe.regX, golpe.regY);
-
 		};
 
 		gerenciador.dano = function(id){
