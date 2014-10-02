@@ -72,9 +72,9 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 			Personagens.ataque(idAutor, $scope.temaPropostasVisiveis, function () {
 				Jogo.atualizaPlacar(idAutor);
 				$scope.popBuffer();
-				//$timeout(function () {
+				$timeout(function () {
 					$scope.mostrarBox = true;
-				//}, 2500);
+				}, 2500);
 
 			});
 		};
