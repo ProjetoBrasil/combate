@@ -15,7 +15,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 		gerenciador.inicializa = function(){
 			gerenciador.criaSpritesPersonagens();
-			// gerenciador.inicializaEfeitos();
+			gerenciador.inicializaEfeitos();
 
 			createjs.Ticker.setFPS(10);
 			createjs.Ticker.addEventListener('tick', arena);
@@ -87,13 +87,17 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				},
 				animations: {
 					pow: {
-						frames: [0,1,2,1,0],
-						speed: 1
+						frames: [0,1,2,2,2,1,0],
+						speed: 0.9
 					}
-				}
+				},
+				images: ['/images/pow_sprite.png']
 			});
 			pow.sprites = new createjs.Sprite(pow.spriteSheets, 'pow');
-			arena.addChild(pow.sprites);
+			pow.sprites.addEventListener('animationend', function(event){
+				var index = arena.getChildIndex(pow.sprites);
+				arena.removeChildAt(index);
+			});
 		};
 
 		gerenciador.ataque = function(id, tema, sucesso){
@@ -117,13 +121,13 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			golpe.y = arena.canvas.height/2 - (golpe.scale * (tamFigurasGolpe.height/2));
 			arena.addChild(golpe);
 
-			var index = arena.getChildIndex(golpe);
+			golpe.index = arena.getChildIndex(golpe);
 
 			function golpeia(scale, posX, angle, regX, regY){
 				if(scale >= 1){
-					// pow.sprites.gotoAndPlay('pow');
+					gerenciador.animaPow(id);
 					gerenciador.dano(id);
-					arena.removeChildAt(index);
+					arena.removeChildAt(golpe.index);
 					sucesso();
 					return;
 				}
@@ -154,6 +158,16 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		gerenciador.dano = function(id){
 			var idAdversario = personagens[id].adversario;
 			personagens[idAdversario].sprites.ginga.gotoAndPlay('dano');
+		};
+
+		gerenciador.animaPow = function(id){
+			if(personagens[id].lado === 'esquerda'){
+				pow.sprites.x = arena.canvas.width - (frameSize.width / 2);
+			}else{
+				pow.sprites.x = frameSize.width / 2;
+			}
+			pow.sprites.y = arena.canvas.height / 2;
+			arena.addChild(pow.sprites);
 		};
 
 		gerenciador.inicializa();
