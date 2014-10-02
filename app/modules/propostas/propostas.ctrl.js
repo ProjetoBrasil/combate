@@ -86,10 +86,22 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.carregaPropostasIniciais();
 		$scope.atualizaBuffer();
 
-		$scope.escolherProposta = function(idAutor){
+		$scope.escolherProposta = function(idAutorPropostaVotada){
 			$scope.mostrarBox = false;
-			Personagens.ataque(idAutor, $scope.temaPropostasVisiveis, function () {
-				Jogo.atualizaPlacar(idAutor);
+
+			// Envia o voto no servidor
+			if ($scope.proposta1.politician_id == idAutorPropostaVotada){
+				var propostaVotada = $scope.proposta1;
+				var propostaNaoVotada = $scope.proposta2;
+			} else {
+				var propostaVotada = $scope.proposta2;
+				var propostaNaoVotada = $scope.proposta1;
+			}
+			PropostasServ.postPropostas(propostaVotada, propostaNaoVotada);
+
+			// Executa a interação visual e requisição de nova propostas
+			Personagens.ataque(idAutorPropostaVotada, $scope.temaPropostasVisiveis, function () {
+				Jogo.atualizaPlacar(idAutorPropostaVotada);
 				if (!bufferVazio()) {
 					$scope.popBuffer();
 					$timeout(function () {
