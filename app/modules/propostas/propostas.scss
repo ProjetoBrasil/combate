@@ -44,13 +44,6 @@ $verde-claro-borda: rgb(82, 120, 130);
 	margin-bottom: 1px;
 	cursor: pointer;
 	text-align: justify;
-	/* Desabilita a seleção de texto */
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 .box-propostas .proposta:first-of-type {
 	margin-bottom: 0;

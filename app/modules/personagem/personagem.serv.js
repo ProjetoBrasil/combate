@@ -106,6 +106,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 				var newScale = scale + (1/stepsGolpe);
 				var newX = posX;
+
 				if(lado === 'esquerda'){
 					newX += (arena.canvas.width - frameSize.width) / stepsGolpe;
 				}else{
