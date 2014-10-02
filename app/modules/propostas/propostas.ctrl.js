@@ -2,8 +2,8 @@
 
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
-		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens', '$timeout',
-		function ($scope, $rootScope, PropostasServ, Jogo, Personagens, $timeout){
+		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens',
+		function ($scope, $rootScope, PropostasServ, Jogo, Personagens){
 
 		// DONE:
 		// - Solicitar as propostas do servidor, uma a uma
@@ -35,7 +35,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 			if ($scope.bufferPropostas[0] == null ||
 				$scope.bufferPropostas[1] == null ||
 				$scope.bufferTema == null){
-				return true
+				return true;
 			}
 			return false;
 		}
@@ -57,8 +57,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 
 		// Define um tema, requisita novas propostas nesse tema e as adiciona ao buffer
 		$scope.atualizaBuffer = function(callback) {
-			var num = geraNumeroAleatorio();
-			var temaPropostasBuffer = temas[num];
+			var temaPropostasBuffer = temas[geraNumeroAleatorio()];
 			PropostasServ.getPropostas(temaPropostasBuffer).query(function(data) {
 				console.log('Propostas fresquinhas carregadas do backend no buffer. Tema: ' + temaPropostasBuffer);
 				$scope.bufferPropostas[0] = data[0];
@@ -77,8 +76,8 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				$scope.proposta1 = data[0];
 				$scope.proposta2 = data[1];
 				$scope.temaPropostasVisiveis = temaPropostasIniciais;
-				$scope.proposta1.titulo = "Investir em tecnologia da informação e comunicação para modernizar o trabalho das equipes do PSF junto aos indivíduos, famílias e comunidades";
-				$scope.proposta2.titulo = "Priorizar o modal ferroviário e Implantar ferrovias de norte a sul do País interligando as principais metrópoles brasileiras, inclusive o Aerotrem e o Monotrem dentro das cidades";
+				$scope.proposta1.titulo = 'Investir em tecnologia da informação e comunicação para modernizar o trabalho das equipes do PSF junto aos indivíduos, famílias e comunidades';
+				$scope.proposta2.titulo = 'Priorizar o modal ferroviário e Implantar ferrovias de norte a sul do País interligando as principais metrópoles brasileiras, inclusive o Aerotrem e o Monotrem dentro das cidades';
 				$scope.mostrarBox = true;
 			});
 		};
@@ -89,13 +88,15 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.escolherProposta = function(idAutorPropostaVotada){
 			$scope.mostrarBox = false;
 
-			// Envia o voto no servidor
-			if ($scope.proposta1.politician_id == idAutorPropostaVotada){
-				var propostaVotada = $scope.proposta1;
-				var propostaNaoVotada = $scope.proposta2;
+			// Envia o voto para o servidor
+			var propostaVotada;
+			var propostaNaoVotada;
+			if ($scope.proposta1.politicians_id == idAutorPropostaVotada){
+				propostaVotada = $scope.proposta1;
+				propostaNaoVotada = $scope.proposta2;
 			} else {
-				var propostaVotada = $scope.proposta2;
-				var propostaNaoVotada = $scope.proposta1;
+				propostaVotada = $scope.proposta2;
+				propostaNaoVotada = $scope.proposta1;
 			}
 			PropostasServ.postPropostas(propostaVotada, propostaNaoVotada);
 
@@ -104,9 +105,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				Jogo.atualizaPlacar(idAutorPropostaVotada);
 				if (!bufferVazio()) {
 					$scope.popBuffer();
-					$timeout(function () {
-						$scope.mostrarBox = true;
-					}, 2000);
+					$scope.mostrarBox = true;
 					$scope.atualizaBuffer();
 				} else {
 					// Caso o buffer esteja vazio, força atualização,
@@ -118,6 +117,6 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 					});
 				}
 			});
-		}
+		};
 
 	}]);
