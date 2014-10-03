@@ -15,6 +15,7 @@ angular
 		'ui.router',
 		'ui.bootstrap',
 		'angular-lodash',
+		'projetobrasil.ufc.jogo',
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.propostas',
 		'projetobrasil.ufc.personagem',

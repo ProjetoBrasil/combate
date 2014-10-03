@@ -1,13 +1,11 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.interface.controllers', [
-		'projetobrasil.ufc.interface.directives',
-		'projetobrasil.ufc.jogo.services'
+		'projetobrasil.ufc.interface.directives'
 	])
 	.controller('InterfaceCtrl', ['$scope', '$window', function ($scope, $window){
+		// FIXME: Fazer canvas mais responsivo
 		$scope.canvasWidth = $window.innerWidth > 1280 ? 1280 : $window.innerWidth;
-	}])
-	.controller('CandidatosCtrl', [ function (){
 	}])
 	.controller('BarrasCtrl', ['$scope', 'GerenciadorJogo', function ($scope, Jogo){
 		$scope.p1 = Jogo.candidatos.test;
