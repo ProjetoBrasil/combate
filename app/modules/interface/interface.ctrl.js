@@ -75,10 +75,10 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 		$scope.percentLoaded = 0;
 
 		$scope.imageLocations = [
-			'/images/com-cache/background.jpg',
-			'/images/com-cache/logo_ufc.png',
-			'/images/com-cache/logo-projeto-brasil.png',
-			'/images/com-cache/rsz_logo-projeto-brasil.png',
+			'/images/com-cache/background.d6b14439.jpg',
+			'/images/com-cache/logo_ufc.be69e032.png',
+			'/images/com-cache/logo-projeto-brasil.a220cb72.png',
+			'/images/com-cache/rsz_logo-projeto-brasil.7acee032.png',
 			'/images/com-cache/ryu.gif',
 			'/images/sem-cache/golpes/cultura_turismo.png',
 			'/images/sem-cache/golpes/democracia_reforma_politica.png',
