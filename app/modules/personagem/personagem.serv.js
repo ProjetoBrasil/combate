@@ -55,7 +55,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 							speed: 1
 						}
 					},
-					images: ['/images/'+id+'_sprite.png']
+					images: ['/images/sem-cache/sprites/'+id+'_sprite.png']
 				});
 
 				personagens[id].sprites = {};
@@ -91,7 +91,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 						speed: 0.9
 					}
 				},
-				images: ['/images/pow_sprite.png']
+				images: ['/images/sem-cache/sprites/pow_sprite.png']
 			});
 			pow.sprites = new createjs.Sprite(pow.spriteSheets, 'pow');
 			pow.sprites.addEventListener('animationend', function(event){
@@ -104,7 +104,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			personagens[id].sprites.ginga.gotoAndPlay('ataque');
 			var lado = personagens[id].lado;
 			var imagemTema = PropostasServ.getNomePastaTema(tema);
-			var golpe = new createjs.Bitmap('/images/golpes/'+imagemTema+'.png');
+			var golpe = new createjs.Bitmap('/images/sem-cache/golpes/'+imagemTema+'.png');
 			var stepsGolpe = 40;
 			var ajuste = 20;
 
