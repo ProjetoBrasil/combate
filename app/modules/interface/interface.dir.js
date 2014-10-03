@@ -1,10 +1,6 @@
 'use strict';
 
-angular.module('projetobrasil.ufc.interface.directives', [
-		'projetobrasil.ufc.interface.controllers',
-		'projetobrasil.ufc.jogo.services'
-	])
-
+angular.module('projetobrasil.ufc.interface.directives', [])
   .directive('barraDeVida', function() {
     return {
     	restrict: 'E',
