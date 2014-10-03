@@ -79,7 +79,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			'/images/com-cache/logo_ufc.be69e032.png',
 			'/images/com-cache/logo-projeto-brasil.a220cb72.png',
 			'/images/com-cache/rsz_logo-projeto-brasil.7acee032.png',
-			'/images/com-cache/ryu.gif',
+			'/images/com-cache/ryu.e2e1e4a4.gif',
 			'/images/sem-cache/golpes/cultura_turismo.png',
 			'/images/sem-cache/golpes/democracia_reforma_politica.png',
 			'/images/sem-cache/golpes/desenvolvimento_economico.png',
