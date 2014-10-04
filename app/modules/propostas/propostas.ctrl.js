@@ -2,8 +2,8 @@
 
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
-		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens',
-		function ($scope, $rootScope, PropostasServ, Jogo, Personagens){
+		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens', '$timeout',
+		function ($scope, $rootScope, PropostasServ, Jogo, Personagens, $timeout){
 
 		// DONE:
 		// - Solicitar as propostas do servidor, uma a uma
@@ -85,7 +85,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.carregaPropostasIniciais();
 		$scope.atualizaBuffer();
 
-		$scope.escolherProposta = function(idAutorPropostaVotada){
+		$scope.escolherProposta = function(idAutorPropostaVotada) {
 			$scope.mostrarBox = false;
 
 			// Envia o voto para o servidor
@@ -103,19 +103,21 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 			// Executa a interação visual e requisição de nova propostas
 			Personagens.ataque(idAutorPropostaVotada, $scope.temaPropostasVisiveis, function () {
 				Jogo.atualizaPlacar(idAutorPropostaVotada);
-				if (!bufferVazio()) {
-					$scope.popBuffer();
-					$scope.mostrarBox = true;
-					$scope.atualizaBuffer();
-				} else {
-					// Caso o buffer esteja vazio, força atualização,
-					// a cópia do buffer pro elemento e uma atualização do buffer
-					$scope.atualizaBuffer(function() {
+				$timeout(function() {
+					if (!bufferVazio()) {
 						$scope.popBuffer();
 						$scope.mostrarBox = true;
 						$scope.atualizaBuffer();
-					});
-				}
+					} else {
+						// Caso o buffer esteja vazio, força atualização,
+						// a cópia do buffer pro elemento e uma atualização do buffer
+						$scope.atualizaBuffer(function() {
+							$scope.popBuffer();
+							$scope.mostrarBox = true;
+							$scope.atualizaBuffer();
+						});
+					}
+				},800); // Delay para evitar que imagem dos ataques trave na tela
 			});
 		};
 
