@@ -6,9 +6,14 @@ $verde-claro-borda: rgb(82, 120, 130);
 
 .box-propostas {
 	position: absolute;
-	top: 35%;
-	left: 34%;
+	bottom: 15%;
+	right: 0;
+	left: 0;
+	margin-left: auto;
+	margin-right: auto;
 	width: 35%;
+	min-width: 430px;
+	max-width: 530px;
 	background-color: $verde-escuro;
 	padding: 0;
 }
