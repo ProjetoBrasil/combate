@@ -4,6 +4,11 @@
 				<polygon ng-attr-points="{{coordenadasIniciaisA}}" transform="scale(0.6, 0.6)" style="fill:#09404c;stroke:purple;stroke-width:0"></polygon>
 				<polygon ng-attr-points="{{coordenadasA}}" transform="scale(0.6, 0.6)" style="fill:#f5e642;stroke:purple;stroke-width:0"></polygon>
 			</svg>
+			<div class="nome-candidato pull-right">
+				Dilma {{placar}}
+				<div ng-repeat="a in range(placar.dilma.vencidos)" class="round round-vitoria"></div>
+				<div ng-repeat="a in range(placar.dilma.naoVencidos)" class="round"></div>
+			</div>
 		</div>
 		<div class="col-sm-2 logo">
 			<img src="images/com-cache/logo_ufc.png" alt="The Urna Fighter Combat" width="160px">
@@ -13,6 +18,11 @@
 				<polygon ng-attr-points="{{coordenadasIniciaisB}}" style="fill:#09404c;stroke:purple;stroke-width:0"  transform="translate(264, 0) scale(-0.6, 0.6) "></polygon>
 				<polygon ng-attr-points="{{coordenadasB}}" style="fill:#f5e642;stroke:purple;stroke-width:0" transform="translate(264, 0) scale(-0.6, 0.6) "></polygon>
 			</svg>
+			<div class="nome-candidato pull-left">
+				<div ng-repeat="a in range(placar.marina.vencidos)" class="round round-vitoria"></div>
+				<div ng-repeat="a in range(placar.marina.naoVencidos)" class="round"></div>
+				Marina
+			</div>
 		</div>
 	</div>
 
