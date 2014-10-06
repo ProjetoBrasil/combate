@@ -5,15 +5,14 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 		$scope.canvasWidth = $window.innerWidth > 1280 ? 1280 : $window.innerWidth;
 	}])
 	.controller('BarrasCtrl', ['$scope', 'GerenciadorJogo', function ($scope, Jogo){
-		$scope.p1 = Jogo.candidatos.test;
-		$scope.p2 = Jogo.candidatos.test2;
+		$scope.p2 = Jogo.candidatos.test;
+		$scope.p1 = Jogo.candidatos.test2;
 		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
 
 	}])
 	.controller('barraDeVidaCtrl', ['$scope', 'GerenciadorJogo', function($scope, Jogo) {
-		$scope.p1 = Jogo.candidatos.test;
-		$scope.p2 = Jogo.candidatos.test2;
-
+		$scope.p2 = Jogo.candidatos.test;
+		$scope.p1 = Jogo.candidatos.test2;
 		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
 		$scope.minRoundsParaVitoria = Jogo.minRoundsParaVitoria;
 
