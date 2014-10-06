@@ -96,7 +96,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			pow.sprites = new createjs.Sprite(pow.spriteSheets, 'pow');
 			pow.sprites.scaleX = 0.7;
 			pow.sprites.scaleY = 0.7;
-			pow.sprites.addEventListener('animationend', function(event){
+			pow.sprites.addEventListener('animationend', function(){
 				var index = arena.getChildIndex(pow.sprites);
 				arena.removeChildAt(index);
 			});

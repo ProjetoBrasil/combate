@@ -1,16 +1,31 @@
-<div class="text-center box-propostas row" ng-show="mostrarBox" ng-controller="PropostasCtrl">
-	<div class="col-md-12 chamada">
-		<p>O que você faria se fosse presidente?</p>
+<div class="bg-box-propostas" ng-controller="PropostasCtrl" ng-show="mostrarBox">
+	<span class="tema-propostas">
+		{{temaPropostasVisiveis}}
+	</span>
+	<div style="border-bottom: {{tamProposta1}}px solid #00bd8e" class="alternativa pointer primeira" ng-click="escolherProposta(proposta1.politicians_id)">
+		<span class="letra">A</span>
+		<p>{{proposta1.titulo}}</p>
 	</div>
-	<h3 class="col-md-12 tema">{{temaPropostasVisiveis}}</h3>
-	<div class="clearfix">
-		<div class="proposta col-md-12" ng-click="escolherProposta(proposta1.politicians_id)">
-			<div class="letra-opcao col-md-2 text-center">A</div>
-			<div class="titulo col-md-10">{{proposta1.titulo}}</div>
+	<div style="border-bottom: {{tamProposta2}}px solid #00bd8e" class="alternativa pointer" ng-click="escolherProposta(proposta2.politicians_id)">
+		<span class="letra">B</span>
+		<p>{{proposta2.titulo}}</p>
+	</div>
+
+	<div class="text-center box-propostas row" ng-if="false" >
+		<div class="col-md-12 chamada">
+			<p>O que você faria se fosse presidente?</p>
 		</div>
-		<div class="proposta col-md-12" ng-click="escolherProposta(proposta2.politicians_id)">
-			<div class="letra-opcao col-md-2 text-center">B</div>
-			<div class="titulo col-md-10">{{proposta2.titulo}}</div>
+		<h3 class="col-md-12 tema">{{temaPropostasVisiveis}}</h3>
+		<div class="clearfix">
+			<div class="proposta col-md-12" ng-click="escolherProposta(proposta1.politicians_id)">
+				<div class="letra-opcao col-md-2 text-center">A</div>
+				<div class="titulo col-md-10">{{proposta1.titulo}}</div>
+			</div>
+			<div class="proposta col-md-12" ng-click="escolherProposta(proposta2.politicians_id)">
+				<div class="letra-opcao col-md-2 text-center">B</div>
+				<div class="titulo col-md-10">{{proposta2.titulo}}</div>
+			</div>
 		</div>
 	</div>
 </div>
+
