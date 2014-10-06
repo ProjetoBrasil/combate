@@ -13,7 +13,13 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 	.controller('barraDeVidaCtrl', ['$scope', 'GerenciadorJogo', function($scope, Jogo) {
 		$scope.p1 = Jogo.candidatos.test;
 		$scope.p2 = Jogo.candidatos.test2;
+
 		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
+		$scope.minRoundsParaVitoria = 2;
+
+		$scope.abs = function(valor){
+			return Math.abs(valor);
+		}
 
     var x1, y1, x2, y2, x3a, y3a, x4a, y4a, x3b, y3b, x4b, y4b;
 
@@ -54,7 +60,6 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			x4a = x3a - 30;
 			y4a = '50';
     	$scope.coordenadasA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
-    	atualizarRoundsBarra();
     });
 
     $scope.$watch('p2.golpesSofridos', function(){
@@ -70,15 +75,5 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			} else {
     		$scope.coordenadasB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
     	}
-    	atualizarRoundsBarra();
     });
-
-    var minRoundsVitoria = 2;
-	$scope.placar = {};
-	function atualizarRoundsBarra() {
-		var placarGeral = Jogo.placarGeral();
-		$scope.placar.dilma = {'vencidos': placarGeral[0], 'naoVencidos':  Math.abs(placarGeral[0] - minRoundsVitoria) };
-		$scope.placar.marina = {'vencidos': placarGeral[1], 'naoVencidos':  Math.abs(placarGeral[1] - minRoundsVitoria) };
-	}
-
   }]);

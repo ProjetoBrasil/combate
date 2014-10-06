@@ -6,8 +6,8 @@
 			</svg>
 			<div class="nome-candidato pull-right">
 				Dilma
-				<div ng-repeat="a in range(placar.dilma.vencidos)" class="round round-vitoria"></div>
-				<div ng-repeat="a in range(placar.dilma.naoVencidos)" class="round"></div>
+				<div ng-repeat="a in range(p1.roundsGanhos)" class="round round-vitoria"></div>
+				<div ng-repeat="a in range(abs(p1.roundsGanhos - minRoundsParaVitoria))" class="round"></div>
 			</div>
 		</div>
 		<div class="col-sm-2 logo">
@@ -19,9 +19,9 @@
 				<polygon ng-attr-points="{{coordenadasB}}" style="fill:#f5e642;stroke:purple;stroke-width:0" transform="translate(264, 0) scale(-0.6, 0.6) "></polygon>
 			</svg>
 			<div class="nome-candidato pull-left">
-				<div ng-repeat="a in range(placar.marina.vencidos)" class="round round-vitoria"></div>
-				<div ng-repeat="a in range(placar.marina.naoVencidos)" class="round"></div>
-				Marina
+				<div ng-repeat="a in range(p2.roundsGanhos)" class="round round-vitoria"></div>
+				<div ng-repeat="a in range(abs(p2.roundsGanhos - minRoundsParaVitoria))" class="round"></div>
+				Aécio
 			</div>
 		</div>
 	</div>
