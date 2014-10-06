@@ -94,6 +94,8 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				images: ['/images/sem-cache/sprites/pow_sprite.png']
 			});
 			pow.sprites = new createjs.Sprite(pow.spriteSheets, 'pow');
+			pow.sprites.scaleX = 0.7;
+			pow.sprites.scaleY = 0.7;
 			pow.sprites.addEventListener('animationend', function(event){
 				var index = arena.getChildIndex(pow.sprites);
 				arena.removeChildAt(index);
@@ -105,7 +107,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			var lado = personagens[id].lado;
 			var imagemTema = PropostasServ.getNomePastaTema(tema);
 			var golpe = new createjs.Bitmap('/images/sem-cache/golpes/'+imagemTema+'.png');
-			var stepsGolpe = 40;
+			var stepsGolpe = 20;
 			var ajuste = 20;
 
 			golpe.scale = 0;
