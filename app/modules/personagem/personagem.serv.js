@@ -55,7 +55,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 							speed: 1
 						}
 					},
-					images: ['/images/sem-cache/sprites/'+id+'_sprite.png']
+					images: ['/images/sem-cache/sprites/'+ $rootScope.nomesCandidatos[id] +'_sprite.png']
 				});
 
 				personagens[id].sprites = {};
