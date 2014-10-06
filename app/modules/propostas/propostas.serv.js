@@ -5,18 +5,44 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 .factory('PropostasServ',[
 	'$rootScope', '$resource',
 	function($rootScope, $resource){
+		var apiPropostasUrl = $rootScope.apiBaseUrl + 'ufc/proposals/';
+
+		function api() {
+			return $resource(apiPropostasUrl, {}, {
+				query: { method: 'GET', isArray: true, url: apiPropostasUrl + 'rand/:tema' },
+				save: { method: 'POST' , isArray: true, url: apiPropostasUrl + 'vote'}
+			})
+		};
+
+		function getTemaId(tema) {
+			var temas = {
+				'Cultura e Turismo' : 1000,
+				'Democracia e Reforma Política': 1001,
+				'Desenvolvimento Econômico': 1002,
+				'Direitos Humanos e Inclusão social': 1003,
+				'Educação': 1004,
+				'Esporte e lazer': 1005,
+				'Gestão Pública': 1006,
+				'Infraestrutura': 1007,
+				'Liberdades civis': 1008,
+				'Segurança Pública': 1009,
+				'Meio-ambiente': 110,
+				'Política Econômica': 1011,
+				'Política Externa e Defesa Nacional': 1012,
+				'Políticas Sociais': 1013,
+				'Saúde':1014,
+				'Outros' : 1015
+			};
+			return temas[tema];
+		}
+
 		return {
-			getPropostas: function(tema) {
-				return $resource($rootScope.apiBaseUrl + 'ufc/proposals/rand', {}, {
-					query: { method: 'GET', params: {}, isArray: true}
-				});
+			getPropostas: function(tema, callback) {
+				//return api().query({tema: getTemaId(tema)}, callback); // TODO: mudar quando backend estiver finalizado recebendo proposta id
+				return api().query({}, callback);
 			},
 			postPropostas: function(propostaVotada, propostaNaoVotada) {
-				return;
-				//TODO
-				//return $resource($rootScope.apiBaseUrl + 'ufc/proposals/rand', {}, {
-				//	query: { method: 'POST', params: {}, isArray: true}
-				//});
+				return api().save({'propostas' : [propostaVotada.id, propostaNaoVotada.id]});
 			},
 			getTemas: function() {
 				return [

@@ -58,7 +58,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		// Define um tema, requisita novas propostas nesse tema e as adiciona ao buffer
 		$scope.atualizaBuffer = function(callback) {
 			var temaPropostasBuffer = temas[geraNumeroAleatorio()];
-			PropostasServ.getPropostas(temaPropostasBuffer).query(function(data) {
+			PropostasServ.getPropostas(temaPropostasBuffer, function(data) {
 				console.log('Propostas fresquinhas carregadas do backend no buffer. Tema: ' + temaPropostasBuffer);
 				$scope.bufferPropostas[0] = data[0];
 				$scope.bufferPropostas[1] = data[1];
@@ -71,7 +71,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 
 		$scope.carregaPropostasIniciais = function() {
 			var temaPropostasIniciais = temas[geraNumeroAleatorio()];
-			PropostasServ.getPropostas(temaPropostasIniciais).query(function(data) {
+			PropostasServ.getPropostas(temaPropostasIniciais, function(data) {
 				console.log('Propostas iniciais carregadas do backend. Tema: ' + temaPropostasIniciais);
 				$scope.proposta1 = data[0];
 				$scope.proposta2 = data[1];
