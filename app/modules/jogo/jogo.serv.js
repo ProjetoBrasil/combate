@@ -2,14 +2,14 @@
 
 angular.module('projetobrasil.ufc.jogo.services', [])
 	.factory('GerenciadorJogo', [ '$log', '$rootScope', function ($log, $rootScope){
+		var maxRounds = 3;
+
 		var gerenciador = {
 			roundAtual : 0,
 			maxGolpesRound : 10,
+			minRoundsParaVitoria: parseInt(maxRounds/2)+1,
 			candidatos : {}
 		};
-
-		var maxRounds = 3;
-		var minRoundsParaVitoria = parseInt(maxRounds/2)+1;
 
 		// Gerencia o jogo
 		gerenciador.inicializaJogo = function(){
@@ -46,7 +46,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			$log.info('Round finalizado\nPlacar do Round: '+this.placarRound());
 			this.roundAtual++;
 			var roundsGanhos = ++this.candidatos[vencedor].roundsGanhos;
-			if(roundsGanhos >= minRoundsParaVitoria){
+			if(roundsGanhos >= this.minRoundsParaVitoria){
 				this.finalizaJogo(vencedor);
 			}else{
 				this.comecaNovoRound();

@@ -15,7 +15,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 		$scope.p2 = Jogo.candidatos.test2;
 
 		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
-		$scope.minRoundsParaVitoria = 2;
+		$scope.minRoundsParaVitoria = Jogo.minRoundsParaVitoria;
 
 		$scope.abs = function(valor){
 			return Math.abs(valor);
