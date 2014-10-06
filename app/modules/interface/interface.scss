@@ -13,21 +13,59 @@
 	top: -50px;
 }
 
+.barra{
+	margin-top: 35px;
+}
+
 .barraesquerda {
 	text-align: right;
 	position: relative;
 	right: -40px;
+	.nome-candidato {
+		text-align: left;
+		width: 264px;
+	}
+	.round {
+		margin-left: 5px;
+	}
 }
 
 .barradireita {
 	text-align: left;
 	position: relative;
 	right: 40px;
+	.nome-candidato {
+		text-align: right;
+		width: 264px;
+	}
+	.round {
+		margin-right: 5px;
+	}
+}
+
+.nome-candidato {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 19px;
+	margin-top: -20px;
+}
+
+.round {
+    display: inline-block;
+	-moz-border-radius: 17px/17px;
+    -webkit-border-radius: 17px 17px;
+    border-radius: 17px/17px;;
+    background-color: #09404c;
+    width: 17px;
+    height: 17px;
+}
+.round-vitoria {
+    border: 1px solid gray;
+	background-color: #f5e642;
 }
 
 .container-jogo{
-	min-width: 1024px;
-	max-width: 1280px;
+	min-width: 1280px;
 }
 
 body {
@@ -56,8 +94,7 @@ body {
 	position: absolute;
     left: 0;
     right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
 	padding: 3px 3px 7px;
 }
 

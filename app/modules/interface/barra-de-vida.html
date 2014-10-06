@@ -1,18 +1,28 @@
 	<div class="row" ng-controller="BarrasCtrl">
-		<div class="col-sm-5 barraesquerda">
+		<div class="col-xs-5 barra barraesquerda">
 			<svg height="50" width="264">
 				<polygon ng-attr-points="{{coordenadasIniciaisA}}" transform="scale(0.6, 0.6)" style="fill:#09404c;stroke:purple;stroke-width:0"></polygon>
 				<polygon ng-attr-points="{{coordenadasA}}" transform="scale(0.6, 0.6)" style="fill:#f5e642;stroke:purple;stroke-width:0"></polygon>
 			</svg>
+			<div class="nome-candidato pull-right">
+				Dilma
+				<div ng-repeat="a in range(p1.roundsGanhos)" class="round round-vitoria"></div>
+				<div ng-repeat="a in range(abs(p1.roundsGanhos - minRoundsParaVitoria))" class="round"></div>
+			</div>
 		</div>
-		<div class="col-sm-2 logo">
+		<div class="col-xs-2 logo">
 			<img src="images/com-cache/logo_ufc.png" alt="The Urna Fighter Combat" width="160px">
 		</div>
-		<div class="col-sm-5 barradireita">
+		<div class="col-xs-5 barra barradireita">
 			<svg height="50" width="264">
 				<polygon ng-attr-points="{{coordenadasIniciaisB}}" style="fill:#09404c;stroke:purple;stroke-width:0"  transform="translate(264, 0) scale(-0.6, 0.6) "></polygon>
 				<polygon ng-attr-points="{{coordenadasB}}" style="fill:#f5e642;stroke:purple;stroke-width:0" transform="translate(264, 0) scale(-0.6, 0.6) "></polygon>
 			</svg>
+			<div class="nome-candidato pull-left">
+				<div ng-repeat="a in range(p2.roundsGanhos)" class="round round-vitoria"></div>
+				<div ng-repeat="a in range(abs(p2.roundsGanhos - minRoundsParaVitoria))" class="round"></div>
+				Aécio
+			</div>
 		</div>
 	</div>
 
