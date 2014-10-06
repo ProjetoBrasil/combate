@@ -35,13 +35,13 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 	y3a = -0.075*x3a+37.78;
 	// y3 = '0';
 
-	x4a = x3a - 30;
+	x4a = x3a - 16;
 	y4a = '50';
 
 	x4b = 40*($scope.maxGolpesPorRound - $scope.p2.golpesSofridos + 1);
 	y4b = '50';
 
-	x3b = x4b - 30;
+	x3b = x4b - 16;
 	y3b = -0.075*x3b+37.78;
 	// y3 = '0';
 
@@ -57,7 +57,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			y3a = -0.075*x3a+37.78;
 			// y3 = '0';
 
-			x4a = x3a - 30;
+			x4a = x3a - 16;
 			y4a = '50';
     	$scope.coordenadasA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
     });
@@ -67,7 +67,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			x4b = 40*($scope.maxGolpesPorRound - $scope.p2.golpesSofridos + 1);
 			y4b = '50';
 
-			x3b = x4b - 30;
+			x3b = x4b - 16;
 			y3b = -0.075*x3b+37.78;
 
 			if($scope.p2.golpesSofridos === $scope.maxGolpesPorRound){
