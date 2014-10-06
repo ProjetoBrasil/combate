@@ -6,7 +6,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 	'$rootScope', '$resource',
 	function($rootScope, $resource){
 		return {
-			getPropostas: function(tema) {
+			getPropostas: function() {
 				return $resource($rootScope.apiBaseUrl + 'ufc/proposals/rand', {}, {
 					query: { method: 'GET', params: {}, isArray: true}
 				});

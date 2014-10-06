@@ -1,88 +1,74 @@
-$verde-escuro: rgb(9, 63, 77);
-$amarelo: rgb(210, 209, 7);
-$azul-escuro: rgb(7, 33, 42);
-$marrom: rgb(204, 176, 143);
-$verde-claro-borda: rgb(82, 120, 130);
+$verde-claro: #00BD8E;
+$branco: #fff;
+$amarelo: #FBBC47;
 
-.box-propostas {
+.bg-box-propostas{
+	background-image: url('/images/com-cache/bg-box-propostas.png');
+	width: 540px;
+	min-height: 454px;
+	margin: auto;
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: relative;
+	z-index: 100;
+}
+
+.tema-propostas {
 	position: absolute;
-	bottom: 15%;
-	right: 0;
-	left: 0;
-	margin-left: auto;
-	margin-right: auto;
-	width: 35%;
-	min-width: 430px;
-	max-width: 530px;
-	background-color: $verde-escuro;
-	padding: 0;
+	top: 55px;
+	left: 129px;
+	width: 282px;
+	text-align: center;
+	font-family: 'Lobster Two', cursive;
+	color: $branco;
+	text-transform: lowercase;
+	font-size: 18px;
+	margin-top: -5px;
 }
 
-.box-propostas .chamada {
-	background-color: $azul-escuro;
-	color: $marrom;
-	text-transform: uppercase;
-	height: 60px;
-	line-height: 60px;
-	font-weight: bold;
-}
-.box-propostas .chamada p {
-	margin: 0;
+.alternativa{
+	border-bottom: 100px solid $verde-claro;
+	border-left: 14px solid transparent;
+	border-right: 8px solid transparent;
+	height: 0;
+	width: 458px;
+	margin-left: 43px;
+	margin-bottom: 10px;
+	font-weight: 700;
+	font-style: italic;
+
+	&:hover{
+		border-bottom-color: $branco !important;
+
+		& p{
+			color: $verde-claro;
+		}
+
+		& .letra{
+			background-color: $verde-claro;
+			color: $amarelo;
+		}
+	}
+
+	&.primeira{
+		padding-top: 92px;
+	}
+
+	p{
+		padding: 7px 10px 0px 20px;
+		line-height: 16px;
+		color: $branco;
+	}
 }
 
-.box-propostas .tema {
-	color: #ffffff;
-	text-transform: uppercase;
-	margin: 0;
-	padding-top: 35px;
-	padding-bottom: 35px;
-	border-bottom: 1px solid $verde-claro-borda;
-	font-size: 40px;
-	font-weight: bold;
-}
+.letra {
+	position: absolute;
+	background-color: $branco;
+	padding: 10px;
+	left: 35px;
+	margin-top: 20px;
+	color: $verde-claro;
 
-.box-propostas .proposta {
-	color: white;
-	height: 105px;
-	border-bottom: 1px solid $verde-claro-borda;
-	margin-top: 1px;
-	margin-bottom: 1px;
-	cursor: pointer;
-	text-align: justify;
-}
-.box-propostas .proposta:first-of-type {
-	margin-bottom: 0;
-}
-.box-propostas .proposta:hover {
-	background-color: $amarelo;
-	color: $verde-escuro;
-}
-
-.box-propostas .proposta .titulo,
-.box-propostas .proposta .letra-opcao {
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-.box-propostas .proposta .letra-opcao {
-	background-color: $amarelo;
-	color: $verde-escuro;
-	font-weight: bold;
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	/* Faz círculo */
-	-moz-border-radius: 100%;
-	-webkit-border-radius: 100%;
-	border-radius: 100%;
-	/* Posiciona verticalmente centralizado */
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	font-size: 24px;
-}
-.box-propostas .proposta:hover .letra-opcao {
-	background-color: $verde-escuro;
-	color: $amarelo;
+	&:hover{
+	}
 }
