@@ -10,13 +10,13 @@ angular.module('projetobrasil.ufc.interface.controllers', [
 	.controller('CandidatosCtrl', [ function (){
 	}])
 	.controller('BarrasCtrl', ['$scope', 'GerenciadorJogo', function ($scope, Jogo){
-		$scope.p1 = Jogo.candidatos.test;
-		$scope.p2 = Jogo.candidatos.test2;
+		$scope.p2 = Jogo.candidatos.test;
+		$scope.p1 = Jogo.candidatos.test2;
 		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
 	}])
 	.controller('barraDeVidaCtrl', ['$scope', 'GerenciadorJogo', function($scope, Jogo) {
-		$scope.p1 = Jogo.candidatos.test;
-		$scope.p2 = Jogo.candidatos.test2;
+		$scope.p2 = Jogo.candidatos.test;
+		$scope.p1 = Jogo.candidatos.test2;
 		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
 
     var x1, y1, x2, y2, x3a, y3a, x4a, y4a, x3b, y3b, x4b, y4b;
