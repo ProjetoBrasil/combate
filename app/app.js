@@ -23,10 +23,14 @@ angular
 		'projetobrasil.ufc.home',
 		'projetobrasil.ufc.login'
 	])
+
 	.run(['$rootScope', 'UserLogin', function($rootScope, UserLogin){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
-		$rootScope.idsCandidatos = ['test', 'test2'];
-		$rootScope.nomesCandidatos = ['dilma', 'marina'];
+		$rootScope.idsCandidatos = ['b6bc0250-0d10-11e4-b416-b9cab1b63b1e', '827c9cc0-0d10-11e4-a4de-3d18690f2356'];
+		$rootScope.nomesCandidatos = {
+			'b6bc0250-0d10-11e4-b416-b9cab1b63b1e' : 'dilma',
+			'827c9cc0-0d10-11e4-a4de-3d18690f2356' : 'aecio'
+		};
 
 		UserLogin.promise().then(function(){
 			if(!UserLogin.isUserLogged){

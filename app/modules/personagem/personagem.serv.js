@@ -25,6 +25,33 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			});
 		};
 
+		gerenciador.carregaAssets = function() {
+			var queue = new createjs.LoadQueue();
+			var manifest = [];
+
+			// Prepara imagens de ataque por tema
+			var temas = PropostasServ.getTemas();
+			_.each(temas, function(tema) {
+				var imagemTema = PropostasServ.getNomePastaTema(tema);
+				manifest.push({id: tema, src: '/images/sem-cache/golpes/'+imagemTema+'.png'});
+			});
+
+			// Prepara sprites dos personagens
+			var ids = $rootScope.idsCandidatos;
+			_.each(ids, function(idCandidato){
+				manifest.push({id: idCandidato, src: '/images/sem-cache/sprites/'+ $rootScope.nomesCandidatos[idCandidato] +'_sprite.png'});
+			});
+
+			// Só inicializa o jogo quando todas as imagens da fila já foram carregas
+			function handleComplete() {
+			    gerenciador.inicializa();
+				$rootScope.$broadcast('imagens_carregadas');
+			}
+			queue.on('complete', handleComplete, this);
+
+			queue.loadManifest(manifest);
+		};
+
 		gerenciador.criaSpritesPersonagens = function(){
 			var ids = $rootScope.idsCandidatos;
 			_.each(ids, function(id, indice){
@@ -55,7 +82,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 							speed: 1
 						}
 					},
-					images: ['/images/sem-cache/sprites/'+id+'_sprite.png']
+					images: ['/images/sem-cache/sprites/'+ $rootScope.nomesCandidatos[id] +'_sprite.png']
 				});
 
 				personagens[id].sprites = {};
@@ -94,7 +121,9 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				images: ['/images/sem-cache/sprites/pow_sprite.png']
 			});
 			pow.sprites = new createjs.Sprite(pow.spriteSheets, 'pow');
-			pow.sprites.addEventListener('animationend', function(event){
+			pow.sprites.scaleX = 0.7;
+			pow.sprites.scaleY = 0.7;
+			pow.sprites.addEventListener('animationend', function(){
 				var index = arena.getChildIndex(pow.sprites);
 				arena.removeChildAt(index);
 			});
@@ -105,7 +134,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			var lado = personagens[id].lado;
 			var imagemTema = PropostasServ.getNomePastaTema(tema);
 			var golpe = new createjs.Bitmap('/images/sem-cache/golpes/'+imagemTema+'.png');
-			var stepsGolpe = 40;
+			var stepsGolpe = 20;
 			var ajuste = 20;
 
 			golpe.scale = 0;
@@ -170,7 +199,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			arena.addChild(pow.sprites);
 		};
 
-		gerenciador.inicializa();
+		gerenciador.carregaAssets();
 
 		return(gerenciador);
 	}]);

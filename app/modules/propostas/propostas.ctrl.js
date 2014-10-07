@@ -16,6 +16,9 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		// - Comunicar a jogada para o módulo Jogo
 		// - Comunicar a jogada para o módulo Personagens
 
+		$scope.tamProposta1 = 100;
+		$scope.tamProposta2 = 100;
+
 		$scope.mostrarBox = false;
 		$scope.bufferPropostas = [];
 		$scope.bufferPropostas[0] = null;
@@ -23,12 +26,23 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.bufferTema = null;
 		var temas = PropostasServ.getTemas();
 
+		$scope.assetsCarregados = {propostas: false, imagens: false};
+		$rootScope.$on('imagens_carregadas', function() {
+			$scope.assetsCarregados.imagens = true;
+		});
+		$scope.$watch('assetsCarregados', function(newValue, oldValue){
+			if (newValue.propostas === true && newValue.imagens === true){
+				$scope.mostrarBox = true;
+			}
+		}, true);
+
 		/**
-		 * @return número aleatório entre [0, MAX] (contidos)
+		 * @return obejto aleatório de um vetor, sem alterar o vetor
 		 */
-		function geraNumeroAleatorio() {
-			var MAX = 15;
-			return Math.floor(Math.random() * (MAX + 1));
+		function getElementoAleatorio(vetor) {
+			var MAX = _.size(vetor);
+			var indice = Math.floor(Math.random() * (MAX - 1));
+			return vetor[indice];
 		}
 
 		function bufferVazio() {
@@ -40,12 +54,18 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 			return false;
 		}
 
+		function atualizaTamanhoPropostas(){
+			$scope.tamProposta1 = $scope.proposta1.titulo.length*0.4 > 100 ? $scope.proposta1.titulo.length*0.4 : 100;
+			$scope.tamProposta2 = $scope.proposta2.titulo.length*0.4 > 100 ? $scope.proposta2.titulo.length*0.4 : 100;
+		}
+
 		// Copia o valor do buffer para a proposta corrente
 		$scope.popBuffer = function() {
 			if (!bufferVazio()) {
 
 				$scope.proposta1 = $scope.bufferPropostas[0];
 				$scope.proposta2 = $scope.bufferPropostas[1];
+				atualizaTamanhoPropostas();
 				$scope.temaPropostasVisiveis = $scope.bufferTema;
 				$scope.bufferPropostas[0] = null;
 				$scope.bufferPropostas[1] = null;
@@ -57,8 +77,8 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 
 		// Define um tema, requisita novas propostas nesse tema e as adiciona ao buffer
 		$scope.atualizaBuffer = function(callback) {
-			var temaPropostasBuffer = temas[geraNumeroAleatorio()];
-			PropostasServ.getPropostas(temaPropostasBuffer).query(function(data) {
+			var temaPropostasBuffer = getElementoAleatorio(temas);
+			PropostasServ.getPropostas(temaPropostasBuffer, function(data) {
 				console.log('Propostas fresquinhas carregadas do backend no buffer. Tema: ' + temaPropostasBuffer);
 				$scope.bufferPropostas[0] = data[0];
 				$scope.bufferPropostas[1] = data[1];
@@ -70,15 +90,16 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		};
 
 		$scope.carregaPropostasIniciais = function() {
-			var temaPropostasIniciais = temas[geraNumeroAleatorio()];
-			PropostasServ.getPropostas(temaPropostasIniciais).query(function(data) {
+			var temaPropostasIniciais = getElementoAleatorio(temas);
+			PropostasServ.getPropostas(temaPropostasIniciais, function(data) {
 				console.log('Propostas iniciais carregadas do backend. Tema: ' + temaPropostasIniciais);
 				$scope.proposta1 = data[0];
 				$scope.proposta2 = data[1];
 				$scope.temaPropostasVisiveis = temaPropostasIniciais;
-				$scope.proposta1.titulo = 'Investir em tecnologia da informação e comunicação para modernizar o trabalho das equipes do PSF junto aos indivíduos, famílias e comunidades';
-				$scope.proposta2.titulo = 'Priorizar o modal ferroviário e Implantar ferrovias de norte a sul do País interligando as principais metrópoles brasileiras, inclusive o Aerotrem e o Monotrem dentro das cidades';
-				$scope.mostrarBox = true;
+				$scope.proposta1.titulo = 'Protagonizar a coordenação e articulação dos atores sociais e agentes econômicos envolvidos no desenvolvimento sustentável, e liderar iniciativas que protejam os oceanos, nos encaminhamentos de questões relativas ao meio-ambiente na agenda internacional, especialmente a Conferência das Partes 21 da Convenção de Mudança do Clima, em 2015, e os Objetivos do Desenvolvimento Sustentável em substituição aos Objetivos do Milênio';
+				$scope.proposta2.titulo = 'Criar mecanismos que transfiram as conquistas institucionais para prevenção e combate à corrupção do Governo Federal (por exemplo, a configuração atual da Controladoria Geral da União, a criação do Portal da Transparência, a afirmação da Polícia Federal como órgão de Estado, entre outros) para o âmbito dos Estados e municípios';
+				atualizaTamanhoPropostas();
+				$scope.assetsCarregados.propostas = true;
 			});
 		};
 

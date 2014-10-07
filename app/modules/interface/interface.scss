@@ -13,6 +13,10 @@
 	top: -50px;
 }
 
+.barra{
+	margin-top: 35px;
+}
+
 .barraesquerda {
 	text-align: right;
 	position: relative;
@@ -38,6 +42,7 @@
 		margin-right: 5px;
 	}
 }
+
 .nome-candidato {
 	text-transform: uppercase;
 	font-weight: bold;
@@ -60,8 +65,7 @@
 }
 
 .container-jogo{
-	min-width: 1024px;
-	max-width: 1280px;
+	min-width: 1280px;
 }
 
 body {
@@ -90,8 +94,7 @@ body {
 	position: absolute;
     left: 0;
     right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
 	padding: 3px 3px 7px;
 }
 
