@@ -45,6 +45,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			// Só inicializa o jogo quando todas as imagens da fila já foram carregas
 			function handleComplete() {
 			    gerenciador.inicializa();
+				$rootScope.$broadcast('imagens_carregadas');
 			}
 			queue.on('complete', handleComplete, this);
 

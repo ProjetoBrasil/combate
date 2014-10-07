@@ -26,6 +26,16 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.bufferTema = null;
 		var temas = PropostasServ.getTemas();
 
+		$scope.assetsCarregados = {propostas: false, imagens: false};
+		$rootScope.$on('imagens_carregadas', function() {
+			$scope.assetsCarregados.imagens = true;
+		});
+		$scope.$watch('assetsCarregados', function(newValue, oldValue){
+			if (newValue.propostas === true && newValue.imagens === true){
+				$scope.mostrarBox = true;
+			}
+		}, true);
+
 		/**
 		 * @return obejto aleatório de um vetor, sem alterar o vetor
 		 */
@@ -89,7 +99,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				$scope.proposta1.titulo = 'Protagonizar a coordenação e articulação dos atores sociais e agentes econômicos envolvidos no desenvolvimento sustentável, e liderar iniciativas que protejam os oceanos, nos encaminhamentos de questões relativas ao meio-ambiente na agenda internacional, especialmente a Conferência das Partes 21 da Convenção de Mudança do Clima, em 2015, e os Objetivos do Desenvolvimento Sustentável em substituição aos Objetivos do Milênio';
 				$scope.proposta2.titulo = 'Criar mecanismos que transfiram as conquistas institucionais para prevenção e combate à corrupção do Governo Federal (por exemplo, a configuração atual da Controladoria Geral da União, a criação do Portal da Transparência, a afirmação da Polícia Federal como órgão de Estado, entre outros) para o âmbito dos Estados e municípios';
 				atualizaTamanhoPropostas();
-				$scope.mostrarBox = true;
+				$scope.assetsCarregados.propostas = true;
 			});
 		};
 
