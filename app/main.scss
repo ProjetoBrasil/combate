@@ -3,6 +3,12 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+$largura-minima: 1280px;
+$altura-minima: 700px;
+$verde-claro: #00BD8E;
+$branco: #fff;
+$amarelo: #FBBC47;
+
 @import 'modules/interface/interface';
 @import 'modules/propostas/propostas';
 @import 'modules/home/home';

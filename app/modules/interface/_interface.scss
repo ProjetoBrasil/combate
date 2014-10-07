@@ -1,3 +1,8 @@
+.container-jogo{
+	min-width: $largura-minima;
+	min-height: $altura-minima;
+}
+
 .candidato-avatar{
 	width: 200px;
 	margin: auto;
@@ -62,10 +67,6 @@
 .round-vitoria {
     border: 1px solid gray;
 	background-color: #f5e642;
-}
-
-.container-jogo{
-	min-width: 1280px;
 }
 
 body {

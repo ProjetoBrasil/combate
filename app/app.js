@@ -24,7 +24,7 @@ angular
 		'projetobrasil.ufc.login'
 	])
 
-	.run(['$rootScope', 'UserLogin', function($rootScope, UserLogin){
+	.run(['$rootScope', 'UserLogin', '$state', function($rootScope, UserLogin, $state){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 		$rootScope.idsCandidatos = ['b6bc0250-0d10-11e4-b416-b9cab1b63b1e', '827c9cc0-0d10-11e4-a4de-3d18690f2356'];
 		$rootScope.nomesCandidatos = {
@@ -34,7 +34,7 @@ angular
 
 		UserLogin.promise().then(function(){
 			if(!UserLogin.isUserLogged){
-				$location.path('/');
+				$state.go('home');
 			}
 		});
 	}])
@@ -44,16 +44,16 @@ angular
 		$urlRouterProvider.otherwise('/');
 
 		$stateProvider
-				.state('jogo', {
-					url: '/jogo',
-					templateUrl: 'modules/interface/interface.html',
-					controller: 'InterfaceCtrl'
-				})
-				.state('home', {
-					url: '/',
-					templateUrl: 'modules/home/home.html',
-					controller: 'HomeCtrl'
-				});
+			.state('jogo', {
+				url: '/jogo',
+				templateUrl: 'modules/interface/interface.html',
+				controller: 'InterfaceCtrl'
+			})
+			.state('home', {
+				url: '/',
+				templateUrl: 'modules/home/home.html',
+				controller: 'HomeCtrl'
+			});
 	})
 
 //Setting up the interceptor to handle when the server returns 401
