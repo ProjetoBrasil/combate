@@ -24,11 +24,12 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		var temas = PropostasServ.getTemas();
 
 		/**
-		 * @return número aleatório entre [0, MAX] (contidos)
+		 * @return obejto aleatório de um vetor, sem alterar o vetor
 		 */
-		function geraNumeroAleatorio() {
-			var MAX = 15;
-			return Math.floor(Math.random() * (MAX + 1));
+		function getElementoAleatorio(vetor) {
+			var MAX = _.size(vetor);
+			var indice = Math.floor(Math.random() * (MAX - 1));
+			return vetor[indice];
 		}
 
 		function bufferVazio() {
@@ -57,7 +58,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 
 		// Define um tema, requisita novas propostas nesse tema e as adiciona ao buffer
 		$scope.atualizaBuffer = function(callback) {
-			var temaPropostasBuffer = temas[geraNumeroAleatorio()];
+			var temaPropostasBuffer = getElementoAleatorio(temas);
 			PropostasServ.getPropostas(temaPropostasBuffer, function(data) {
 				console.log('Propostas fresquinhas carregadas do backend no buffer. Tema: ' + temaPropostasBuffer);
 				$scope.bufferPropostas[0] = data[0];
@@ -70,7 +71,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		};
 
 		$scope.carregaPropostasIniciais = function() {
-			var temaPropostasIniciais = temas[geraNumeroAleatorio()];
+			var temaPropostasIniciais = getElementoAleatorio(temas);
 			PropostasServ.getPropostas(temaPropostasIniciais, function(data) {
 				console.log('Propostas iniciais carregadas do backend. Tema: ' + temaPropostasIniciais);
 				$scope.proposta1 = data[0];
