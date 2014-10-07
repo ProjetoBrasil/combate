@@ -25,6 +25,32 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			});
 		};
 
+		gerenciador.carregaAssets = function() {
+			var queue = new createjs.LoadQueue();
+			var manifest = [];
+
+			// Prepara imagens de ataque por tema
+			var temas = PropostasServ.getTemas();
+			_.each(temas, function(tema) {
+				var imagemTema = PropostasServ.getNomePastaTema(tema);
+				manifest.push({id: tema, src: '/images/sem-cache/golpes/'+imagemTema+'.png'});
+			});
+
+			// Prepara sprites dos personagens
+			var ids = $rootScope.idsCandidatos;
+			_.each(ids, function(idCandidato){
+				manifest.push({id: idCandidato, src: '/images/sem-cache/sprites/'+ $rootScope.nomesCandidatos[idCandidato] +'_sprite.png'});
+			});
+
+			// Só inicializa o jogo quando todas as imagens da fila já foram carregas
+			function handleComplete() {
+			    gerenciador.inicializa();
+			}
+			queue.on('complete', handleComplete, this);
+
+			queue.loadManifest(manifest);
+		};
+
 		gerenciador.criaSpritesPersonagens = function(){
 			var ids = $rootScope.idsCandidatos;
 			_.each(ids, function(id, indice){
@@ -172,7 +198,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			arena.addChild(pow.sprites);
 		};
 
-		gerenciador.inicializa();
+		gerenciador.carregaAssets();
 
 		return(gerenciador);
 	}]);
