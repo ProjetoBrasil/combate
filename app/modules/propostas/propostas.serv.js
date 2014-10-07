@@ -38,7 +38,8 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 
 		return {
 			getPropostas: function(tema, callback) {
-				return api().query({tema: getTemaId(tema)}, callback); // TODO: mudar quando backend estiver finalizado recebendo proposta id
+				//return api().query({tema: getTemaId(tema)}, callback); // TODO: mudar quando backend estiver finalizado recebendo proposta id
+				return api().query({}, callback);
 			},
 			postPropostas: function(propostaVotada, propostaNaoVotada) {
 				return api().save({'propostas' : [propostaVotada.id, propostaNaoVotada.id]});
