@@ -11,8 +11,8 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 			return $resource(apiPropostasUrl, {}, {
 				query: { method: 'GET', isArray: true, url: apiPropostasUrl + 'rand/:tema' },
 				save: { method: 'POST' , isArray: true, url: apiPropostasUrl + 'vote'}
-			})
-		};
+			});
+		}
 
 		function getTemaId(tema) {
 			var temas = {
@@ -38,8 +38,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 
 		return {
 			getPropostas: function(tema, callback) {
-				//return api().query({tema: getTemaId(tema)}, callback); // TODO: mudar quando backend estiver finalizado recebendo proposta id
-				return api().query({}, callback);
+				return api().query({tema: getTemaId(tema)}, callback); // TODO: mudar quando backend estiver finalizado recebendo proposta id
 			},
 			postPropostas: function(propostaVotada, propostaNaoVotada) {
 				return api().save({'propostas' : [propostaVotada.id, propostaNaoVotada.id]});
