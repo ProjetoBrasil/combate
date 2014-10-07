@@ -23,6 +23,19 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			_.each(personagens, function(p){
 				arena.addChild(p.sprites.ginga);
 			});
+
+			var queue = new createjs.LoadQueue();
+			queue.on("complete", handleComplete, this);
+			var manifest = [];
+			var temas = PropostasServ.getTemas();
+			_.each(temas, function(tema) {
+				var imagemTema = PropostasServ.getNomePastaTema(tema);
+				manifest.push({id: tema, src: '/images/sem-cache/golpes/'+imagemTema+'.png'});
+			});
+			queue.loadManifest(manifest);
+			function handleComplete() {
+			    console.log(queue);
+			}
 		};
 
 		gerenciador.criaSpritesPersonagens = function(){
