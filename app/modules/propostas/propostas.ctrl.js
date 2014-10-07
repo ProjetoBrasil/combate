@@ -2,8 +2,10 @@
 
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
-		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens', '$timeout',
-		function ($scope, $rootScope, PropostasServ, Jogo, Personagens, $timeout){
+		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens',
+			'$timeout', '$state',
+		function ($scope, $rootScope, PropostasServ, Jogo, Personagens,
+			$timeout, $state){
 
 		// DONE:
 		// - Solicitar as propostas do servidor, uma a uma
@@ -15,6 +17,16 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		// - Verificar se o usuário está logado
 		// - Comunicar a jogada para o módulo Jogo
 		// - Comunicar a jogada para o módulo Personagens
+
+		// $rootScope.$on('$stateChangeSuccess',
+		// 	function(event, toState, toParams, fromState){
+		// 		if(toState.name === 'jogo'){
+		// 			$state.reload();
+		// 		}
+		// 	});
+
+		// Personagens.carregaAssets();
+		// Jogo.inicializaJogo();
 
 		$scope.tamProposta1 = 100;
 		$scope.tamProposta2 = 100;
@@ -141,5 +153,6 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				},800); // Delay para evitar que imagem dos ataques trave na tela
 			});
 		};
+
 
 	}]);

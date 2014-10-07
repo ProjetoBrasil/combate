@@ -24,7 +24,7 @@ angular
 		'projetobrasil.ufc.login'
 	])
 
-	.run(['$rootScope', 'UserLogin', function($rootScope, UserLogin){
+	.run(['$rootScope', 'UserLogin', '$state', function($rootScope, UserLogin, $state){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 		$rootScope.idsCandidatos = ['b6bc0250-0d10-11e4-b416-b9cab1b63b1e', '827c9cc0-0d10-11e4-a4de-3d18690f2356'];
 		$rootScope.nomesCandidatos = {
@@ -32,11 +32,22 @@ angular
 			'827c9cc0-0d10-11e4-a4de-3d18690f2356' : 'aecio'
 		};
 
-		UserLogin.promise().then(function(){
-			if(!UserLogin.isUserLogged){
-				$location.path('/');
-			}
-		});
+		$rootScope.$on('$stateChangeStart',
+				function(event, toState, toParams, fromState){
+					UserLogin.promise().error(function(){
+						if(toState.name === 'home') {
+							if(fromState.name === 'jogo'){
+								window.location.reload();
+							} else {
+								return;
+							}
+						}
+						if(!UserLogin.isUserLogged()){
+							$state.go('home');
+						}
+					});
+			});
+
 	}])
 
 	.config(function($stateProvider, $urlRouterProvider){
