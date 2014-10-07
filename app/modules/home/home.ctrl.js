@@ -5,8 +5,11 @@ angular
 		'ngDialog'
 		])
 	.controller('HomeCtrl', function($scope, ngDialog, $state, UserLogin){
+
+		var dialog;
+
 		$scope.openLoginModal = function(){
-			ngDialog.open({
+			dialog = ngDialog.open({
 				template: 'modules/home/modal.html',
 				controller: ['$scope', 'UserLogin', function($scope, UserLogin) {
 					$scope.facebookLogin = UserLogin.facebookLogin;
@@ -21,4 +24,9 @@ angular
 				$scope.openLoginModal();
 			}
 		};
+
+		$scope.$on('login', function(){
+			$state.go('jogo');
+			dialog.close();
+		});
 	});
