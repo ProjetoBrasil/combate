@@ -1,7 +1,8 @@
 'use strict';
 
 angular
-	.module('projetobrasil.ufc.login.services', [])
+	.module('projetobrasil.ufc.login.services', [
+		])
 .factory('UserLogin', ['$rootScope', '$http', function($rootScope, $http){
 
 	var isUserLogged = false;

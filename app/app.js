@@ -19,13 +19,19 @@ angular
 		'projetobrasil.ufc.propostas',
 		'projetobrasil.ufc.personagem',
 		'projetobrasil.ufc.interface',
+		'projetobrasil.ufc.home',
 		'projetobrasil.ufc.login'
 	])
-
-	.run(['$rootScope', function($rootScope){
-		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org:4242/v1/';
+	.run(['$rootScope', 'UserLogin', function($rootScope, UserLogin){
+		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 		$rootScope.idsCandidatos = ['test', 'test2'];
 		$rootScope.nomesCandidatos = ['dilma', 'marina'];
+
+		UserLogin.promise().then(function(){
+			if(!UserLogin.isUserLogged){
+				$location.path('/');
+			}
+		});
 	}])
 
 	.config(function($stateProvider, $urlRouterProvider){
@@ -44,6 +50,23 @@ angular
 					controller: 'HomeCtrl'
 				});
 	})
-	.run(function($rootScope){
-		 $rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
-	});
+
+//Setting up the interceptor to handle when the server returns 401
+.config(function($httpProvider) {
+  $httpProvider.responseInterceptors.push('securityInterceptor');
+})
+.provider('securityInterceptor', function() {
+  this.$get = function($location, $q, $injector) {
+    return function(promise) {
+      // var appAuth = $injector.get('appAuth');
+      return promise.then(null, function(response) {
+        if(response.status === 401) {
+          // delete $cookies.FPSSO;
+          // appAuth.saveAttemptUrl();
+          $location.path('/login');
+        }
+        return $q.reject(response);
+      });
+    };
+  };
+});
