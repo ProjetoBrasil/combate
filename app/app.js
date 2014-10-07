@@ -34,6 +34,9 @@ angular
 
 		$rootScope.$on('$stateChangeStart',
 				function(event, toState, toParams, fromState){
+					if(toState.name === 'home' && fromState.name === 'jogo'){
+						window.location.reload();
+					}
 					UserLogin.promise().error(function(){
 						if(toState.name === 'home') {
 							if(fromState.name === 'jogo'){
