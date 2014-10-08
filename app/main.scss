@@ -27,3 +27,29 @@ $azul-claro: #0BC2FA;
 .avatar{
 	border-radius: 50%;
 }
+
+body {
+	font-family: 'Roboto', sans-serif;
+	/* Permite redimensionamento da janela */
+	height: 100%;
+
+    &.jogo{
+		background: url('../images/com-cache/background.jpg') bottom center no-repeat fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		/* Desabilita a seleção de texto */
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+			-o-user-select: none;
+		user-select: none;
+    }
+
+    &.resultado, &.home{
+    	background-color: $amarelo-claro;
+    }
+}

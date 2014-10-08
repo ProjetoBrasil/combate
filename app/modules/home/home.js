@@ -4,14 +4,11 @@ angular
 	.module('projetobrasil.ufc.home', [
 		'projetobrasil.ufc.home.controllers'
 	])
-	.config(function($stateProvider, $urlRouterProvider){
-
-		$urlRouterProvider.otherwise('/');
-
+	.config(function($stateProvider){
 		$stateProvider
 			.state('home', {
 				url: '/',
 				templateUrl: 'modules/home/home.html',
 				controller: 'HomeCtrl'
 			});
-	})
+	});

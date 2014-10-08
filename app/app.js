@@ -21,7 +21,8 @@ angular
 		'projetobrasil.ufc.personagem',
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.home',
-		'projetobrasil.ufc.login'
+		'projetobrasil.ufc.login',
+		'projetobrasil.ufc.resultado'
 	])
 	.run(['$rootScope', 'UserLogin', '$state', function($rootScope, UserLogin, $state){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
@@ -58,7 +59,7 @@ angular
 		$httpProvider.responseInterceptors.push('securityInterceptor');
 	})
 	.provider('securityInterceptor', function() {
-		this.$get = function($location, $q, $injector) {
+		this.$get = function($location, $q) {
 			return function(promise) {
 				return promise.then(null, function(response) {
 					if(response.status === 401) {
@@ -68,4 +69,7 @@ angular
 				});
 			};
 		};
-	});
+	})
+	.controller('BodyBackgroundCtrl', ['$scope', '$state', function ($scope, $state){
+		$scope.estado = $state;
+	}]);
