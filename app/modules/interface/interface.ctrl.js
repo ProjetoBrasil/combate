@@ -4,13 +4,6 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 	.controller('InterfaceCtrl', [function (){
 
 	}])
-	.controller('BarrasCtrl', ['$scope', '$rootScope', 'GerenciadorJogo', function ($scope, $rootScope, Jogo){
-		var cand = $rootScope.idsCandidatos;
-		$scope.p1 = Jogo.candidatos[cand[0]];
-		$scope.p2 = Jogo.candidatos[cand[1]];
-		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
-
-	}])
 	.controller('barraDeVidaCtrl', ['$scope', '$rootScope', 'GerenciadorJogo', function($scope, $rootScope, Jogo) {
 		var cand = $rootScope.idsCandidatos;
 		$scope.p1 = Jogo.candidatos[cand[0]];
