@@ -1,18 +1,29 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', [ '$log', '$rootScope', function ($log, $rootScope){
+	.factory('GerenciadorJogo', [ '$log', '$rootScope', 'Angularytics',
+	 function ($log, $rootScope, Angularytics){
 		var maxRounds = 3;
 
 		var gerenciador = {
 			roundAtual : 0,
 			maxGolpesRound : 10,
 			minRoundsParaVitoria: parseInt(maxRounds/2)+1,
+			totalGolpesSessaoCount: 0,
 			candidatos : {}
+		};
+
+		gerenciador.totalGopesRound = function(){
+			var totalGolpesSofridos = 0;
+			_.each(this.candidatos, function(c){
+				totalGolpesSofridos += c.golpesSofridos;
+			});
+			return totalGolpesSofridos;
 		};
 
 		// Gerencia o jogo
 		gerenciador.inicializaJogo = function(){
+			Angularytics.trackEvent("Jogo", "Jogo iniciado");
 			this.roundAtual = 0;
 			var idsCandidatos = $rootScope.idsCandidatos;
 			var candidatos = this.candidatos;
@@ -28,6 +39,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 		};
 
 		gerenciador.finalizaJogo = function(vencedor){
+			Angularytics.trackEvent("Jogo", "Jogo finalizado", $rootScope.nomesCandidatos[vencedor]);
 			$log.info('Fim de jogo\n'+this.placarGeral());
 			$log.info('Vencedor: '+vencedor);
 			gerenciador.inicializaJogo();
@@ -35,6 +47,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		// Gerencia os rounds
 		gerenciador.comecaNovoRound = function(){
+			Angularytics.trackEvent("Jogo", "Round iniciado");
 			this.roundAtual++;
 			$log.info('Começa novo round\nRound ->'+this.roundAtual);
 			_.each(this.candidatos,function(c){
@@ -43,6 +56,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 		};
 
 		gerenciador.finalizaRound = function(vencedor){
+			Angularytics.trackEvent("Jogo", "Round finalizado");
 			$log.info('Round finalizado\nPlacar do Round: '+this.placarRound());
 			this.roundAtual++;
 			var roundsGanhos = ++this.candidatos[vencedor].roundsGanhos;
@@ -60,6 +74,8 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			if(pontuacao === this.maxGolpesRound){
 				this.finalizaRound(escolhido);
 			}
+			Angularytics.trackEvent("Jogo", "Proposta escolhida", "Round " + this.roundAtual, this.totalGopesRound());
+
 		};
 
 		// Funções GET

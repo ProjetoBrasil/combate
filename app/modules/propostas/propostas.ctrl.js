@@ -3,9 +3,9 @@
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
 		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens',
-			'$timeout', '$state',
+			'$timeout', '$state', 'Angularytics',
 		function ($scope, $rootScope, PropostasServ, Jogo, Personagens,
-			$timeout, $state){
+			$timeout, $state, Angularytics){
 
 		// DONE:
 		// - Solicitar as propostas do servidor, uma a uma
@@ -119,6 +119,9 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.atualizaBuffer();
 
 		$scope.escolherProposta = function(idAutorPropostaVotada) {
+
+			console.log(Jogo.totalGopesRound()+1);
+
 			$scope.mostrarBox = false;
 
 			// Envia o voto para o servidor
