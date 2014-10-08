@@ -16,6 +16,7 @@ angular
 		'ui.bootstrap',
 		'angular-lodash',
 		'angularytics', // Plugin para Google Analytics
+		'facebook',
  		'projetobrasil.ufc.jogo',
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.propostas',
@@ -24,6 +25,11 @@ angular
 		'projetobrasil.ufc.home',
 		'projetobrasil.ufc.login'
 	])
+	.config(function(FacebookProvider) {
+     // Set your appId through the setAppId method or
+     // use the shortcut in the initialize method directly.
+     FacebookProvider.init('1520150961538128');
+  })
 	.config(function(AngularyticsProvider) {
 			AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
 		}).run(function(Angularytics) {
@@ -51,7 +57,7 @@ angular
 						}
 					}
 					if(!UserLogin.isUserLogged()){
-						$state.go('home');
+						// $state.go('home');
 					}
 				});
 		});
@@ -87,7 +93,7 @@ angular
 				if(response.status === 401) {
 					// delete $cookies.FPSSO;
 					// appAuth.saveAttemptUrl();
-					$location.path('/login');
+					$location.path('/');
 				}
 				return $q.reject(response);
 			});

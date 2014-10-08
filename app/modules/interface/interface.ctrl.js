@@ -1,8 +1,21 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.interface.controllers', [])
-	.controller('InterfaceCtrl', [function (){
+	.controller('InterfaceCtrl', ['$scope', 'UserLogin', 'Facebook', '$state',
+	 function ($scope, UserLogin, Facebook, $state){
+		UserLogin.promise().then(function(){
+			$scope.userData = UserLogin.getUserData();
+			 Facebook.api('/' + $scope.userData.provider_id + '/picture', function(response) {
+				$scope.avatarUrl = response.data.url;
+			});
 
+		});
+
+		 $scope.logoutUser = function() {
+			UserLogin.logout(function(){
+				$state.go('home');
+			});
+		};
 	}])
 	.controller('barraDeVidaCtrl', ['$scope', '$rootScope', 'GerenciadorJogo', function($scope, $rootScope, Jogo) {
 		var cand = $rootScope.idsCandidatos;
@@ -16,7 +29,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			return Math.abs(valor);
 		};
 
-    var x1, y1, x2, y2, x3a, y3a, x4a, y4a, x3b, y3b, x4b, y4b;
+		var x1, y1, x2, y2, x3a, y3a, x4a, y4a, x3b, y3b, x4b, y4b;
 
 	x1 = '0';
 	y1 = '50';
@@ -38,25 +51,25 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 	y3b = -0.075*x3b+37.78;
 	// y3 = '0';
 
-	// Y = -0.075X  + 37.78
+	// Y = -0.075X	+ 37.78
 
-    $scope.coordenadasIniciaisA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
-    $scope.coordenadasIniciaisB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
-    // $scope.coordenadas = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3 + ',' + y3 + ' ' + x4 + ',' + y4 ;
+		$scope.coordenadasIniciaisA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
+		$scope.coordenadasIniciaisB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
+		// $scope.coordenadas = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3 + ',' + y3 + ' ' + x4 + ',' + y4 ;
 
-    $scope.$watch('p1.golpesSofridos', function(){
-    	console.log('Mudou!');
+		$scope.$watch('p1.golpesSofridos', function(){
+			console.log('Mudou!');
 			x3a = 40*($scope.maxGolpesPorRound - $scope.p1.golpesSofridos + 1);
 			y3a = -0.075*x3a+37.78;
 			// y3 = '0';
 
 			x4a = x3a - 16;
 			y4a = '50';
-    	$scope.coordenadasA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
-    });
+			$scope.coordenadasA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
+		});
 
-    $scope.$watch('p2.golpesSofridos', function(){
-    	console.log('Mudou!');
+		$scope.$watch('p2.golpesSofridos', function(){
+			console.log('Mudou!');
 			x4b = 40*($scope.maxGolpesPorRound - $scope.p2.golpesSofridos + 1);
 			y4b = '50';
 
@@ -66,7 +79,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 			if($scope.p2.golpesSofridos === $scope.maxGolpesPorRound){
 				$scope.coordenadas = '';
 			} else {
-    		$scope.coordenadasB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
-    	}
-    });
-  }]);
+				$scope.coordenadasB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
+			}
+		});
+	}]);

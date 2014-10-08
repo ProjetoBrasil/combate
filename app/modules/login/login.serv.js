@@ -38,9 +38,6 @@ angular
 								isUserLogged = true;
 								loggedUserData = data;
 								$rootScope.$broadcast('login');
-								if(modalDismiss){
-									modalDismiss();
-								}
 							}
 						}).error(function(){
 							// console.log('Deu errado');

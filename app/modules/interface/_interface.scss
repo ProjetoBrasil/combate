@@ -113,3 +113,15 @@ body {
 		display: block;
 	}
 }
+
+.logout {
+	z-index: 1000;
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	border: solid 1px black;
+	background-color: white;
+	height: 75px;
+	width: 250px;
+	text-align: center;
+}
