@@ -8,6 +8,9 @@ $altura-minima: 700px;
 $verde-claro: #00BD8E;
 $branco: #fff;
 $amarelo: #FBBC47;
+$amarelo-claro: #feffeb;
+$azul-escuro: #045371;
+$azul-claro: #0BC2FA;
 
 @import 'modules/interface/interface';
 @import 'modules/propostas/propostas';
@@ -19,4 +22,8 @@ $amarelo: #FBBC47;
 
 .pointer{
 	cursor: pointer;
+}
+
+.avatar{
+	border-radius: 50%;
 }

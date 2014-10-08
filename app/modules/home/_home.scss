@@ -1,7 +1,7 @@
 #home-container {
 	width: 100%;
 	height: 100%;
-	background-color: #feffeb;
+	background-color: $amarelo-claro;
 	position: absolute;
 	top: 0px;
 	min-width: $largura-minima;
@@ -65,17 +65,19 @@
 	}
 }
 
-.btn-login-rede-social {
-  width: 100%;
-  margin-left: 24px !important;
-  margin-top: 28px;
-
-  .btn:last-child {
-    width: 215px;
-  }
-
+.dialog-login-home{
+	.chamada-login{
+		color: $verde-claro;
+		font-family: 'Lobster Two', cursive;
+		font-size: 1.4em;
+		padding: 5px 35px 15px;
+	}
 }
 
-.btn-facebook:hover {
-	color: #fff;
+.btn-facebook{
+	font-family: 'Lobster Two', cursive;
+	&:hover {
+		color: #fff;
+	}
 }
+

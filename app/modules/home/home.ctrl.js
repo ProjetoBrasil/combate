@@ -13,7 +13,8 @@ angular
 				template: 'modules/home/modal.html',
 				controller: ['$scope', 'UserLogin', function($scope, UserLogin) {
 					$scope.facebookLogin = UserLogin.facebookLogin;
-				}]
+				}],
+				className: 'ngdialog-theme-default dialog-login-home'
 			});
 		};
 
