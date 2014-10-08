@@ -1,0 +1,62 @@
+.resultado-logo{
+	width: 200px;
+	margin-left: -100px;
+	margin-top: 10px;
+	position: absolute;
+	left: 50%;
+	z-index: 200;
+}
+
+.wrapper-resultado {
+	width: 1000px;
+	min-height: 200px;
+	margin: 100px auto 0;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.resultado{
+	width: 50%;
+	min-height: 200px;
+
+	&.pessoal{
+		float: left;
+		background-image: radial-gradient(circle at right, $verde-escuro, shade($verde-escuro, 20%));
+		background-color: $verde-escuro;
+	}
+
+	&.geral{
+		float: right;
+		background-image: radial-gradient(circle at left, $azul-mais-escuro, shade($azul-mais-escuro, 20%));
+		background-color: $azul-mais-escuro;
+	}
+
+	.titulo{
+		font-family: 'Fight', Serif;
+		font-size: 2.8em;
+		color: $amarelo;
+	}
+
+	.sub-titulo{
+		color: $verde-claro;
+		font-size: 1.7em;
+		font-weight: 900;
+		font-style: italic;
+	}
+}
+
+.avatar-dilma{
+	background-image: image-url('com-cache/sprite-aecio-dilma.png');
+	background-repeat: no-repeat;
+	background-position: 9px 0;
+	max-width: 133px;
+	min-height: 210px;
+}
+
+.avatar-aecio{
+	background-image: image-url('com-cache/sprite-aecio-dilma.png');
+	background-repeat: no-repeat;
+	background-position: -125px 0px;
+	max-width: 133px;
+	min-height: 210px;
+}
