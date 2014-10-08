@@ -32,11 +32,25 @@ angular
 			'827c9cc0-0d10-11e4-a4de-3d18690f2356' : 'aecio'
 		};
 
-		UserLogin.promise().then(function(){
-			if(!UserLogin.isUserLogged){
-				$state.go('home');
-			}
+		$rootScope.$on('$stateChangeStart',
+			function(event, toState, toParams, fromState){
+				if(toState.name === 'home' && fromState.name === 'jogo'){
+					window.location.reload();
+				}
+				UserLogin.promise().error(function(){
+					if(toState.name === 'home') {
+						if(fromState.name === 'jogo'){
+							window.location.reload();
+						} else {
+							return;
+						}
+					}
+					if(!UserLogin.isUserLogged()){
+						$state.go('home');
+					}
+				});
 		});
+
 	}])
 
 	.config(function($stateProvider, $urlRouterProvider){

@@ -1,0 +1,24 @@
+
+#home-container {
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.btn-login-rede-social {
+  width: 100%;
+  margin-left: 24px !important;
+  margin-top: 28px;
+
+  .btn:last-child {
+    width: 215px;
+  }
+
+}
+
+.btn-facebook:hover {
+	color: #fff;
+}
