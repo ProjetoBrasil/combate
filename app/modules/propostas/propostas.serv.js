@@ -5,14 +5,91 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 .factory('PropostasServ',[
 	'$rootScope', '$resource',
 	function($rootScope, $resource){
+
+		var propostas = {
+			propostasVisiveis: {tema: '', props: []},
+			buffer: {tema: '', props: []}
+		};
+
 		var apiPropostasUrl = $rootScope.apiBaseUrl + 'ufc/proposals/';
 
-		function api() {
-			return $resource(apiPropostasUrl, {}, {
-				query: { method: 'GET', isArray: true, url: apiPropostasUrl + 'rand/:tema' },
-				save: { method: 'POST' , isArray: true, url: apiPropostasUrl + 'vote'}
+		var api = $resource(apiPropostasUrl, {}, {
+					query: { method: 'GET', isArray: true, url: apiPropostasUrl + 'rand/:tema' },
+					save: { method: 'POST' , isArray: true, url: apiPropostasUrl + 'vote'}
+				});
+
+		/**
+		 * Copia o conteúdo do buffer para propostas vísiveis.
+		 * Limpa o buffer após cópia e requisita atualização do buffer em seguida.
+		 */
+		propostas.popBuffer = function () {
+			if (!propostas.vazio(propostas.buffer)) {
+				this.propostasVisiveis.props[0] = this.buffer.props[0];
+				this.propostasVisiveis.props[1] = this.buffer.props[1];
+				this.propostasVisiveis.tema = this.buffer.tema;
+
+				this.buffer.props = [];
+				this.buffer.tema = null;
+
+				this.atualizaBuffer();
+
+			} else {
+				console.error('Tentando pop em buffer vazio!');
+			}
+		};
+
+		/**
+		 * Busca novas propostas do servidor. Se propostasVisiveis estiver vazio
+		 * copia o buffer para propostasVisiveis
+		 */
+		propostas.atualizaBuffer = function () {
+			var temaPropostasBuffer = getElementoAleatorio(temas);
+			api.query({tema: getTemaId(temaPropostasBuffer) }, function(data) {
+				console.log('Propostas fresquinhas carregadas do backend no buffer. Tema: ' + temaPropostasBuffer);
+
+				propostas.buffer.tema = temaPropostasBuffer;
+				propostas.buffer.props = data;
+
+				//propostas.buffer.props[0].titulo = 'Protagonizar a coordenação e articulação dos atores sociais e agentes econômicos envolvidos no desenvolvimento sustentável, e liderar iniciativas que protejam os oceanos, nos encaminhamentos de questões relativas ao meio-ambiente na agenda internacional, especialmente a Conferência das Partes 21 da Convenção de Mudança do Clima, em 2015, e os Objetivos do Desenvolvimento Sustentável em substituição aos Objetivos do Milênio';
+				//propostas.buffer.props[1].titulo = 'Criar mecanismos que transfiram as conquistas institucionais para prevenção e combate à corrupção do Governo Federal (por exemplo, a configuração atual da Controladoria Geral da União, a criação do Portal da Transparência, a afirmação da Polícia Federal como órgão de Estado, entre outros) para o âmbito dos Estados e municípios';
+
+				if (propostas.vazio(propostas.propostasVisiveis)){
+					propostas.popBuffer();
+				}
 			});
+		};
+
+		/**
+		 * @return objeto aleatório de um vetor, sem alterar o vetor
+		 */
+		function getElementoAleatorio(vetor) {
+			var MAX = _.size(vetor);
+			var indice = Math.floor(Math.random() * (MAX - 1));
+			return vetor[indice];
 		}
+
+		propostas.vazio = function(objeto) {
+			if (_.size(objeto.props) < 2 ||
+				objeto.props[0] === null ||
+				objeto.props[1] === null ||
+				objeto.tema === null){
+				return true;
+			}
+			return false;
+		};
+
+		propostas.postPropostasVisiveis = function(idAutorPropostaVotada) {
+			var propostaVotada;
+			var propostaNaoVotada;
+			if (propostas.propostasVisiveis.props[0].politicians_id === idAutorPropostaVotada){
+				propostaVotada = propostas.propostasVisiveis.props[0];
+				propostaNaoVotada = propostas.propostasVisiveis.props[1];
+			} else {
+				propostaVotada = propostas.propostasVisiveis.props[1];
+				propostaNaoVotada = propostas.propostasVisiveis.props[0];
+			}
+			return api.save({'propostas' : [propostaVotada.id, propostaNaoVotada.id]});
+		};
 
 		function getTemaId(tema) {
 			var temas = {
@@ -36,54 +113,50 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 			return temas[tema];
 		}
 
-		return {
-			getPropostas: function(tema, callback) {
-				//return api().query({tema: getTemaId(tema)}, callback); // TODO: mudar quando backend estiver finalizado recebendo proposta id
-				return api().query({}, callback);
-			},
-			postPropostas: function(propostaVotada, propostaNaoVotada) {
-				return api().save({'propostas' : [propostaVotada.id, propostaNaoVotada.id]});
-			},
-			getTemas: function() {
-				return [
-					'Cultura e Turismo',
-					'Democracia e Reforma Política',
-					'Desenvolvimento Econômico',
-					'Direitos Humanos e Inclusão social',
-					'Educação',
-					'Esporte e lazer',
-					'Gestão Pública',
-					'Infraestrutura',
-					'Liberdades civis',
-					'Segurança Pública',
-					'Meio-ambiente',
-					'Política Econômica',
-					'Política Externa e Defesa Nacional',
-					'Políticas Sociais',
-					'Saúde'
-					//'Outros' // Dilma não possui proposta nesse tema
-				];
-			},
-			getNomePastaTema: function(tema) {
-
-				var temas = {
-					'Cultura e Turismo' : 'cultura_turismo',
-					'Democracia e Reforma Política': 'democracia_reforma_politica',
-					'Desenvolvimento Econômico': 'desenvolvimento_economico',
-					'Direitos Humanos e Inclusão social': 'direitos_humanos_inclusao_social',
-					'Educação': 'educacao',
-					'Esporte e lazer': 'esporte_lazer',
-					'Gestão Pública': 'gestao_publica',
-					'Infraestrutura': 'infraestrutura',
-					'Liberdades civis': 'liberdades_civis',
-					'Segurança Pública': 'seguranca_publica',
-					'Meio-ambiente': 'meio_ambiente',
-					'Política Econômica': 'politica_economica',
-					'Política Externa e Defesa Nacional': 'politica_externa_defesa_nacional',
-					'Políticas Sociais': 'politicas_sociais',
-					'Saúde':'saude'
-				};
-				return temas[tema];
-			}
+		propostas.getTemas = function() {
+			return [
+				'Cultura e Turismo',
+				'Democracia e Reforma Política',
+				'Desenvolvimento Econômico',
+				'Direitos Humanos e Inclusão social',
+				'Educação',
+				'Esporte e lazer',
+				'Gestão Pública',
+				'Infraestrutura',
+				'Liberdades civis',
+				'Segurança Pública',
+				'Meio-ambiente',
+				'Política Econômica',
+				'Política Externa e Defesa Nacional',
+				'Políticas Sociais',
+				'Saúde'
+				//'Outros' // Dilma não possui proposta nesse tema
+			];
 		};
+		propostas.getNomePastaTema = function(tema) {
+			var temas = {
+				'Cultura e Turismo' : 'cultura_turismo',
+				'Democracia e Reforma Política': 'democracia_reforma_politica',
+				'Desenvolvimento Econômico': 'desenvolvimento_economico',
+				'Direitos Humanos e Inclusão social': 'direitos_humanos_inclusao_social',
+				'Educação': 'educacao',
+				'Esporte e lazer': 'esporte_lazer',
+				'Gestão Pública': 'gestao_publica',
+				'Infraestrutura': 'infraestrutura',
+				'Liberdades civis': 'liberdades_civis',
+				'Segurança Pública': 'seguranca_publica',
+				'Meio-ambiente': 'meio_ambiente',
+				'Política Econômica': 'politica_economica',
+				'Política Externa e Defesa Nacional': 'politica_externa_defesa_nacional',
+				'Políticas Sociais': 'politicas_sociais',
+				'Saúde':'saude'
+			};
+			return temas[tema];
+		};
+
+
+		var temas = propostas.getTemas();
+		propostas.atualizaBuffer();
+
+		return propostas;
 	}]);
