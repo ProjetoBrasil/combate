@@ -51,30 +51,25 @@
 .nome-candidato {
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 19px;
+	font-size: 22px;
 	margin-top: -20px;
 	font-family: 'Fight';
+	color: $azul-mais-escuro;
 }
 
 .round {
     display: inline-block;
-	-moz-border-radius: 17px/17px;
-    -webkit-border-radius: 17px 17px;
-    border-radius: 17px/17px;;
-    background-color: #09404c;
-    width: 17px;
-    height: 17px;
-}
-.round-vitoria {
-    border: 1px solid gray;
-	background-color: #FBBC47;
+    width: 22px;
+    i {
+    	color: $amarelo-dourado;
+    }
 }
 
 .logo-projeto-brasil {
 	background-color: #09404C;
 	bottom: 0;
 	width: 139px;
-	position: absolute;
+	position: fixed;
     left: 0;
     right: 0;
     margin: auto;

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', [ '$log', '$rootScope', 'Angularytics',
-	 function ($log, $rootScope, Angularytics){
+	.factory('GerenciadorJogo', ['$rootScope', 'Angularytics',
+	 function ($rootScope, Angularytics){
 		var maxRounds = 3;
 
 		var gerenciador = {
@@ -34,14 +34,12 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				}
 				candidatos[id].roundsGanhos = 0;
 				candidatos[id].golpesSofridos = 0;
+				candidatos[id].adversario = id == idsCandidatos[0] ? idsCandidatos[1] : idsCandidatos[0];
 			});
-			$log.info('Jogo inicializado\nPlacar inicial: '+this.placarRound()+'\nRound atual: '+this.roundAtual);
 		};
 
 		gerenciador.finalizaJogo = function(vencedor){
 			Angularytics.trackEvent("Jogo", "Jogo finalizado", $rootScope.nomesCandidatos[vencedor]);
-			$log.info('Fim de jogo\n'+this.placarGeral());
-			$log.info('Vencedor: '+vencedor);
 			gerenciador.inicializaJogo();
 		};
 
@@ -49,7 +47,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 		gerenciador.comecaNovoRound = function(){
 			Angularytics.trackEvent("Jogo", "Round iniciado");
 			this.roundAtual++;
-			$log.info('Começa novo round\nRound ->'+this.roundAtual);
 			_.each(this.candidatos,function(c){
 				c.golpesSofridos = 0;
 			});
@@ -57,7 +54,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		gerenciador.finalizaRound = function(vencedor){
 			Angularytics.trackEvent("Jogo", "Round finalizado");
-			$log.info('Round finalizado\nPlacar do Round: '+this.placarRound());
 			this.roundAtual++;
 			var roundsGanhos = ++this.candidatos[vencedor].roundsGanhos;
 			if(roundsGanhos >= this.minRoundsParaVitoria){
@@ -69,8 +65,8 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		// Gerencia os golpes
 		gerenciador.atualizaPlacar = function(escolhido){
-			$log.info('Golpe do candidato ' + escolhido + '\nBem no meio da fuça!!!');
-			var pontuacao = ++this.candidatos[escolhido].golpesSofridos;
+			var adversario = this.candidatos[escolhido].adversario;
+			var pontuacao = ++this.candidatos[adversario].golpesSofridos;
 			if(pontuacao === this.maxGolpesRound){
 				this.finalizaRound(escolhido);
 			}
