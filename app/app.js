@@ -21,9 +21,9 @@ angular
 		'projetobrasil.ufc.personagem',
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.home',
-		'projetobrasil.ufc.login'
+		'projetobrasil.ufc.login',
+		'projetobrasil.ufc.resultado'
 	])
-
 	.run(['$rootScope', 'UserLogin', '$state', function($rootScope, UserLogin, $state){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 		$rootScope.idsCandidatos = ['b6bc0250-0d10-11e4-b416-b9cab1b63b1e', '827c9cc0-0d10-11e4-a4de-3d18690f2356'];
@@ -52,40 +52,24 @@ angular
 		});
 
 	}])
-
-	.config(function($stateProvider, $urlRouterProvider){
-
+	.config(function($urlRouterProvider){
 		$urlRouterProvider.otherwise('/');
-
-		$stateProvider
-			.state('jogo', {
-				url: '/jogo',
-				templateUrl: 'modules/interface/interface.html',
-				controller: 'InterfaceCtrl'
-			})
-			.state('home', {
-				url: '/',
-				templateUrl: 'modules/home/home.html',
-				controller: 'HomeCtrl'
-			});
 	})
-
-//Setting up the interceptor to handle when the server returns 401
-.config(function($httpProvider) {
-  $httpProvider.responseInterceptors.push('securityInterceptor');
-})
-.provider('securityInterceptor', function() {
-  this.$get = function($location, $q, $injector) {
-    return function(promise) {
-      // var appAuth = $injector.get('appAuth');
-      return promise.then(null, function(response) {
-        if(response.status === 401) {
-          // delete $cookies.FPSSO;
-          // appAuth.saveAttemptUrl();
-          $location.path('/login');
-        }
-        return $q.reject(response);
-      });
-    };
-  };
-});
+	.config(function($httpProvider) {
+		$httpProvider.responseInterceptors.push('securityInterceptor');
+	})
+	.provider('securityInterceptor', function() {
+		this.$get = function($location, $q) {
+			return function(promise) {
+				return promise.then(null, function(response) {
+					if(response.status === 401) {
+						$location.path('/login');
+					}
+					return $q.reject(response);
+				});
+			};
+		};
+	})
+	.controller('BodyBackgroundCtrl', ['$scope', '$state', function ($scope, $state){
+		$scope.estado = $state;
+	}]);

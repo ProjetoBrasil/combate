@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="projetobrasil.ufc">
 	<head>
 	<meta charset="utf-8">
 	<title>Urna Fighter Combat :: Projeto Brasil</title>
@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
 	</head>
-	<body ng-app="projetobrasil.ufc">
+	<body ng-controller="BodyBackgroundCtrl" ng-class="estado.current.name">
 	<!--[if lt IE 7]>
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -96,12 +96,20 @@
 	<script src="modules/personagem/personagem.serv.js"></script>
 	<script src="modules/personagem/personagem.ctrl.js"></script>
 	<script src="modules/personagem/personagem.dir.js"></script>
+
 	<!-- MODULO: Login -->
 	<script src="modules/login/login.js"></script>
 	<script src="modules/login/login.serv.js"></script>
+
 	<!-- MODULO: Home -->
 	<script src="modules/home/home.js"></script>
 	<script src="modules/home/home.ctrl.js"></script>
+
+	<!-- MODULO: Resultado -->
+	<script src="modules/resultado/resultado.js"></script>
+	<script src="modules/resultado/resultado.ctrl.js"></script>
+	<script src="modules/resultado/resultado.serv.js"></script>
+
 	<!-- endbuild -->
 </body>
 </html>
