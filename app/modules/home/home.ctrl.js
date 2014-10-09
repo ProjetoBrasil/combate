@@ -20,7 +20,7 @@ angular
 
 		$scope.jogar = function(){
 			if(UserLogin.isUserLogged()){
-				$state.go('jogo', {}, {reload: true});
+				$state.go('jogo');
 			} else {
 				$scope.openLoginModal();
 			}

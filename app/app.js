@@ -15,7 +15,9 @@ angular
 		'ui.router',
 		'ui.bootstrap',
 		'angular-lodash',
-		'projetobrasil.ufc.jogo',
+		'angularytics', // Plugin para Google Analytics
+		'facebook',
+ 		'projetobrasil.ufc.jogo',
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.propostas',
 		'projetobrasil.ufc.personagem',
@@ -24,6 +26,14 @@ angular
 		'projetobrasil.ufc.login',
 		'projetobrasil.ufc.resultado'
 	])
+	.config(function(FacebookProvider) {
+		FacebookProvider.init('1520150961538128');
+	})
+	.config(function(AngularyticsProvider) {
+		AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
+	}).run(function(Angularytics) {
+		Angularytics.init();
+	})
 	.run(['$rootScope', 'UserLogin', '$state', function($rootScope, UserLogin, $state){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 		$rootScope.idsCandidatos = ['b6bc0250-0d10-11e4-b416-b9cab1b63b1e', '827c9cc0-0d10-11e4-a4de-3d18690f2356'];
@@ -46,7 +56,7 @@ angular
 						}
 					}
 					if(!UserLogin.isUserLogged()){
-						$state.go('home');
+						// $state.go('home');
 					}
 				});
 		});
