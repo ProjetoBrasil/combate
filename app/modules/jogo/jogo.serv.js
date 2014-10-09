@@ -34,6 +34,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				}
 				candidatos[id].roundsGanhos = 0;
 				candidatos[id].golpesSofridos = 0;
+				candidatos[id].adversario = id == idsCandidatos[0] ? idsCandidatos[1] : idsCandidatos[0];
 			});
 			$log.info('Jogo inicializado\nPlacar inicial: '+this.placarRound()+'\nRound atual: '+this.roundAtual);
 		};
@@ -70,7 +71,8 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 		// Gerencia os golpes
 		gerenciador.atualizaPlacar = function(escolhido){
 			$log.info('Golpe do candidato ' + escolhido + '\nBem no meio da fuça!!!');
-			var pontuacao = ++this.candidatos[escolhido].golpesSofridos;
+			var adversario = this.candidatos[escolhido].adversario;
+			var pontuacao = ++this.candidatos[adversario].golpesSofridos;
 			if(pontuacao === this.maxGolpesRound){
 				this.finalizaRound(escolhido);
 			}

@@ -19,8 +19,8 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 	}])
 	.controller('barraDeVidaCtrl', ['$scope', '$rootScope', 'GerenciadorJogo', function($scope, $rootScope, Jogo) {
 		var cand = $rootScope.idsCandidatos;
-		$scope.p1 = Jogo.candidatos[cand[1]];
-		$scope.p2 = Jogo.candidatos[cand[0]];
+		$scope.p1 = Jogo.candidatos[cand[0]];
+		$scope.p2 = Jogo.candidatos[cand[1]];
 
 		$scope.maxGolpesPorRound = Jogo.maxGolpesRound;
 		$scope.minRoundsParaVitoria = Jogo.minRoundsParaVitoria;
