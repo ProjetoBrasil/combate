@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.personagem.services', [])
-	.factory('Personagens', ['$rootScope', '$document', 'PropostasServ', function ($rootScope, $document, PropostasServ) {
+	.factory('Personagens', ['$rootScope', '$document', 'PropostasServ',
+		function ($rootScope, $document, PropostasServ) {
 
 		var gerenciador = {};
 		var personagens = {};
@@ -171,7 +172,8 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				}
 
 				var newY = arena.canvas.height/2 - (newScale * tamFigurasGolpe.height/2);
-				var newAngle = Math.sin(angle + 0.04) * 360;
+				var newAngle = angle + 15;
+				console.log(newAngle);
 
 				golpe.setTransform(newX, newY, newScale, newScale, newAngle, 0, 0, regX, regY);
 				var newRegX = golpe.image.width/2;
