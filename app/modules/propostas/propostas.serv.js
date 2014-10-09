@@ -44,7 +44,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 		 */
 		propostas.atualizaBuffer = function () {
 			var temaPropostasBuffer = getElementoAleatorio(temas);
-			api.query({tema: getTemaId(temaPropostasBuffer) }, function(data) {
+			api.query({tema: getTemaId(temaPropostasBuffer, 0) }, function(data) {
 				console.log('Propostas fresquinhas carregadas do backend no buffer. Tema: ' + temaPropostasBuffer);
 
 				propostas.buffer.tema = temaPropostasBuffer;
@@ -91,7 +91,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 			return api.save({'propostas' : [propostaVotada.id, propostaNaoVotada.id]});
 		};
 
-		function getTemaId(tema) {
+		function getTemaId(tema, mode) {
 			var temas = {
 				'Cultura e Turismo' : 1000,
 				'Democracia e Reforma Política': 1001,
@@ -103,7 +103,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 				'Infraestrutura': 1007,
 				'Liberdades civis': 1008,
 				'Segurança Pública': 1009,
-				'Meio-ambiente': 110,
+				'Meio-ambiente': 1010,
 				'Política Econômica': 1011,
 				'Política Externa e Defesa Nacional': 1012,
 				'Políticas Sociais': 1013,

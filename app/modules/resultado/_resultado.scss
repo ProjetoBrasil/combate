@@ -8,26 +8,38 @@
 }
 
 .wrapper-resultado {
-	width: 1000px;
+	width: 1100px;
 	min-height: 200px;
 	margin: 100px auto 0;
 	border-radius: 5px;
 	overflow: hidden;
 }
 
+.btn-share-button{
+	border-radius: 0;
+	font-family: 'Fight';
+	margin: 10px auto;
+
+	&.facebook{
+		background-color: $azul-escuro;
+		color: $branco;
+	}
+}
+
 .resultado{
 	width: 50%;
 	min-height: 200px;
+	padding: 25px;
 
 	&.pessoal{
 		float: left;
-		background-image: radial-gradient(circle at right, $verde-escuro, shade($verde-escuro, 20%));
+		background-image: radial-gradient(circle at right, tint($verde-escuro, 10%), shade($verde-escuro, 20%));
 		background-color: $verde-escuro;
 	}
 
 	&.geral{
 		float: right;
-		background-image: radial-gradient(circle at left, $azul-mais-escuro, shade($azul-mais-escuro, 20%));
+		background-image: radial-gradient(circle at left, tint($azul-mais-escuro, 10%), shade($azul-mais-escuro, 20%));
 		background-color: $azul-mais-escuro;
 	}
 
@@ -35,6 +47,7 @@
 		font-family: 'Fight', Serif;
 		font-size: 2.8em;
 		color: $amarelo;
+		margin-top: 10px;
 	}
 
 	.sub-titulo{
@@ -45,18 +58,90 @@
 	}
 }
 
+.categoria{
+	div{
+		text-align: right;
+	}
+
+	div+div{
+		text-align: left;
+	}
+}
+
+.titulo-categoria{
+	color: $azul-claro;
+	margin: 7px 0 3px;
+}
+
+.porcentagem{
+	color: $verde-claro;
+}
+
+.barra-resultado{
+	height: 15px;
+	-webkit-transform: skew(15deg);
+	-moz-transform: skew(15deg);
+	-o-transform: skew(15deg);
+	-webkit-backface-visibility: hidden;
+
+	border-radius: 0;
+	background-color: $azul-escuro;
+	margin-bottom: 4px;
+
+	.progress-bar{
+		background-color: $verde-claro;
+		// background-image: linear-gradient(to right, tint($verde-claro, 10%), adjust-lightness($verde-claro, 20%));
+	}
+
+	&.invertida{
+		-webkit-transform: skew(-15deg);
+		-moz-transform: skew(-15deg);
+		-o-transform: skew(-15deg);
+
+		.progress-bar{
+			background-color: $verde-claro;
+			// background-image: linear-gradient(to left, tint($verde-claro, 10%), adjust-lightness($verde-claro, 20%));
+			float: right;
+		}
+	}
+}
+
 .avatar-dilma{
 	background-image: image-url('com-cache/sprite-aecio-dilma.png');
 	background-repeat: no-repeat;
-	background-position: 9px 0;
+	background-position: 11px 0;
 	max-width: 133px;
-	min-height: 210px;
+	min-height: 160px;
 }
 
 .avatar-aecio{
 	background-image: image-url('com-cache/sprite-aecio-dilma.png');
 	background-repeat: no-repeat;
-	background-position: -125px 0px;
+	background-position: -92px 0px;
 	max-width: 133px;
-	min-height: 210px;
+	min-height: 160px;
+}
+
+.arrow-box {
+	position: relative;
+	background: #0bbd89;
+	font-family: 'Fight';
+	padding: 10px;
+	font-size: 1.7em;
+	color: $amarelo;
+}
+
+.arrow-box:after {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(11, 189, 137, 0);
+	border-bottom-color: #0bbd89;
+	border-width: 10px;
+	margin-left: -10px;
 }

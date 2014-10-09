@@ -2,34 +2,90 @@
 	<img src="images/com-cache/logo_ufc.png" class="resultado-logo" alt="Logo do Urna Fighter Combat">
 	<div class="wrapper-resultado">
 		<div class="resultado text-center pessoal">
+			<button class="btn btn-lg btn-share-button facebook">
+				<i class="fa fa-facebook"></i>
+				COMPARTILHAR
+			</button>
 			<h3 class="titulo">Seu resultado</h3>
-			<h5 class="sub-titulo">111 x 3333</h5>
+			<h5 class="sub-titulo">
+				{{qtdeVotosPessoal[dilma]}} x {{qtdeVotosPessoal[aecio]}}
+			</h5>
 			<div class="row">
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<div class="avatar-dilma"></div>
+					<div class="arrow-box">
+						VENCEDORA
+					</div>
 				</div>
-				<div class="col-sm-4">
-					GRAFICOS
+				<div class="col-sm-6">
+					<div class="row categoria" ng-repeat="(id, nome) in categorias">
+						<p class="titulo-categoria">{{nome}}</p>
+						<div class="col-sm-6">
+							<progressbar class="barra-resultado invertida" value="rankPessoal[dilma][id]" max="qtdeVotosPessoal[id]"></progressbar>
+							<span class="porcentagem">{{rankPessoal[dilma][id] || 101}}%</span>
+						</div>
+						<div class="col-sm-6">
+							<progressbar class="barra-resultado" value="rankPessoal[aecio][id]" max="qtdeVotosPessoal[id]"></progressbar>
+							<span class="porcentagem">{{rankPessoal[aecio][id] || 101}}%</span>
+						</div>
+					</div>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<div class="avatar-aecio"></div>
+					<div class="arrow-box">
+						VENCEDOR
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="resultado text-center geral">
+			<button class="btn btn-lg btn-share-button facebook">
+				<i class="fa fa-facebook"></i>
+				COMPARTILHAR
+			</button>
 			<h3 class="titulo">Resultado nacional</h3>
-			<h5 class="sub-titulo">111 x 3333</h5>
+			<h5 class="sub-titulo">
+				{{qtdeVotosGlobal[dilma]}} x {{qtdeVotosGlobal[aecio]}}
+			</h5>
 			<div class="row">
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<div class="avatar-dilma"></div>
+					<div class="arrow-box">
+						VENCEDORA
+					</div>
 				</div>
-				<div class="col-sm-4">
-					GRAFICOS
+				<div class="col-sm-6">
+					<div class="row categoria" ng-repeat="(id, nome) in categorias">
+						<p class="titulo-categoria">{{nome}}</p>
+						<div class="col-sm-6">
+							<progressbar class="barra-resultado invertida" value="rankGlobal[dilma][id]" max="qtdeVotosGlobal[id]"></progressbar>
+							<span class="porcentagem">{{rankGlobal[dilma][id] || 101}}%</span>
+						</div>
+						<div class="col-sm-6">
+							<progressbar class="barra-resultado" value="rankGlobal[aecio][id]" max="qtdeVotosGlobal[id]"></progressbar>
+							<span class="porcentagem">{{rankGlobal[aecio][id] || 101}}%</span>
+						</div>
+					</div>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<div class="avatar-aecio"></div>
+					<div class="arrow-box">
+						VENCEDOR
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="resultado-rodape">
+		<div class="controles">
+			<img src="images/com-cache/controle-esquerda.png" alt="">
+			<img src="images/com-cache/controle-direita.png" alt="">
+		</div>
+		<!-- <img src="images/com-cache/comecar-jogar.png" alt="">
+		<div class="logomarcas">
+			<img src="images/com-cache/logo-projetobrasil-rodape.png" alt="">
+			<img src="images/com-cache/logo-muito-interessante.png" alt="">
+			<img src="images/com-cache/logo-dwrk.png" alt="">
+		</div> -->
 	</div>
 </div>
