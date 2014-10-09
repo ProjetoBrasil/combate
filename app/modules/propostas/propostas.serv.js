@@ -45,13 +45,9 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 		propostas.atualizaBuffer = function () {
 			var temaPropostasBuffer = getElementoAleatorio(temas);
 			api.query({tema: getTemaId(temaPropostasBuffer) }, function(data) {
-				console.log('Propostas fresquinhas carregadas do backend no buffer. Tema: ' + temaPropostasBuffer);
 
 				propostas.buffer.tema = temaPropostasBuffer;
 				propostas.buffer.props = data;
-
-				//propostas.buffer.props[0].titulo = 'Protagonizar a coordenação e articulação dos atores sociais e agentes econômicos envolvidos no desenvolvimento sustentável, e liderar iniciativas que protejam os oceanos, nos encaminhamentos de questões relativas ao meio-ambiente na agenda internacional, especialmente a Conferência das Partes 21 da Convenção de Mudança do Clima, em 2015, e os Objetivos do Desenvolvimento Sustentável em substituição aos Objetivos do Milênio';
-				//propostas.buffer.props[1].titulo = 'Criar mecanismos que transfiram as conquistas institucionais para prevenção e combate à corrupção do Governo Federal (por exemplo, a configuração atual da Controladoria Geral da União, a criação do Portal da Transparência, a afirmação da Polícia Federal como órgão de Estado, entre outros) para o âmbito dos Estados e municípios';
 
 				if (propostas.vazio(propostas.propostasVisiveis)){
 					propostas.popBuffer();
