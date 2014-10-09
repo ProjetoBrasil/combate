@@ -51,41 +51,18 @@
 .nome-candidato {
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 19px;
+	font-size: 22px;
 	margin-top: -20px;
+	font-family: 'Fight';
+	color: $azul-mais-escuro;
 }
 
 .round {
     display: inline-block;
-	-moz-border-radius: 17px/17px;
-    -webkit-border-radius: 17px 17px;
-    border-radius: 17px/17px;;
-    background-color: #09404c;
-    width: 17px;
-    height: 17px;
-}
-.round-vitoria {
-    border: 1px solid gray;
-	background-color: #f5e642;
-}
-
-body {
-	font-family: 'Roboto', sans-serif;
-	/* Permite redimensionamento da janela */
-	background: url('../images/com-cache/background.jpg') bottom center no-repeat fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	height: 100%;
-	/* Desabilita a seleção de texto */
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-  	-o-user-select: none;
-    user-select: none;
+    width: 22px;
+    i {
+    	color: $amarelo-dourado;
+    }
 }
 
 .logo-projeto-brasil {
