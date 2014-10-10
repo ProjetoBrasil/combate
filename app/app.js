@@ -34,7 +34,7 @@ angular
 	}).run(function(Angularytics) {
 		Angularytics.init();
 	})
-	.run(['$rootScope', 'UserLogin', '$state', function($rootScope, UserLogin, $state){
+	.run(['$rootScope', 'UserLogin', function($rootScope, UserLogin){
 		$rootScope.apiBaseUrl = 'http://api.projetobrasil.org/v1/';
 		$rootScope.idsCandidatos = ['b6bc0250-0d10-11e4-b416-b9cab1b63b1e', '827c9cc0-0d10-11e4-a4de-3d18690f2356'];
 		$rootScope.nomesCandidatos = {
