@@ -15,7 +15,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 
 		var api = $resource(apiPropostasUrl, {}, {
 					query: { method: 'GET', isArray: true, url: apiPropostasUrl + 'rand/:tema' },
-					save: { method: 'POST' , isArray: true, url: apiPropostasUrl + 'vote'}
+					save: { method: 'POST', url: apiPropostasUrl + 'vote'}
 				});
 
 		/**
