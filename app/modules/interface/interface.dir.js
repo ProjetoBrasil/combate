@@ -5,6 +5,6 @@ angular.module('projetobrasil.ufc.interface.directives', [])
     return {
     	restrict: 'E',
     	controller: 'barraDeVidaCtrl',
-      templateUrl: 'modules/interface/barra-de-vida.html'
+      	templateUrl: 'modules/interface/barra-de-vida.html'
     };
   });

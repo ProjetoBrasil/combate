@@ -10,9 +10,6 @@ angular.module('projetobrasil.ufc.propostas.directives', [])
 .directive('boxpropostas', [function () {
 	return {
 		restrict: 'E',
-		templateUrl: 'modules/propostas/box-propostas.html',
-		link: function () {
-
-		}
+		templateUrl: 'modules/propostas/box-propostas.html'
 	};
 }]);

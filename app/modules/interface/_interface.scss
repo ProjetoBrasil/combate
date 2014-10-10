@@ -1,3 +1,8 @@
+.container-jogo{
+	min-width: $largura-minima;
+	min-height: $altura-minima;
+}
+
 .candidato-avatar{
 	width: 200px;
 	margin: auto;
@@ -10,11 +15,11 @@
 .logo {
 	text-align: center;
 	position: relative;
-	top: -50px;
+	top: 10px;
 }
 
 .barra{
-	margin-top: 35px;
+	margin-top: 85px;
 }
 
 .barraesquerda {
@@ -46,56 +51,30 @@
 .nome-candidato {
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 19px;
+	font-size: 22px;
 	margin-top: -20px;
+	font-family: 'Fight';
+	color: $azul-mais-escuro;
 }
 
 .round {
     display: inline-block;
-	-moz-border-radius: 17px/17px;
-    -webkit-border-radius: 17px 17px;
-    border-radius: 17px/17px;;
-    background-color: #09404c;
-    width: 17px;
-    height: 17px;
-}
-.round-vitoria {
-    border: 1px solid gray;
-	background-color: #f5e642;
-}
-
-.container-jogo{
-	min-width: 1280px;
-}
-
-body {
-	font-family: 'Roboto', sans-serif;
-	/* Permite redimensionamento da janela */
-	background: url('../images/com-cache/background.jpg') bottom center no-repeat fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	height: 100%;
-	/* Desabilita a seleção de texto */
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-  	-o-user-select: none;
-    user-select: none;
+    width: 22px;
+    i {
+    	color: $azul-escuro;
+    }
 }
 
 .logo-projeto-brasil {
 	background-color: #09404C;
 	bottom: 0;
 	width: 139px;
-	position: absolute;
+	position: fixed;
     left: 0;
     right: 0;
     margin: auto;
 	padding: 3px 3px 7px;
+	z-index: 200;
 }
 
 .canvas-box{
@@ -109,5 +88,43 @@ body {
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
+	}
+}
+
+.logout {
+	z-index: 1000;
+	position: fixed;
+	top: 12px;
+	width: 250px;
+	right: -10px;
+
+	img{
+		float: left;
+		text-shadow: 0 1px 1px #FFF;
+		margin-right: 10px;
+	}
+
+	.nome{
+		color: $azul-escuro;
+		font-size: 1.5em;
+		text-shadow: 0 1px 1px #FFF;
+	}
+
+	.acao{
+		font-size: 0.95em;
+		color: $azul-mais-escuro;
+	}
+}
+
+.dialog-round .ngdialog-content {
+	width: 100% !important;
+	// height: 40px !important;
+	padding: 0 !important;
+
+	.dialog-message {
+		padding: 20px 0 30px;
+		font-family: 'Fight';
+		color: $amarelo;
+		font-size: 2.5em;
 	}
 }

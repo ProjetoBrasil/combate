@@ -1,7 +1,8 @@
 'use strict';
 
 angular
-	.module('projetobrasil.ufc.login.services', [])
+	.module('projetobrasil.ufc.login.services', [
+		])
 .factory('UserLogin', ['$rootScope', '$http', function($rootScope, $http){
 
 	var isUserLogged = false;
@@ -20,7 +21,7 @@ angular
 		promise: function(){
 			return promise;
 		},
-		facebookLogin: function(modalDismiss){
+		facebookLogin: function(){
 			var left = (screen.width/2)-(780/2);
 			var top = (screen.height/2)-(410/2);
 			var signinWin = window.open($rootScope.apiBaseUrl + 'auth/facebook', 'SignIn', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=' + left + ',top=' + top);
@@ -37,16 +38,12 @@ angular
 								isUserLogged = true;
 								loggedUserData = data;
 								$rootScope.$broadcast('login');
-								if(modalDismiss){
-									modalDismiss();
-								}
 							}
 						}).error(function(){
 							// console.log('Deu errado');
 						});
 				}
 			}, 1000);
-		// // });
 		},
 		logout: function(success, error){
 			 $http.get($rootScope.apiBaseUrl+'user/logout')
