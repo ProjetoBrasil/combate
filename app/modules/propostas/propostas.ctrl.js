@@ -3,9 +3,9 @@
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
 		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens',
-			'$timeout', '$state', 'Angularytics',
+			'$timeout',
 		function ($scope, $rootScope, PropostasServ, Jogo, Personagens,
-			$timeout, $state, Angularytics){
+			$timeout){
 
 		// $rootScope.$on('$stateChangeSuccess',
 		// 	function(event, toState, toParams, fromState){

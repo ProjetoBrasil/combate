@@ -1,18 +1,14 @@
 .resultado-logo{
 	width: 200px;
-	margin-left: -100px;
-	margin-top: 10px;
-	position: absolute;
-	left: 50%;
-	z-index: 200;
+	margin: auto;
+	display: table;
+	padding-top: 25px;
 }
 
 .wrapper-resultado {
-	width: 1100px;
+	min-width: 1100px;
 	min-height: 200px;
-	margin: 100px auto 0;
-	border-radius: 5px;
-	overflow: hidden;
+	margin-top: -70px;
 }
 
 .btn-share-button{
@@ -26,7 +22,7 @@
 	}
 }
 
-.resultado{
+.coluna-resultado{
 	width: 50%;
 	min-height: 200px;
 	padding: 25px;
@@ -35,12 +31,16 @@
 		float: left;
 		background-image: radial-gradient(circle at right, tint($verde-escuro, 10%), shade($verde-escuro, 20%));
 		background-color: $verde-escuro;
+		border-bottom-left-radius: 5px;
+		border-top-left-radius: 5px;
 	}
 
 	&.geral{
 		float: right;
 		background-image: radial-gradient(circle at left, tint($azul-mais-escuro, 10%), shade($azul-mais-escuro, 20%));
 		background-color: $azul-mais-escuro;
+		border-bottom-right-radius: 5px;
+		border-top-right-radius: 5px;
 	}
 
 	.titulo{
@@ -90,7 +90,7 @@
 
 	.progress-bar{
 		background-color: $verde-claro;
-		// background-image: linear-gradient(to right, tint($verde-claro, 10%), adjust-lightness($verde-claro, 20%));
+		background-image: linear-gradient(to right, tint($verde-claro, 10%), adjust-lightness($verde-claro, 20%));
 	}
 
 	&.invertida{
@@ -100,7 +100,7 @@
 
 		.progress-bar{
 			background-color: $verde-claro;
-			// background-image: linear-gradient(to left, tint($verde-claro, 10%), adjust-lightness($verde-claro, 20%));
+			background-image: linear-gradient(to left, tint($verde-claro, 10%), adjust-lightness($verde-claro, 20%));
 			float: right;
 		}
 	}
@@ -144,4 +144,23 @@
 	border-bottom-color: #0bbd89;
 	border-width: 10px;
 	margin-left: -10px;
+}
+
+.resultado-rodape{
+	margin: 40px auto 85px;
+
+	.logo-pb,
+	.logo-dwrk{
+		margin: 0 40px;
+		padding-top: 30px;
+	}
+
+	.logo-mi{
+		margin: 15px 40px;
+	}
+
+	p{
+		font-size: 1.6em;
+		color: #225245;
+	}
 }

@@ -104,7 +104,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 			return api.save({'propostas' : [propostaVotada.id, propostaNaoVotada.id]});
 		};
 
-		function getTemaId(tema, mode) {
+		function getTemaId(tema) {
 			var temas = {
 				'Cultura e Turismo' : 1000,
 				'Democracia e Reforma Política': 1001,

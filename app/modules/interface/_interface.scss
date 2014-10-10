@@ -61,7 +61,7 @@
     display: inline-block;
     width: 22px;
     i {
-    	color: $amarelo-dourado;
+    	color: $azul-escuro;
     }
 }
 
@@ -93,21 +93,38 @@
 
 .logout {
 	z-index: 1000;
-	position: absolute;
-	top: 50px;
-	right: 50px;
-	border: solid 1px black;
-	background-color: white;
-	height: 75px;
+	position: fixed;
+	top: 12px;
 	width: 250px;
-	text-align: center;
+	right: -10px;
+
+	img{
+		float: left;
+		text-shadow: 0 1px 1px #FFF;
+		margin-right: 10px;
+	}
+
+	.nome{
+		color: $azul-escuro;
+		font-size: 1.5em;
+		text-shadow: 0 1px 1px #FFF;
+	}
+
+	.acao{
+		font-size: 0.95em;
+		color: $azul-mais-escuro;
+	}
 }
 
 .dialog-round .ngdialog-content {
 	width: 100% !important;
-	height: 40px !important;
+	// height: 40px !important;
 	padding: 0 !important;
-}
-.dialog-round .ngdialog-content .dialog-message {
-	font-family: 'Fight';
+
+	.dialog-message {
+		padding: 20px 0 30px;
+		font-family: 'Fight';
+		color: $amarelo;
+		font-size: 2.5em;
+	}
 }

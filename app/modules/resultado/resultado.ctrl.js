@@ -3,13 +3,17 @@
 angular
 	.module('projetobrasil.ufc.resultado.controllers', [])
 	.controller('ResultadoCtrl',
-	['$scope', '$rootScope', 'RankingPessoalService', 'RankingGlobalService',
-		function ($scope, $rootScope, rankPessoal, rankGlobal){
+	['$scope', '$rootScope', '$state', 'RankingPessoalService', 'RankingGlobalService',
+		function ($scope, $rootScope, $state, rankPessoal, rankGlobal){
 			var ids = $rootScope.idsCandidatos;
 			$scope.qtdeVotosPessoal = {};
 			$scope.qtdeVotosGlobal = {};
 			$scope.aecio = ids[1];
 			$scope.dilma = ids[0];
+
+			$scope.jogar = function(){
+				$state.go('jogo');
+			};
 
 			// FIXME: Passar isso para um serviço.
 			$scope.categorias = {
@@ -21,14 +25,14 @@ angular
 				1005 : 'Esporte e lazer',
 				1006 : 'Gestão Pública',
 				1007 : 'Infraestrutura',
-				1008 : 'Liberdades civis',
+				// 1008 : 'Liberdades civis',
 				1009 : 'Segurança Pública',
 				1010 : 'Meio-ambiente',
 				1011 : 'Política Econômica',
 				1012 : 'Política Externa e Defesa Nacional',
 				1013 : 'Políticas Sociais',
-				1014 : 'Saúde',
-				1015 : 'Outros'
+				1014 : 'Saúde'
+				// 1015 : 'Outros'
 			};
 
 			$scope.rankPessoal = rankPessoal.get(function(){
@@ -40,11 +44,12 @@ angular
 					$scope.qtdeVotosPessoal.total += $scope.qtdeVotosPessoal[id];
 				});
 				_.each($scope.categorias, function(nome, idCat){
-					$scope.qtdeVotosPessoal[idCat] = $scope.rankPessoal[$scope.dilma] + $scope.rankPessoal[$scope.aecio];
+					$scope.qtdeVotosPessoal[idCat] = $scope.rankPessoal[$scope.dilma][idCat] + $scope.rankPessoal[$scope.aecio][idCat];
 				});
 			});
 
 			$scope.rankGlobal = rankGlobal.get(function(){
+				console.log(typeof($scope.rankGlobal[$scope.dilma][1001]));
 				$scope.qtdeVotosGlobal.total = 0;
 				_.each(ids, function(id){
 					$scope.qtdeVotosGlobal[id] = _.reduce($scope.rankGlobal[id], function(soma, valor){
@@ -53,7 +58,7 @@ angular
 					$scope.qtdeVotosGlobal.total += $scope.qtdeVotosGlobal[id];
 				});
 				_.each($scope.categorias, function(nome, idCat){
-					$scope.qtdeVotosGlobal[idCat] = $scope.rankGlobal[$scope.dilma] + $scope.rankGlobal[$scope.aecio];
+					$scope.qtdeVotosGlobal[idCat] = $scope.rankGlobal[$scope.dilma][idCat] + $scope.rankGlobal[$scope.aecio][idCat];
 				});
 			});
 
