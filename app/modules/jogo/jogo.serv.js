@@ -88,7 +88,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			if(pontuacao === this.maxGolpesRound){
 				this.finalizaRound(escolhido);
 			}
-			console.log(this);
 			Angularytics.trackEvent("Jogo", "Proposta escolhida", "Round " + this.roundAtual, this.totalGopesRound());
 
 		};
