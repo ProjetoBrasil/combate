@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', ['$rootScope', 'Angularytics', 'ngDialog',
-	 function ($rootScope, Angularytics, ngDialog){
+	.factory('GerenciadorJogo', ['$rootScope', 'Angularytics', 'ngDialog', '$timeout',
+	 function ($rootScope, Angularytics, ngDialog, $timeout){
 		var maxRounds = 3;
 
 		var gerenciador = {
@@ -56,7 +56,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		gerenciador.finalizaRound = function(vencedor){
 			Angularytics.trackEvent("Jogo", "Round finalizado");
-			this.roundAtual++;
 			var roundsGanhos = ++this.candidatos[vencedor].roundsGanhos;
 			if(roundsGanhos >= this.minRoundsParaVitoria){
 				this.finalizaJogo(vencedor);
@@ -66,12 +65,20 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 		};
 
 		gerenciador.dialogRound = function() {
-			ngDialog.open({
+			var roundDialogId = ngDialog.open({
 				template: 'modules/interface/novo-round.html',
+				showClose: false,
+				className: 'ngdialog-theme-default dialog-round',
 				controller: function ($scope) {
-					$scope.round = gerenciador.roundAtual;
+					$scope.mensagem = 'Round ' + (gerenciador.roundAtual + 1) ;
+					$timeout(function() {
+						$scope.mensagem = 'Fight!';
+					},800);
 				}
 			});
+			$timeout(function() {
+				ngDialog.close(roundDialogId);
+			},1450);
 		}
 
 		// Gerencia os golpes
