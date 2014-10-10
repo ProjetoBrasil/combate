@@ -15,7 +15,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 
 		var api = $resource(apiPropostasUrl, {}, {
 					query: { method: 'GET', isArray: true, url: apiPropostasUrl + 'rand/:tema' },
-					save: { method: 'POST' , isArray: true, url: apiPropostasUrl + 'vote'}
+					save: { method: 'POST', url: apiPropostasUrl + 'vote'}
 				});
 
 		/**
@@ -31,11 +31,10 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 				this.buffer.props = [];
 				this.buffer.tema = null;
 
-				this.atualizaBuffer();
-
 			} else {
 				console.error('Tentando pop em buffer vazio!');
 			}
+			this.atualizaBuffer();
 		};
 
 		/**
@@ -119,7 +118,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 				'Esporte e lazer',
 				'Gestão Pública',
 				'Infraestrutura',
-				'Liberdades civis',
+				//'Liberdades civis', // Um dos candidatos não possui propostas no tema
 				'Segurança Pública',
 				'Meio-ambiente',
 				'Política Econômica',
@@ -145,11 +144,11 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 				'Política Econômica': 'politica_economica',
 				'Política Externa e Defesa Nacional': 'politica_externa_defesa_nacional',
 				'Políticas Sociais': 'politicas_sociais',
-				'Saúde':'saude'
+				'Saúde':'saude',
+				'Outros': 'outros'
 			};
 			return temas[tema];
 		};
-
 
 		var temas = propostas.getTemas();
 		propostas.atualizaBuffer();
