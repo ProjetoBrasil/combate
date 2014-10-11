@@ -12,9 +12,9 @@
 		<div class="row">
 			<div class="col-xs-3">
 				<div class="avatar-dilma"></div>
-				<!-- <div class="arrow-box">
+				<div class="arrow-box" ng-show="qtdeVotosPessoal[dilma] > qtdeVotosPessoal[aecio]">
 					VENCEDORA
-				</div> -->
+				</div>
 			</div>
 			<div class="col-xs-6">
 				<div class="row categoria" ng-repeat="(id, nome) in categorias">
@@ -41,9 +41,9 @@
 			</div>
 			<div class="col-xs-3">
 				<div class="avatar-aecio"></div>
-				<!-- <div class="arrow-box">
+				<div class="arrow-box" ng-show="qtdeVotosPessoal[aecio] > qtdeVotosPessoal[dilma]">
 					VENCEDOR
-				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>
@@ -59,9 +59,9 @@
 		<div class="row">
 			<div class="col-xs-3">
 				<div class="avatar-dilma"></div>
-				<!-- <div class="arrow-box">
+				<div class="arrow-box" ng-show="qtdeVotosGlobal[dilma] > qtdeVotosGlobal[aecio]">
 					VENCEDORA
-				</div> -->
+				</div>
 			</div>
 			<div class="col-xs-6">
 				<div class="row categoria" ng-repeat="(id, nome) in categorias">
@@ -88,9 +88,9 @@
 			</div>
 			<div class="col-xs-3">
 				<div class="avatar-aecio"></div>
-				<!-- <div class="arrow-box">
+				<div class="arrow-box" ng-show="qtdeVotosGlobal[aecio] > qtdeVotosGlobal[dilma]">
 					VENCEDOR
-				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>
