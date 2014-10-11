@@ -11,12 +11,16 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 			buffer: {tema: '', props: []}
 		};
 
+		var MAX_TENTATIVAS_RECONNECT = 10;
+
 		var apiPropostasUrl = $rootScope.apiBaseUrl + 'ufc/proposals/';
 
 		var api = $resource(apiPropostasUrl, {}, {
 					query: { method: 'GET', isArray: true, url: apiPropostasUrl + 'rand/:tema' },
 					save: { method: 'POST', url: apiPropostasUrl + 'vote'}
 				});
+
+		propostas.assetsCarregados = {propostas: false, imagens: false};
 
 		/**
 		 * Copia o conteúdo do buffer para propostas vísiveis.
@@ -31,17 +35,25 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 				this.buffer.props = [];
 				this.buffer.tema = null;
 
+
 			} else {
 				console.error('Tentando pop em buffer vazio!');
 			}
 			this.atualizaBuffer();
 		};
 
+		propostas.esvaziaPropostasVisiveis = function() {
+			this.propostasVisiveis.props[0] = null;
+			this.propostasVisiveis.props[1] = null;
+			this.propostasVisiveis.tema = null;
+		};
+
 		/**
 		 * Busca novas propostas do servidor. Se propostasVisiveis estiver vazio
 		 * copia o buffer para propostasVisiveis
 		 */
-		propostas.atualizaBuffer = function () {
+		propostas.atualizaBuffer = function (errorCount) {
+			errorCount = errorCount || 0;
 			var temaPropostasBuffer = getElementoAleatorio(temas);
 			api.query({tema: getTemaId(temaPropostasBuffer) }, function(data) {
 
@@ -51,6 +63,14 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 				if (propostas.vazio(propostas.propostasVisiveis)){
 					propostas.popBuffer();
 				}
+			}, function(error){
+				console.log(errorCount);
+				if (errorCount > MAX_TENTATIVAS_RECONNECT) {
+					console.log('Erro ao contactar servidor');
+					//TODO notificar usuário
+				} else {
+					propostas.atualizaBuffer(++errorCount);
+				}
 			});
 		};
 
@@ -59,7 +79,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 		 */
 		function getElementoAleatorio(vetor) {
 			var MAX = _.size(vetor);
-			var indice = Math.floor(Math.random() * (MAX - 1));
+			var indice = Math.floor(Math.random() * (MAX));
 			return vetor[indice];
 		}
 

@@ -23,7 +23,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.mostrarBox = false;
 		$scope.propostasVisiveis = PropostasServ.propostasVisiveis;
 
-		$scope.assetsCarregados = {propostas: false, imagens: false};
+		$scope.assetsCarregados = PropostasServ.assetsCarregados;
 		// Só mostra o box de propostas se os sprites e as propostas tiverem sido carregadas
 		$scope.$watch('assetsCarregados', function(newValue) {
 			if (newValue.propostas === true && newValue.imagens === true) {
@@ -60,6 +60,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				Jogo.atualizaPlacar(idAutorPropostaVotada);
 				$timeout(function() {
 					PropostasServ.popBuffer();
+
 					atualizaTamanhoPropostas();
 					$scope.mostrarBox = true;
 				},800); // Delay para evitar que imagem dos ataques trave na tela

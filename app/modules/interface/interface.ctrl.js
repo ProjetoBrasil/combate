@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.interface.controllers', [])
-	.controller('InterfaceCtrl', ['$scope', 'UserLogin', 'Facebook', '$state',
-	 function ($scope, UserLogin, Facebook, $state){
+	.controller('InterfaceCtrl', ['$scope', 'UserLogin', 'Facebook', '$state', 'PropostasServ',
+	 function ($scope, UserLogin, Facebook, $state, PropostasServ){
 		UserLogin.promise().then(function(){
 			$scope.userData = UserLogin.getUserData();
 			 Facebook.api('/' + $scope.userData.provider_id + '/picture', function(response) {
@@ -16,6 +16,8 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 				$state.go('home');
 			});
 		};
+
+		$scope.carregado = PropostasServ.assetsCarregados;
 	}])
 	.controller('barraDeVidaCtrl', ['$scope', '$rootScope', 'GerenciadorJogo', function($scope, $rootScope, Jogo) {
 		var cand = $rootScope.idsCandidatos;

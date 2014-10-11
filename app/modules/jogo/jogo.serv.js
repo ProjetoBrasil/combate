@@ -22,7 +22,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 		};
 
 		// Gerencia o jogo
-		gerenciador.inicializaJogo = function(){
+		gerenciador.inicializaNovoJogo = function(){
 			Angularytics.trackEvent('Jogo', 'Jogo iniciado');
 			this.roundAtual = 0;
 			var idsCandidatos = $rootScope.idsCandidatos;
@@ -39,9 +39,46 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			gerenciador.dialogRound();
 		};
 
+		gerenciador.reiniciaJogo = function(){
+			this.roundAtual = 0;
+			var idsCandidatos = $rootScope.idsCandidatos;
+			var candidatos = this.candidatos;
+
+			_.each(idsCandidatos,function(id){
+				candidatos[id].roundsGanhos = 0;
+				candidatos[id].golpesSofridos = 0;
+			});
+		};
+
 		gerenciador.finalizaJogo = function(vencedor){
 			Angularytics.trackEvent('Jogo', 'Jogo finalizado', $rootScope.nomesCandidatos[vencedor]);
-			$state.go('resultado');
+
+			// FIXME: Colocar uma classe mais genérica para o modal e uma função mais genérica para utilizá-lo.
+			var finalDialog = ngDialog.open({
+				template: '<div class="dialog-message text-center"><h1>{{mensagem}}</h1></div>',
+				plain: true,
+				showClose: false,
+				className: 'ngdialog-theme-default dialog-round',
+				controller: function ($scope) {
+					switch(vencedor){
+						case 'b6bc0250-0d10-11e4-b416-b9cab1b63b1e':
+							$scope.mensagem = 'DILMA WINS!!!';
+							break;
+						case '827c9cc0-0d10-11e4-a4de-3d18690f2356':
+							$scope.mensagem = 'AÉCIO WINS!!!';
+							break;
+						default:
+							$scope.mensagem = 'YOU WIN!!!';
+					}
+				}
+			});
+
+			$timeout(function() {
+				ngDialog.close(finalDialog);
+				gerenciador.reiniciaJogo();
+				$state.go('resultado');
+			},1600);
+
 		};
 
 		// Gerencia os rounds
@@ -88,7 +125,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			if(pontuacao === this.maxGolpesRound){
 				this.finalizaRound(escolhido);
 			}
-			console.log(this);
 			Angularytics.trackEvent('Jogo', 'Proposta escolhida', 'Round ' + this.roundAtual, this.totalGopesRound());
 
 		};
@@ -116,6 +152,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			return this.candidatos[candidato].golpesSofridos;
 		};
 
-		gerenciador.inicializaJogo();
+		gerenciador.inicializaNovoJogo();
 		return gerenciador;
 	}]);
