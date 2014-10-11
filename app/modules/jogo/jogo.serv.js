@@ -22,7 +22,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 		};
 
 		// Gerencia o jogo
-		gerenciador.inicializaJogo = function(){
+		gerenciador.inicializaNovoJogo = function(){
 			Angularytics.trackEvent('Jogo', 'Jogo iniciado');
 			this.roundAtual = 0;
 			var idsCandidatos = $rootScope.idsCandidatos;
@@ -39,8 +39,20 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			gerenciador.dialogRound();
 		};
 
+		gerenciador.reiniciaJogo = function(){
+			this.roundAtual = 0;
+			var idsCandidatos = $rootScope.idsCandidatos;
+			var candidatos = this.candidatos;
+
+			_.each(idsCandidatos,function(id){
+				candidatos[id].roundsGanhos = 0;
+				candidatos[id].golpesSofridos = 0;
+			});
+		};
+
 		gerenciador.finalizaJogo = function(vencedor){
 			Angularytics.trackEvent('Jogo', 'Jogo finalizado', $rootScope.nomesCandidatos[vencedor]);
+			gerenciador.reiniciaJogo();
 			$state.go('resultado');
 		};
 
@@ -115,6 +127,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			return this.candidatos[candidato].golpesSofridos;
 		};
 
-		gerenciador.inicializaJogo();
+		gerenciador.inicializaNovoJogo();
 		return gerenciador;
 	}]);

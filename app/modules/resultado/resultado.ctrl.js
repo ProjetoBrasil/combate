@@ -49,7 +49,6 @@ angular
 			});
 
 			$scope.rankGlobal = rankGlobal.get(function(){
-				console.log(typeof($scope.rankGlobal[$scope.dilma][1001]));
 				$scope.qtdeVotosGlobal.total = 0;
 				_.each(ids, function(id){
 					$scope.qtdeVotosGlobal[id] = _.reduce($scope.rankGlobal[id], function(soma, valor){
