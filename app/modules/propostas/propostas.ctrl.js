@@ -60,6 +60,7 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 				Jogo.atualizaPlacar(idAutorPropostaVotada);
 				$timeout(function() {
 					PropostasServ.popBuffer();
+
 					atualizaTamanhoPropostas();
 					$scope.mostrarBox = true;
 				},800); // Delay para evitar que imagem dos ataques trave na tela
