@@ -20,6 +20,8 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 					save: { method: 'POST', url: apiPropostasUrl + 'vote'}
 				});
 
+		propostas.assetsCarregados = {propostas: false, imagens: false};
+
 		/**
 		 * Copia o conteúdo do buffer para propostas vísiveis.
 		 * Limpa o buffer após cópia e requisita atualização do buffer em seguida.
