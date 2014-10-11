@@ -118,13 +118,16 @@
 
 .dialog-round .ngdialog-content {
 	width: 100% !important;
-	// height: 40px !important;
 	padding: 0 !important;
 
 	.dialog-message {
+		background-color: $azul-escuro;
 		padding: 20px 0 30px;
 		font-family: 'Fight';
 		color: $amarelo;
-		font-size: 2.5em;
+
+		h1{
+			font-size: 4em;
+		}
 	}
 }
