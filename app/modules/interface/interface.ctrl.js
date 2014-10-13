@@ -11,7 +11,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 
 		});
 
-		 $scope.logoutUser = function() {
+		$scope.logoutUser = function() {
 			UserLogin.logout(function(){
 				$state.go('home');
 			});

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout',
-	 function ($rootScope, $state, Angularytics, ngDialog, $timeout){
+	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout', 'UserLogin',
+	 function ($rootScope, $state, Angularytics, ngDialog, $timeout, UserLogin){
 		var maxRounds = 3;
 
 		var gerenciador = {
@@ -23,6 +23,10 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		// Gerencia o jogo
 		gerenciador.inicializaNovoJogo = function(){
+			if(!UserLogin.isUserLogged){
+				return;
+			}
+
 			Angularytics.trackEvent('Jogo', 'Jogo iniciado');
 			this.roundAtual = 0;
 			var idsCandidatos = $rootScope.idsCandidatos;
