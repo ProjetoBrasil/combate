@@ -11,7 +11,7 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 
 		});
 
-		 $scope.logoutUser = function() {
+		$scope.logoutUser = function() {
 			UserLogin.logout(function(){
 				$state.go('home');
 			});
@@ -35,13 +35,13 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 		x2 = '40';
 		y2 = '34';
 
-		x3a = 40*($scope.maxGolpesPorRound - $scope.p1.golpesSofridos + 1);
+		x3a = 40*(2*$scope.maxGolpesPorRound - 2*$scope.p1.golpesSofridos + 1);
 		y3a = -0.075*x3a+37.78;
 
 		x4a = x3a - 16;
 		y4a = '50';
 
-		x4b = 40*($scope.maxGolpesPorRound - $scope.p2.golpesSofridos + 1);
+		x4b = 40*(2*$scope.maxGolpesPorRound - 2*$scope.p2.golpesSofridos + 1);
 		y4b = '50';
 
 		x3b = x4b - 16;
@@ -51,23 +51,29 @@ angular.module('projetobrasil.ufc.interface.controllers', [])
 		$scope.coordenadasIniciaisB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
 
 		$scope.$watch('p1.golpesSofridos', function(){
-			x3a = 40*($scope.maxGolpesPorRound - $scope.p1.golpesSofridos + 1);
+			x3a = 40*(2*$scope.maxGolpesPorRound - 2*$scope.p1.golpesSofridos + 1);
 			y3a = -0.075*x3a+37.78;
 
 			x4a = x3a - 16;
 			y4a = '50';
-			$scope.coordenadasA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
+
+			if($scope.p1.golpesSofridos === $scope.maxGolpesPorRound){
+				$scope.coordenadasA = '';
+			} else {
+				$scope.coordenadasA = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3a + ',' + y3a + ' ' + x4a + ',' + y4a ;
+			}
+
 		});
 
 		$scope.$watch('p2.golpesSofridos', function(){
-			x4b = 40*($scope.maxGolpesPorRound - $scope.p2.golpesSofridos + 1);
+			x4b = 40*(2*$scope.maxGolpesPorRound - 2*$scope.p2.golpesSofridos + 1);
 			y4b = '50';
 
 			x3b = x4b - 16;
 			y3b = -0.075*x3b+37.78;
 
 			if($scope.p2.golpesSofridos === $scope.maxGolpesPorRound){
-				$scope.coordenadas = '';
+				$scope.coordenadasB = '';
 			} else {
 				$scope.coordenadasB = x1 + ',' + y1 + ' ' + x2 + ',' + y2 + ' ' + x3b + ',' + y3b + ' ' + x4b + ',' + y4b ;
 			}

@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout',
-	 function ($rootScope, $state, Angularytics, ngDialog, $timeout){
+	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout', 'UserLogin',
+	 function ($rootScope, $state, Angularytics, ngDialog, $timeout, UserLogin){
 		var maxRounds = 3;
 
 		var gerenciador = {
 			roundAtual : 0,
-			maxGolpesRound : 10,
+			maxGolpesRound : 5,
 			minRoundsParaVitoria: parseInt(maxRounds/2)+1,
 			totalGolpesSessaoCount: 0,
 			candidatos : {}
@@ -36,7 +36,10 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				candidatos[id].golpesSofridos = 0;
 				candidatos[id].adversario = id === idsCandidatos[0] ? idsCandidatos[1] : idsCandidatos[0];
 			});
-			gerenciador.dialogRound();
+
+			if(UserLogin.isUserLogged()){
+				gerenciador.dialogRound();
+			}
 		};
 
 		gerenciador.reiniciaJogo = function(){
@@ -48,6 +51,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				candidatos[id].roundsGanhos = 0;
 				candidatos[id].golpesSofridos = 0;
 			});
+			//gerenciador.dialogRound();
 		};
 
 		gerenciador.finalizaJogo = function(vencedor){
