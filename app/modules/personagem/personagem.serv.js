@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.personagem.services', [])
-	.factory('Personagens', ['$rootScope', '$document', 'PropostasServ',
-		function ($rootScope, $document, PropostasServ) {
+	.factory('Personagens', ['$rootScope', '$document', 'PropostasServ', 'GerenciadorJogo',
+		function ($rootScope, $document, PropostasServ, Jogo) {
 
 		var gerenciador = {};
 		var personagens = {};
@@ -27,6 +27,8 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			_.each(personagens, function(p){
 				arena.addChild(p.sprites.ginga);
 			});
+
+			Jogo.dialogRound();
 		};
 
 		gerenciador.criaCanvas = function(){
