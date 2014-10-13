@@ -14,7 +14,7 @@ angular
 			loggedUserData = data;
 			// success(userData);
 		}).error(function(){
-			console.log('Deu errado');
+			console.log('Erro ao obter perfil');
 		});
 
 	return {
