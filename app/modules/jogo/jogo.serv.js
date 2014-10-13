@@ -17,7 +17,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		var gerenciador = {
 			roundAtual : 0,
-			maxGolpesRound : 1,
+			maxGolpesRound : 5,
 			minRoundsParaVitoria: parseInt(maxRounds/2)+1,
 			totalGolpesSessaoCount: 0,
 			candidatos : {}
