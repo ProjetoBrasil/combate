@@ -17,7 +17,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		var gerenciador = {
 			roundAtual : 0,
-			maxGolpesRound : 10,
+			maxGolpesRound : 1,
 			minRoundsParaVitoria: parseInt(maxRounds/2)+1,
 			totalGolpesSessaoCount: 0,
 			candidatos : {}
@@ -58,6 +58,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				candidatos[id].roundsGanhos = 0;
 				candidatos[id].golpesSofridos = 0;
 			});
+			//gerenciador.dialogRound();
 		};
 
 		gerenciador.finalizaJogo = function(vencedor){
