@@ -23,10 +23,6 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		// Gerencia o jogo
 		gerenciador.inicializaNovoJogo = function(){
-			if(!UserLogin.isUserLogged()){
-				return;
-			}
-
 			Angularytics.trackEvent('Jogo', 'Jogo iniciado');
 			this.roundAtual = 0;
 			var idsCandidatos = $rootScope.idsCandidatos;
@@ -40,7 +36,10 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				candidatos[id].golpesSofridos = 0;
 				candidatos[id].adversario = id === idsCandidatos[0] ? idsCandidatos[1] : idsCandidatos[0];
 			});
-			gerenciador.dialogRound();
+
+			if(UserLogin.isUserLogged()){
+				gerenciador.dialogRound();
+			}
 		};
 
 		gerenciador.reiniciaJogo = function(){
