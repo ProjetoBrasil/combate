@@ -34,7 +34,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		gerenciador.criaCanvas = function(){
 			$document.find('#arena').remove();
 
-			var temp = angular.element('<canvas id="arena" width="1280" height="500"></canvas>');
+			var temp = angular.element('<canvas id="arena" width="1260" height="700"></canvas>');
 			$document.find('.canvas-box').append(temp);
 
 			canvas = $document.find('#arena')[0];
@@ -124,10 +124,14 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 					personagens[id].lado = 'direita';
 					_.each(personagens[id].sprites, function(s){
 						s.x = arena.canvas.width - frameSize.width;
+						s.y = arena.canvas.height - frameSize.height;
 					});
 					personagens[id].adversario = ids[0];
 				}else{
 					personagens[id].lado = 'esquerda';
+					_.each(personagens[id].sprites, function(s){
+						s.y = arena.canvas.height - frameSize.height;
+					});
 					personagens[id].adversario = ids[1];
 				}
 			});
@@ -177,7 +181,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				golpe.x = arena.canvas.width - (frameSize.width / 2) - ajuste;
 			}
 
-			golpe.y = arena.canvas.height/2 - (golpe.scale * (tamFigurasGolpe.height/2));
+			golpe.y = (arena.canvas.height - frameSize.height/2) - (golpe.scale * (tamFigurasGolpe.height/2));
 			arena.addChild(golpe);
 
 			golpe.index = arena.getChildIndex(golpe);
@@ -200,9 +204,8 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 					newX -= (arena.canvas.width - frameSize.width) / stepsGolpe;
 				}
 
-				var newY = arena.canvas.height/2 - (newScale * tamFigurasGolpe.height/2);
+				var newY = (arena.canvas.height - frameSize.height/2) - (newScale * tamFigurasGolpe.height/2);
 				var newAngle = angle + 15;
-				console.log(newAngle);
 
 				golpe.setTransform(newX, newY, newScale, newScale, newAngle, 0, 0, regX, regY);
 				var newRegX = golpe.image.width/2;
@@ -226,7 +229,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			}else{
 				pow.sprites.x = frameSize.width / 2;
 			}
-			pow.sprites.y = arena.canvas.height / 2;
+			pow.sprites.y = (arena.canvas.height - frameSize.height/2);
 			arena.addChild(pow.sprites);
 		};
 

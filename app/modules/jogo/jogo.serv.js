@@ -1,19 +1,9 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout',
-	 function ($rootScope, $state, Angularytics, ngDialog, $timeout){
+	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout', 'UserLogin',
+	 function ($rootScope, $state, Angularytics, ngDialog, $timeout, UserLogin){
 		var maxRounds = 3;
-
-		createjs.Sound.alternateExtensions = ["mp3"];
-		createjs.Sound.addEventListener("fileload", createjs.proxy(this.loadHandler, this));
-		createjs.Sound.registerSound("sounds/hadouken.mp3", "sound");
-		function loadHandler(event) {
-				// This is fired for each sound that is registered.
-				var instance = createjs.Sound.play("sound");  // play using id.  Could also use full sourcepath or event.src.
-				instance.addEventListener("complete", createjs.proxy(this.handleComplete, this));
-				instance.volume = 0.5;
-		 }
 
 		var gerenciador = {
 			roundAtual : 0,
@@ -46,7 +36,10 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				candidatos[id].golpesSofridos = 0;
 				candidatos[id].adversario = id === idsCandidatos[0] ? idsCandidatos[1] : idsCandidatos[0];
 			});
-			gerenciador.dialogRound();
+
+			if(UserLogin.isUserLogged()){
+				gerenciador.dialogRound();
+			}
 		};
 
 		gerenciador.reiniciaJogo = function(){
