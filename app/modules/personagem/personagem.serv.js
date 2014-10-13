@@ -31,7 +31,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		gerenciador.criaCanvas = function(){
 			$document.find('#arena').remove();
 
-			var temp = angular.element('<canvas id="arena" width="1280" height="500"></canvas>');
+			var temp = angular.element('<canvas id="arena" width="1260" height="700"></canvas>');
 			$document.find('.canvas-box').append(temp);
 
 			canvas = $document.find('#arena')[0];
@@ -121,10 +121,14 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 					personagens[id].lado = 'direita';
 					_.each(personagens[id].sprites, function(s){
 						s.x = arena.canvas.width - frameSize.width;
+						s.y = arena.canvas.height - frameSize.height;
 					});
 					personagens[id].adversario = ids[0];
 				}else{
 					personagens[id].lado = 'esquerda';
+					_.each(personagens[id].sprites, function(s){
+						s.y = arena.canvas.height - frameSize.height;
+					});
 					personagens[id].adversario = ids[1];
 				}
 			});
