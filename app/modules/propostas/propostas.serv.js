@@ -109,7 +109,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 		propostas.postPropostasVisiveis = function(idAutorPropostaVotada) {
 			var propostaVotada;
 			var propostaNaoVotada;
-			if (propostas.propostasVisiveis.props[0].politicians_id === idAutorPropostaVotada){
+			if (propostas.propostasVisiveis.props[0].id_politicians === idAutorPropostaVotada){
 				propostaVotada = propostas.propostasVisiveis.props[0];
 				propostaNaoVotada = propostas.propostasVisiveis.props[1];
 			} else {
