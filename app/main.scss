@@ -10,11 +10,12 @@ $verde-escuro: #225245;
 $verde-claro: #00BD8E;
 $branco: #fff;
 $amarelo: #FBBC47;
+$amarelo-botao: #F0D152;
 $amarelo-claro: #feffeb;
 $amarelo-dourado: #e6c526;
 $azul-escuro: #045371;
 $azul-claro: #0BC2FA;
-$azul-mais-escuro: #2b4551;
+$azul-mais-escuro: #2d4a56;
 
 @import 'modules/interface/interface';
 @import 'modules/propostas/propostas';
@@ -41,6 +42,32 @@ $azul-mais-escuro: #2b4551;
 	border-radius: 50%;
 }
 
+.to-left{
+	float: left;
+}
+
+.to-right{
+	float: right;
+}
+
+.botao-verde{
+	background: image-url('com-cache/botao-verde.png') 0 0 no-repeat;
+	font-family: 'Fight';
+	color: $amarelo-botao;
+	width: 351px;
+	height: 92px;
+	margin: auto;
+
+	&.jogar{
+		font-size: 4.3em;
+	}
+
+	&.continuar-jogando{
+		font-size: 3em;
+		padding: 12px;
+	}
+}
+
 body {
 	font-family: 'Roboto', sans-serif;
 	/* Permite redimensionamento da janela */
@@ -64,14 +91,6 @@ body {
 
     &.resultado, &.home{
     	background-color: $amarelo-claro;
+    	min-width: 1200px;
     }
-}
-
-#home-container, #resultado-container {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0px;
-	min-width: $largura-minima;
-	min-height: $altura-minima;
 }

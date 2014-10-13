@@ -2,30 +2,13 @@
 	<span class="tema-propostas">
 		{{propostasVisiveis.tema}}
 	</span>
-	<div style="border-bottom: {{tamProposta1}}px solid #00bd8e" class="alternativa pointer primeira" ng-click="escolherProposta(propostasVisiveis.props[0].politicians_id)">
+	<div style="border-bottom: {{tamProposta1}}px solid #00bd8e" class="alternativa pointer primeira" ng-click="escolherProposta(propostasVisiveis.props[0].id_politicians)">
 		<span class="letra">A</span>
 		<p>{{propostasVisiveis.props[0].titulo}}</p>
 	</div>
-	<div style="border-bottom: {{tamProposta2}}px solid #00bd8e" class="alternativa pointer" ng-click="escolherProposta(propostasVisiveis.props[1].politicians_id)">
+	<div style="border-bottom: {{tamProposta2}}px solid #00bd8e" class="alternativa pointer" ng-click="escolherProposta(propostasVisiveis.props[1].id_politicians)">
 		<span class="letra">B</span>
 		<p>{{propostasVisiveis.props[1].titulo}}</p>
-	</div>
-
-	<div class="text-center box-propostas row" ng-if="false" >
-		<div class="col-md-12 chamada">
-			<p>O que você faria se fosse presidente?</p>
-		</div>
-		<h3 class="col-md-12 tema">{{propostasVisiveis.tema}}</h3>
-		<div class="clearfix">
-			<div class="proposta col-md-12" ng-click="escolherProposta(propostasVisiveis.props[0].politicians_id)">
-				<div class="letra-opcao col-md-2 text-center">A</div>
-				<div class="titulo col-md-10">{{propostasVisiveis.props[0].titulo}}</div>
-			</div>
-			<div class="proposta col-md-12" ng-click="escolherProposta(propostasVisiveis.props[1].politicians_id)">
-				<div class="letra-opcao col-md-2 text-center">B</div>
-				<div class="titulo col-md-10">{{propostasVisiveis.props[1].titulo}}</div>
-			</div>
-		</div>
 	</div>
 </div>
 

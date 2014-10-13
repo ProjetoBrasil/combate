@@ -14,14 +14,14 @@ angular
 			loggedUserData = data;
 			// success(userData);
 		}).error(function(){
-			console.log('Deu errado');
+			console.log('Erro ao obter perfil');
 		});
 
 	return {
 		promise: function(){
 			return promise;
 		},
-		facebookLogin: function(modalDismiss){
+		facebookLogin: function(){
 			var left = (screen.width/2)-(780/2);
 			var top = (screen.height/2)-(410/2);
 			var signinWin = window.open($rootScope.apiBaseUrl + 'auth/facebook', 'SignIn', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=' + left + ',top=' + top);
@@ -44,7 +44,6 @@ angular
 						});
 				}
 			}, 1000);
-		// // });
 		},
 		logout: function(success, error){
 			 $http.get($rootScope.apiBaseUrl+'user/logout')

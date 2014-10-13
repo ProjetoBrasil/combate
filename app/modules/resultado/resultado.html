@@ -1,35 +1,118 @@
-<div id="resultado-container" class="container">
-	<img src="images/com-cache/logo_ufc.png" class="resultado-logo" alt="Logo do Urna Fighter Combat">
-	<div class="wrapper-resultado">
-		<div class="resultado text-center pessoal">
-			<h3 class="titulo">Seu resultado</h3>
-			<h5 class="sub-titulo">111 x 3333</h5>
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="avatar-dilma"></div>
+<img src="images/com-cache/logo_ufc.png" class="resultado-logo" alt="Logo do Urna Fighter Combat">
+<div class="wrapper-resultado container">
+	<div class="coluna-resultado text-center pessoal">
+		<!-- <button class="btn btn-lg btn-share-button facebook">
+			<i class="fa fa-facebook"></i>
+			COMPARTILHAR
+		</button> -->
+		<h3 class="titulo">Seu resultado</h3>
+		<h5 class="sub-titulo">
+			{{qtdeVotosPessoal[dilma]}} x {{qtdeVotosPessoal[aecio]}}
+		</h5>
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="avatar-dilma"></div>
+				<div class="arrow-box" ng-show="qtdeVotosPessoal[dilma] > qtdeVotosPessoal[aecio]">
+					VENCEDORA
 				</div>
-				<div class="col-sm-4">
-					GRAFICOS
+			</div>
+			<div class="col-xs-6">
+				<div class="row categoria" ng-repeat="(id, nome) in categorias">
+					<p class="titulo-categoria">{{nome}}</p>
+					<div class="col-xs-6">
+						<progressbar
+							class="barra-resultado invertida"
+							value="100*rankPessoal[dilma][id]/qtdeVotosPessoal[id] || null">
+						</progressbar>
+						<span class="porcentagem">
+							{{100*rankPessoal[dilma][id]/qtdeVotosPessoal[id] || 0 | number:0}}%
+						</span>
+					</div>
+					<div class="col-xs-6">
+						<progressbar
+							class="barra-resultado"
+							value="100*rankPessoal[aecio][id]/qtdeVotosPessoal[id] || null">
+						</progressbar>
+						<span class="porcentagem">
+							{{100*rankPessoal[aecio][id]/qtdeVotosPessoal[id] || 0 | number:0}}%
+						</span>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<div class="avatar-aecio"></div>
+			</div>
+			<div class="col-xs-3">
+				<div class="avatar-aecio"></div>
+				<div class="arrow-box" ng-show="qtdeVotosPessoal[aecio] > qtdeVotosPessoal[dilma]">
+					VENCEDOR
 				</div>
 			</div>
 		</div>
-		<div class="resultado text-center geral">
-			<h3 class="titulo">Resultado nacional</h3>
-			<h5 class="sub-titulo">111 x 3333</h5>
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="avatar-dilma"></div>
+	</div>
+	<div class="coluna-resultado text-center geral">
+		<!-- <button class="btn btn-lg btn-share-button facebook">
+			<i class="fa fa-facebook"></i>
+			COMPARTILHAR
+		</button> -->
+		<h3 class="titulo">Resultado nacional</h3>
+		<h5 class="sub-titulo">
+			{{qtdeVotosGlobal[dilma]}} x {{qtdeVotosGlobal[aecio]}}
+		</h5>
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="avatar-dilma"></div>
+				<div class="arrow-box" ng-show="qtdeVotosGlobal[dilma] > qtdeVotosGlobal[aecio]">
+					VENCEDORA
 				</div>
-				<div class="col-sm-4">
-					GRAFICOS
+			</div>
+			<div class="col-xs-6">
+				<div class="row categoria" ng-repeat="(id, nome) in categorias">
+					<p class="titulo-categoria">{{nome}}</p>
+					<div class="col-xs-6">
+						<progressbar
+							class="barra-resultado invertida"
+							value="100*rankGlobal[dilma][id]/qtdeVotosGlobal[id] || null">
+						</progressbar>
+						<span class="porcentagem">
+							{{100*rankGlobal[dilma][id]/qtdeVotosGlobal[id] || 0 | number:0}}%
+						</span>
+					</div>
+					<div class="col-xs-6">
+						<progressbar
+							class="barra-resultado"
+							value="100*rankGlobal[aecio][id]/qtdeVotosGlobal[id] || null">
+						</progressbar>
+						<span class="porcentagem">
+							{{100*rankGlobal[aecio][id]/qtdeVotosGlobal[id] || 0 | number:0}}%
+						</span>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<div class="avatar-aecio"></div>
+			</div>
+			<div class="col-xs-3">
+				<div class="avatar-aecio"></div>
+				<div class="arrow-box" ng-show="qtdeVotosGlobal[aecio] > qtdeVotosGlobal[dilma]">
+					VENCEDOR
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="box-center controles text-center">
+	<img src="images/com-cache/controle-esquerda.png" class="esquerda" alt="Figura de um controle de fliperama">
+	<div class="centro">
+		<div class="botao-verde continuar-jogando pointer" ng-click="jogar()">
+			CONTINUAR JOGANDO
+		</div>
+	</div>
+	<img src="images/com-cache/controle-direita.png" class="direita" alt="Figura de botões de fliperama">
+</div>
+<div class="resultado-rodape text-center container">
+	<a href="http://www.muitointeressante.com.br/" target="_blank">
+		<img src="images/com-cache/logo-muito-interessante.png" class="logo-mi" alt="Logo do Muito Interessante">
+	</a>
+	<a href="http://projetobrasil.org/" target="_blank">
+		<img src="images/com-cache/logo-projetobrasil-rodape.png" class="logo-pb" alt="Logo do Projeto Brasil">
+	</a>
+	<a href="http://www.dwrk.it/" target="_blank">
+		<img src="images/com-cache/logo-dwrk.png" class="logo-dwrk" alt="Logo da DWRK">
+	</a>
+</div>
+

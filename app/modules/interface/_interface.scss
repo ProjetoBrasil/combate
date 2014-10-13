@@ -61,7 +61,7 @@
     display: inline-block;
     width: 22px;
     i {
-    	color: $amarelo-dourado;
+    	color: $azul-escuro;
     }
 }
 
@@ -92,12 +92,61 @@
 
 .logout {
 	z-index: 1000;
-	position: absolute;
-	top: 50px;
-	right: 50px;
-	border: solid 1px black;
-	background-color: white;
-	height: 75px;
+	position: fixed;
+	top: 12px;
 	width: 250px;
-	text-align: center;
+	right: -10px;
+
+	img{
+		float: left;
+		text-shadow: 0 1px 1px #FFF;
+		margin-right: 10px;
+	}
+
+	.nome{
+		color: $azul-escuro;
+		font-size: 1.5em;
+		text-shadow: 0 1px 1px #FFF;
+	}
+
+	.acao{
+		font-size: 0.95em;
+		color: $azul-mais-escuro;
+		cursor: pointer;
+	}
+}
+
+.dialog-round .ngdialog-content {
+	width: 100% !important;
+	padding: 0 !important;
+
+	.dialog-message {
+		background-color: $azul-escuro;
+		padding: 20px 0 30px;
+		font-family: 'Fight';
+		color: $amarelo;
+
+		h1{
+			font-size: 4em;
+		}
+	}
+}
+
+.carregando{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: $azul-escuro;
+	color: $branco;
+	z-index: 100000;
+
+	i{
+		margin-top: 15%;
+		font-size: 5em;
+	}
+
+	p{
+		font-size: 1.5em;
+		margin-top: 1%;
+	}
 }

@@ -1,10 +1,17 @@
+<div class="carregando text-center" ng-hide="carregado.propostas && carregado.imagens">
+	<i class="fa fa-refresh fa-spin"></i>
+	<p>Carregando</p>
+</div>
 <div id="interface-container" class="container container-jogo">
 	<div class="logout">
-		<img class="avatar" ng-src=" {{avatarUrl}}" />
-			{{userData.nome}}<br>
-			<a href="" ng-click="logoutUser()">
-				<span class="glyphicon glyphicon-log-out"></span> Desconectar
-			</a>
+	<img class="avatar" ng-src=" {{avatarUrl}}" />
+		<span class="nome">
+			{{userData.nome}}
+		</span>
+		<br>
+		<span class="acao" ng-click="logoutUser()">
+			<span class="glyphicon glyphicon-log-out"></span> Desconectar
+		</span>
 	</div>
 	<barra-de-vida></barra-de-vida>
 	<a href="http://www.projetobrasil.org/" target="_blank">
@@ -12,8 +19,6 @@
 			<img src="images/com-cache/rsz_logo-projeto-brasil.png" alt="Logo do Projeto Brasil">
 		</div>
 	</a>
-	<div class="canvas-box">
-		<canvas id="arena" width="1280" height="500"></canvas>
-	</div>
+	<div class="canvas-box" ng-controller="PersonagemCtrl"></div>
 	<boxpropostas></boxpropostas>
 </div>

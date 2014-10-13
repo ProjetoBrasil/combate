@@ -7,14 +7,17 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		var gerenciador = {};
 		var personagens = {};
 		var pow = {};
+		var assetsCarregados = false;
 
-		var canvas = $document.find('#arena')[0];
-		var arena = new createjs.Stage(canvas);
+		var canvas = {};
+		var arena = {};
 
 		var frameSize = { width: 476, height: 500 };
 		var tamFigurasGolpe = { height: 195 };
 
 		gerenciador.inicializa = function(){
+			gerenciador.reset();
+			gerenciador.criaCanvas();
 			gerenciador.criaSpritesPersonagens();
 			gerenciador.inicializaEfeitos();
 
@@ -26,7 +29,36 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			});
 		};
 
+		gerenciador.criaCanvas = function(){
+			$document.find('#arena').remove();
+
+			var temp = angular.element('<canvas id="arena" width="1280" height="500"></canvas>');
+			$document.find('.canvas-box').append(temp);
+
+			canvas = $document.find('#arena')[0];
+			arena = new createjs.Stage(canvas);
+		};
+
+		gerenciador.reset = function(){
+			canvas = {};
+			arena = {};
+			personagens = {};
+			pow = {};
+		};
+
 		gerenciador.carregaAssets = function() {
+			// Só inicializa o jogo quando todas as imagens da fila já foram carregas
+			function handleComplete() {
+			    gerenciador.inicializa();
+				$rootScope.$broadcast('imagensCarregadas');
+				assetsCarregados = true;
+			}
+
+			if(assetsCarregados){
+				handleComplete();
+				return;
+			}
+
 			var queue = new createjs.LoadQueue();
 			var manifest = [];
 
@@ -43,11 +75,6 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				manifest.push({id: idCandidato, src: '/images/sem-cache/sprites/'+ $rootScope.nomesCandidatos[idCandidato] +'_sprite.png'});
 			});
 
-			// Só inicializa o jogo quando todas as imagens da fila já foram carregas
-			function handleComplete() {
-			    gerenciador.inicializa();
-				$rootScope.$broadcast('imagensCarregadas');
-			}
 			queue.on('complete', handleComplete, this);
 
 			queue.loadManifest(manifest);
@@ -200,8 +227,6 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			pow.sprites.y = arena.canvas.height / 2;
 			arena.addChild(pow.sprites);
 		};
-
-		gerenciador.carregaAssets();
 
 		return(gerenciador);
 	}]);
