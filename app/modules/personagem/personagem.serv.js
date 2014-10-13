@@ -178,7 +178,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				golpe.x = arena.canvas.width - (frameSize.width / 2) - ajuste;
 			}
 
-			golpe.y = arena.canvas.height/2 - (golpe.scale * (tamFigurasGolpe.height/2));
+			golpe.y = (arena.canvas.height - frameSize.height/2) - (golpe.scale * (tamFigurasGolpe.height/2));
 			arena.addChild(golpe);
 
 			golpe.index = arena.getChildIndex(golpe);
@@ -201,7 +201,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 					newX -= (arena.canvas.width - frameSize.width) / stepsGolpe;
 				}
 
-				var newY = arena.canvas.height/2 - (newScale * tamFigurasGolpe.height/2);
+				var newY = (arena.canvas.height - frameSize.height/2) - (newScale * tamFigurasGolpe.height/2);
 				var newAngle = Math.sin(angle + 0.04) * 360;
 
 				golpe.setTransform(newX, newY, newScale, newScale, newAngle, 0, 0, regX, regY);
@@ -226,7 +226,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			}else{
 				pow.sprites.x = frameSize.width / 2;
 			}
-			pow.sprites.y = arena.canvas.height / 2;
+			pow.sprites.y = (arena.canvas.height - frameSize.height/2);
 			arena.addChild(pow.sprites);
 		};
 
