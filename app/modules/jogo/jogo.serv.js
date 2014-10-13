@@ -23,7 +23,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 
 		// Gerencia o jogo
 		gerenciador.inicializaNovoJogo = function(){
-			if(!UserLogin.isUserLogged){
+			if(!UserLogin.isUserLogged()){
 				return;
 			}
 
