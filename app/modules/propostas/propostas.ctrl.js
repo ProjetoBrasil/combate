@@ -3,9 +3,9 @@
 angular.module('projetobrasil.ufc.propostas.controllers', [])
 	.controller('PropostasCtrl',
 		['$scope', '$rootScope','PropostasServ', 'GerenciadorJogo', 'Personagens',
-			'$timeout',
+			'$timeout', 'ngDialog',
 		function ($scope, $rootScope, PropostasServ, Jogo, Personagens,
-			$timeout){
+			$timeout, ngDialog){
 
 		// $rootScope.$on('$stateChangeSuccess',
 		// 	function(event, toState, toParams, fromState){
@@ -16,6 +16,8 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 
 		// Personagens.carregaAssets();
 		// Jogo.inicializaJogo();
+
+		var idDialogErro;
 
 		$scope.tamProposta1 = 100;
 		$scope.tamProposta2 = 100;
@@ -41,6 +43,26 @@ angular.module('projetobrasil.ufc.propostas.controllers', [])
 		$scope.$watch('propostasVisiveis', function() {
 			if (!PropostasServ.vazio($scope.propostasVisiveis)) {
 				$scope.assetsCarregados.propostas = true;
+			}
+		}, true);
+
+		$rootScope.$watch('comunicandoComServidor', function(newValue, oldValue) {
+			if (newValue === false) {
+				// Houve erro com comunicação no servidor
+				idDialogErro = ngDialog.open({
+					template: 'modules/propostas/erro-servidor.html',
+					showClose: false,
+					closeByEscape: false,
+					closeByDocument: false,
+					className: 'ngdialog-theme-default',
+					controller: function () {
+						// Faz requisições até receber resposta
+						PropostasServ.atualizaBuffer(true);
+					}
+				});
+			}
+			if (oldValue === false && newValue === true) {
+				ngDialog.close(idDialogErro);
 			}
 		}, true);
 

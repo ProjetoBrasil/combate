@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout',
-	 function ($rootScope, $state, Angularytics, ngDialog, $timeout){
+	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout', 'UserLogin',
+	 function ($rootScope, $state, Angularytics, ngDialog, $timeout, UserLogin){
 		var maxRounds = 3;
 
 		var gerenciador = {
@@ -36,7 +36,10 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				candidatos[id].golpesSofridos = 0;
 				candidatos[id].adversario = id === idsCandidatos[0] ? idsCandidatos[1] : idsCandidatos[0];
 			});
-			gerenciador.dialogRound();
+
+			if(UserLogin.isUserLogged()){
+				gerenciador.dialogRound();
+			}
 		};
 
 		gerenciador.reiniciaJogo = function(){
