@@ -5,9 +5,19 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 	 function ($rootScope, $state, Angularytics, ngDialog, $timeout, UserLogin){
 		var maxRounds = 3;
 
+		createjs.Sound.alternateExtensions = ["mp3"];
+		createjs.Sound.addEventListener("fileload", createjs.proxy(this.loadHandler, this));
+		createjs.Sound.registerSound("sounds/hadouken.mp3", "sound");
+		function loadHandler(event) {
+				// This is fired for each sound that is registered.
+				var instance = createjs.Sound.play("sound");  // play using id.  Could also use full sourcepath or event.src.
+				instance.addEventListener("complete", createjs.proxy(this.handleComplete, this));
+				instance.volume = 0.5;
+		 }
+
 		var gerenciador = {
 			roundAtual : 0,
-			maxGolpesRound : 10,
+			maxGolpesRound : 5,
 			minRoundsParaVitoria: parseInt(maxRounds/2)+1,
 			totalGolpesSessaoCount: 0,
 			candidatos : {}
@@ -51,6 +61,7 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 				candidatos[id].roundsGanhos = 0;
 				candidatos[id].golpesSofridos = 0;
 			});
+			//gerenciador.dialogRound();
 		};
 
 		gerenciador.finalizaJogo = function(vencedor){
