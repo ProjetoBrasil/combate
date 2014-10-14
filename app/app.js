@@ -30,7 +30,7 @@ angular
 		FacebookProvider.init('1520150961538128');
 	})
 	.config(function(AngularyticsProvider) {
-		AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
+		AngularyticsProvider.setEventHandlers(['GoogleUniversal']);
 	}).run(function(Angularytics) {
 		Angularytics.init();
 	})
