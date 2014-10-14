@@ -3,10 +3,6 @@
 	<p>Carregando</p>
 </div>
 <div id="interface-container" class="container container-jogo">
-<div class="fb-buttons">
-<div class="fb-like" data-href="https://www.facebook.com/OProjetoBrasil" data-width="400" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-<div class="fb-share-button" data-href="http://combate.projetobrasil.org" data-layout="button_count"></div>
-</div>
 <div class="logout">
 	<img class="avatar" ng-src=" {{avatarUrl}}" />
 		<span class="nome">
@@ -18,11 +14,17 @@
 		</span>
 	</div>
 	<barra-de-vida></barra-de-vida>
-	<a href="http://www.projetobrasil.org/" target="_blank">
-		<div class="logo-projeto-brasil">
-			<img src="images/com-cache/rsz_logo-projeto-brasil.png" alt="Logo do Projeto Brasil">
+		<div class="logos-parceiros text-center">
+			<a href="//www.dwrk.it" target="_blank">
+				<img src="images/com-cache/logo-dwrk-branca.png" alt="">
+			</a>
+			<a href="http://www.projetobrasil.org/" target="_blank">
+				<img src="images/com-cache/rsz_logo-projeto-brasil.png" alt="Logo do Projeto Brasil">
+			</a>
+			<a href="//www.muitointeressante.com.br" target="_blank">
+				<img src="images/com-cache/logo-muito-interessante.png" alt="">
+			</a>
 		</div>
-	</a>
 	<div class="canvas-box" ng-controller="PersonagemCtrl"></div>
 	<boxpropostas></boxpropostas>
 </div>

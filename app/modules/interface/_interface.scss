@@ -65,16 +65,24 @@
     }
 }
 
-.logo-projeto-brasil {
-	background-color: #09404C;
+.logos-parceiros {
+	border-bottom: 48px solid $azul-escuro;
+	border-left: 25px dotted transparent;
+	border-right: 25px dotted transparent;
+	height: 0;
+	width: 288px;
 	bottom: 0;
-	width: 139px;
 	position: fixed;
-    left: 0;
-    right: 0;
-    margin: auto;
-	padding: 3px 3px 7px;
+	left: 0;
+	right: 0;
+	margin: auto;
 	z-index: 200;
+
+
+	img{
+		max-height: 39px;
+		margin: 5px 3px;
+	}
 }
 
 .canvas-box{
@@ -151,8 +159,14 @@
 	}
 }
 
-#interface-container .fb-buttons {
+.fb-buttons {
 	position: fixed;
 	top: 20px;
 	left: 40px;
+	display: none;
+}
+
+.jogo .fb-buttons,
+.resultado .fb-buttons {
+	display: block;
 }
