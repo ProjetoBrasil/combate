@@ -3,8 +3,8 @@
 angular.module('projetobrasil.ufc.propostas.services', [])
 
 .factory('PropostasServ',[
-	'$rootScope', '$resource',
-	function($rootScope, $resource){
+	'$rootScope', '$resource', '$timeout',
+	function($rootScope, $resource, $timeout){
 
 		var propostas = {
 			propostasVisiveis: {tema: '', props: []},
@@ -51,10 +51,15 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 		/**
 		 * Busca novas propostas do servidor. Se propostasVisiveis estiver vazio
 		 * copia o buffer para propostasVisiveis
+		 * @params 	requisitaAteObterResposta False para ignorar acontagem e
+		 				tentar atualizar indefinidamente
+		 			errorCount contagem de erros acontecidos.
 		 */
-		propostas.atualizaBuffer = function (errorCount) {
+		propostas.atualizaBuffer = function (requisitaAteObterResposta, errorCount) {
 			errorCount = errorCount || 0;
+			requisitaAteObterResposta = requisitaAteObterResposta || false;
 			var temaPropostasBuffer = getElementoAleatorio(temas);
+
 			api.query({tema: getTemaId(temaPropostasBuffer) }, function(data) {
 
 				propostas.buffer.tema = temaPropostasBuffer;
@@ -63,13 +68,21 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 				if (propostas.vazio(propostas.propostasVisiveis)){
 					propostas.popBuffer();
 				}
+				$rootScope.comunicandoComServidor = true;
 			}, function(error){
-				console.log(errorCount);
-				if (errorCount > MAX_TENTATIVAS_RECONNECT) {
-					console.log('Erro ao contactar servidor');
-					//TODO notificar usuário
+				if (requisitaAteObterResposta == true){
+					$timeout(function() {
+						propostas.atualizaBuffer(true, ++errorCount);
+					}, 200);
 				} else {
-					propostas.atualizaBuffer(++errorCount);
+					if (errorCount >= MAX_TENTATIVAS_RECONNECT) {
+						// Para e notifica que a conexão caiu
+						$rootScope.comunicandoComServidor = false;
+					} else {
+						// Continua tentando até conseguir resposta ou
+						// chegar no limite de tentativas
+						propostas.atualizaBuffer(false, ++errorCount);
+					}
 				}
 			});
 		};
@@ -96,7 +109,7 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 		propostas.postPropostasVisiveis = function(idAutorPropostaVotada) {
 			var propostaVotada;
 			var propostaNaoVotada;
-			if (propostas.propostasVisiveis.props[0].politicians_id === idAutorPropostaVotada){
+			if (propostas.propostasVisiveis.props[0].id_politicians === idAutorPropostaVotada){
 				propostaVotada = propostas.propostasVisiveis.props[0];
 				propostaNaoVotada = propostas.propostasVisiveis.props[1];
 			} else {
