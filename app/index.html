@@ -50,15 +50,6 @@
 	<div ui-view></div>
 
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	ga('create', 'UA-52366317-2', 'auto');
-	ga('send', 'pageview');
-</script>
 
 	<!-- build:js(.) scripts/oldieshim.js -->
 	<!--[if lt IE 9]>
@@ -135,5 +126,28 @@
 	<script src="modules/resultado/resultado.serv.js"></script>
 
 	<!-- endbuild -->
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-52366317-2', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+	<script>
+		UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/G4ucpcu6VU7KObecvhz42w.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+		UserVoice.push(['set', {
+		accent_color: '#30b786',
+		trigger_color: '#fff',
+		trigger_background_color: 'rgba(48, 183, 134, 0.85)'
+		}]);
+
+		UserVoice.push(['addTrigger', { mode: 'satisfaction', trigger_position: 'bottom-right' }]);
+		UserVoice.push(['autoprompt', {}]);
+	</script>
 </body>
 </html>
