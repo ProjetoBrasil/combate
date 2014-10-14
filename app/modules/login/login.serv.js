@@ -13,8 +13,8 @@ angular
 			isUserLogged = true;
 			loggedUserData = data;
 			// success(userData);
-		}).error(function(){
-			console.log('Erro ao obter perfil');
+		}).error(function(error){
+			console.log(error);
 		});
 
 	return {
