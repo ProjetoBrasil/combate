@@ -1,11 +1,18 @@
 <img src="images/com-cache/logo_ufc.png" class="resultado-logo" alt="Logo do Urna Fighter Combat">
 <div class="wrapper-resultado container">
 	<div class="coluna-resultado text-center pessoal">
-		<!-- <button class="btn btn-lg btn-share-button facebook">
+		<!-- <a ng-href="http://www.facebook.com/share.php?u={{linkCompartilhamento}}&title=BLABLABLA" class="btn btn-lg btn-share-button facebook">
 			<i class="fa fa-facebook"></i>
 			COMPARTILHAR
-		</button> -->
-		<h3 class="titulo">Seu resultado</h3>
+		</a> -->
+		<button class="btn btn-lg btn-share-button facebook" ng-click="facebook()">
+			<i class="fa fa-facebook"></i>
+			COMPARTILHAR
+		</button>
+		<h3 class="titulo">
+			<img ng-src="{{avatarUrl}}" alt="" ng-show="hashUsuario">
+			{{ hashUsuario ? 'Resultado do Fulano':'Seu resultado'}}
+		</h3>
 		<h5 class="sub-titulo">
 			{{qtdeVotosPessoal[dilma]}} x {{qtdeVotosPessoal[aecio]}}
 		</h5>
@@ -48,10 +55,10 @@
 		</div>
 	</div>
 	<div class="coluna-resultado text-center geral">
-		<!-- <button class="btn btn-lg btn-share-button facebook">
+		<button class="btn btn-lg btn-share-button facebook" ng-click="facebook()">
 			<i class="fa fa-facebook"></i>
 			COMPARTILHAR
-		</button> -->
+		</button>
 		<h3 class="titulo">Resultado nacional</h3>
 		<h5 class="sub-titulo">
 			{{qtdeVotosGlobal[dilma]}} x {{qtdeVotosGlobal[aecio]}}

@@ -3,8 +3,8 @@
 angular
 	.module('projetobrasil.ufc.resultado.controllers', [])
 	.controller('ResultadoCtrl',
-	['$scope', '$rootScope', '$state', 'RankingPessoalService', 'RankingGlobalService',
-		function ($scope, $rootScope, $state, rankPessoal, rankGlobal){
+	['$scope', '$rootScope', '$state', '$stateParams', '$location',  'RankingPessoalService', 'RankingGlobalService', 'Facebook', 'UserHashService',
+		function ($scope, $rootScope, $state, $stateParams, $location, rankPessoal, rankGlobal, Facebook, userHash){
 			var ids = $rootScope.idsCandidatos;
 			$scope.qtdeVotosPessoal = {};
 			$scope.qtdeVotosGlobal = {};
@@ -35,7 +35,34 @@ angular
 				// 1015 : 'Outros'
 			};
 
-			$scope.rankPessoal = rankPessoal.get(function(){
+			$scope.hashUsuario = $stateParams.hash;
+			var query = {};
+
+			if($scope.hashUsuario){
+				$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/%23' + $location.url();
+				query = { hash : $scope.hashUsuario };
+				Facebook.api('/' + $scope.hashUsuario + '/picture', function(response) {
+					$scope.avatarUrl = response.data.url;
+				});
+			}else{
+				$scope.hashUsuario = userHash.get(function(){
+					$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/%23' + $location.url() + '/' + $scope.hashUsuario;
+				});
+			}
+
+			$scope.facebook = function(){
+				Facebook.ui({
+					method: 'feed',
+					name: 'This is the content of the "name" field.',
+					link: $scope.linkCompartilhamento,
+					picture: 'http://combate.projetobrasil.org/',
+					caption: 'BLABLABLA',
+					description: 'This is the content of the "description" field, below the caption.',
+					message: ''
+			    });
+			};
+
+			$scope.rankPessoal = rankPessoal.get(query, function(){
 				$scope.qtdeVotosPessoal.total = 0;
 				_.each(ids, function(id){
 					$scope.qtdeVotosPessoal[id] = _.reduce($scope.rankPessoal[id], function(soma, valor){
