@@ -348,7 +348,8 @@ module.exports = function (grunt) {
             '*.html',
             'modules/**/*.html',
             'images/**/*.{png,jpg}',
-            'fonts/**/*'
+            'fonts/**/*',
+            'sounds/*.mp3'
           ]
         }, {
           expand: true,
