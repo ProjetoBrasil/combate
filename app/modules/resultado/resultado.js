@@ -11,5 +11,10 @@ angular
 				url: '/resultado',
 				templateUrl: 'modules/resultado/resultado.html',
 				controller: 'ResultadoCtrl'
+			})
+			.state('compartilhar', {
+				url: '/resultado/:hash',
+				templateUrl: 'modules/resultado/resultado.html',
+				controller: 'ResultadoCtrl'
 			});
 	});

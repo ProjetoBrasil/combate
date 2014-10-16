@@ -2,15 +2,22 @@
 
 angular
 	.module('projetobrasil.ufc.resultado.services', [])
-	.factory('RankingPessoalService', ['$resource', '$rootScope', function ($resource, $rootScope){
+	.factory('ResultadoService', ['$resource', '$rootScope', function ($resource, $rootScope){
 
-		var ranking = $resource($rootScope.apiBaseUrl+'ufc/ranking', {}, {});
+		var servico = {};
 
-		return ranking;
-	}])
-	.factory('RankingGlobalService', ['$resource', '$rootScope', function ($resource, $rootScope){
+		servico.rankingPessoal = $resource($rootScope.apiBaseUrl+'ufc/ranking/user/:hash', {
+			hash: '@hash'
+		}, {});
 
-		var ranking = $resource($rootScope.apiBaseUrl+'ufc/ranking/global', {}, {});
+		servico.rankingGlobal = $resource($rootScope.apiBaseUrl+'ufc/ranking/global', {}, {});
 
-		return ranking;
+		servico.userHash = $resource($rootScope.apiBaseUrl+'ufc/user/hash', {}, {});
+
+		servico.userName = $resource($rootScope.apiBaseUrl+'ufc/user/name/:hash', {
+			hash: '@hash'
+		}, {});
+
+		return servico;
 	}]);
+
