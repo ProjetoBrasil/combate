@@ -53,13 +53,14 @@ angular
 			$scope.facebook = function(){
 				Facebook.ui({
 					method: 'feed',
-					name: 'This is the content of the "name" field.',
+					name: 'Urna Fighter Combat',
 					link: $scope.linkCompartilhamento,
-					picture: 'http://combate.projetobrasil.org/',
-					caption: 'BLABLABLA',
-					description: 'This is the content of the "description" field, below the caption.',
+					picture: $scope.avatarUrl,
+					// picture: '//combate.projetobrasil.org/images/com-cache/logo_ufc.png',
+					caption: 'Projeto Brasil',
+					description: 'Veja meu resultado no Urna Fighter Combat e compare com a pontuação nacional',
 					message: ''
-			    });
+				});
 			};
 
 			$scope.rankPessoal = rankPessoal.get(query, function(){
