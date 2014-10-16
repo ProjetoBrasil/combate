@@ -7,7 +7,7 @@
 		</button>
 	</div>
 	<div class="coluna-resultado text-center pessoal">
-		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" class="avatar" ng-show="paginaCompartilhada">
+		<img ng-src="{{avatarUrl || 'images/com-cache/avatar-generico.c3332bcf.png'}}" alt="Avatar do usuário" class="avatar" ng-show="paginaCompartilhada">
 		<h3 class="titulo">
 			{{ paginaCompartilhada ? nomeUsuario :'Seu resultado'}}
 		</h3>

@@ -61,11 +61,11 @@ angular
 			$scope.facebook = function(){
 				Facebook.ui({
 					method: 'feed',
-					name: 'Urna Fighter Combat',
+					name: 'Clique para ver meu resultado',
 					link: $scope.linkCompartilhamento,
 					picture: 'http://combate.projetobrasil.org/images/com-cache/logo_ufc.5403714a.png',
-					caption: 'Projeto Brasil',
-					description: 'Veja meu resultado no Urna Fighter Combat e compare com a pontuação nacional',
+					caption: 'Urna Fighter Combat - Projeto Brasil',
+					description: 'Veja quem venceu o combate de propostas. Dilma ou Aécio?',
 					message: ''
 				});
 			};
