@@ -3,8 +3,8 @@
 angular
 	.module('projetobrasil.ufc.resultado.controllers', [])
 	.controller('ResultadoCtrl',
-	['$scope', '$rootScope', '$state', 'RankingPessoalService', 'RankingGlobalService',
-		function ($scope, $rootScope, $state, rankPessoal, rankGlobal){
+	['$scope', '$rootScope', '$state', '$stateParams', '$location', 'ResultadoService' , 'Facebook',
+		function ($scope, $rootScope, $state, $stateParams, $location, ResultadoService, Facebook){
 			var ids = $rootScope.idsCandidatos;
 			$scope.qtdeVotosPessoal = {};
 			$scope.qtdeVotosGlobal = {};
@@ -35,7 +35,46 @@ angular
 				// 1015 : 'Outros'
 			};
 
-			$scope.rankPessoal = rankPessoal.get(function(){
+			$scope.hashUsuario = $stateParams.hash;
+			$scope.paginaCompartilhada = !!$stateParams.hash;
+			var query = {};
+
+			if($scope.hashUsuario){
+				$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/#' + $location.url();
+				query = { hash : $scope.hashUsuario };
+				Facebook.api('/' + $scope.hashUsuario + '/picture', function(response) {
+					$scope.avatarUrl = response.data ? response.data.url : null;
+				});
+				ResultadoService.userName.get({
+					hash: $scope.hashUsuario
+				}, function(data){
+					$scope.nomeUsuario = data.name;
+				});
+			}else{
+				$scope.hashUsuario = ResultadoService.userHash.get(function(){
+					var url = $location.url();
+					url = url[url.length-1] != '/' ? url + '/' : url;
+					$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/#' + url + $scope.hashUsuario.hash;
+				});
+			}
+
+			$scope.linkTwitter = function(link){
+				return encodeURIComponent(link);
+			};
+
+			$scope.facebook = function(){
+				Facebook.ui({
+					method: 'feed',
+					name: 'Clique para ver meu resultado',
+					link: $scope.linkCompartilhamento,
+					picture: 'http://combate.projetobrasil.org/images/com-cache/logo_ufc.5403714a.png',
+					caption: 'Urna Fighter Combat - Projeto Brasil',
+					description: 'Veja quem venceu o combate de propostas. Dilma ou Aécio?',
+					message: 'Eu joguei o Urna Fighter Combat! Quer saber qual dos candidatos venceu a minha disputa?'
+				});
+			};
+
+			$scope.rankPessoal = ResultadoService.rankingPessoal.get(query, function(){
 				$scope.qtdeVotosPessoal.total = 0;
 				_.each(ids, function(id){
 					$scope.qtdeVotosPessoal[id] = _.reduce($scope.rankPessoal[id], function(soma, valor){
@@ -48,7 +87,7 @@ angular
 				});
 			});
 
-			$scope.rankGlobal = rankGlobal.get(function(){
+			$scope.rankGlobal = ResultadoService.rankingGlobal.get(function(){
 				$scope.qtdeVotosGlobal.total = 0;
 				_.each(ids, function(id){
 					$scope.qtdeVotosGlobal[id] = _.reduce($scope.rankGlobal[id], function(soma, valor){

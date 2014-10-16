@@ -1,11 +1,20 @@
 <img src="images/com-cache/logo_ufc.png" class="resultado-logo" alt="Logo do Urna Fighter Combat">
-<div class="wrapper-resultado container">
-	<div class="coluna-resultado text-center pessoal">
-		<!-- <button class="btn btn-lg btn-share-button facebook">
+<div class="wrapper-resultado container" ng-class="{true : 'pag-compartilhada',  false : 'pag-nao-compartilhada'}[paginaCompartilhada]">
+	<div class="clearfix" ng-hide="paginaCompartilhada">
+		<button class="btn btn-lg btn-share-button facebook to-left" ng-click="facebook()">
 			<i class="fa fa-facebook"></i>
-			COMPARTILHAR
-		</button> -->
-		<h3 class="titulo">Seu resultado</h3>
+			COMPARTILHAR NO FACEBOOK
+		</button>
+		<a class="btn btn-lg btn-share-button twitter to-right" ng-href="https://twitter.com/intent/tweet?text=Veja%20o%20resultado%20do%20meu%20combate%20no%20Urna%20Fighter%20Combat&hashtags=UrnaFighterCombat&url={{linkTwitter(linkCompartilhamento)}}">
+			<i class="fa fa-twitter"></i>
+			COMPARTILHAR NO TWITTER
+		</a>
+	</div>
+	<div class="coluna-resultado text-center pessoal">
+		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" class="avatar" ng-show="paginaCompartilhada && avatarUrl">
+		<h3 class="titulo">
+			{{ paginaCompartilhada ? nomeUsuario :'Seu resultado'}}
+		</h3>
 		<h5 class="sub-titulo">
 			{{qtdeVotosPessoal[dilma]}} x {{qtdeVotosPessoal[aecio]}}
 		</h5>
@@ -48,10 +57,7 @@
 		</div>
 	</div>
 	<div class="coluna-resultado text-center geral">
-		<!-- <button class="btn btn-lg btn-share-button facebook">
-			<i class="fa fa-facebook"></i>
-			COMPARTILHAR
-		</button> -->
+		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" ng-show="paginaCompartilhada && avatarUrl" style="visibility: hidden">
 		<h3 class="titulo">Resultado nacional</h3>
 		<h5 class="sub-titulo">
 			{{qtdeVotosGlobal[dilma]}} x {{qtdeVotosGlobal[aecio]}}
@@ -99,7 +105,7 @@
 	<img src="images/com-cache/controle-esquerda.png" class="esquerda" alt="Figura de um controle de fliperama">
 	<div class="centro">
 		<div class="botao-verde continuar-jogando pointer" ng-click="jogar()">
-			CONTINUAR JOGANDO
+			{{ paginaCompartilhada ? 'JOGAR' : 'CONTINUAR JOGANDO' }}
 		</div>
 	</div>
 	<img src="images/com-cache/controle-direita.png" class="direita" alt="Figura de botões de fliperama">
