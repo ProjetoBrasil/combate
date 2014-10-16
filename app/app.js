@@ -24,7 +24,8 @@ angular
 		'projetobrasil.ufc.interface',
 		'projetobrasil.ufc.home',
 		'projetobrasil.ufc.login',
-		'projetobrasil.ufc.resultado'
+		'projetobrasil.ufc.resultado',
+		'projetobrasil.ufc.audio'
 	])
 	.config(function(FacebookProvider) {
 		FacebookProvider.init('1520150961538128');

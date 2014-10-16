@@ -1,0 +1,12 @@
+.btn-mudo {
+	cursor: pointer;
+	color: $azul-mais-escuro;
+	float: left;
+	margin-top: 10.5px;
+	margin-right: 15px;
+	width: 32px;
+	text-align: center;
+	.fa-volume-off {
+		padding-right: 14px;
+	}
+}
