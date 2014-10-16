@@ -3,8 +3,8 @@
 angular
 	.module('projetobrasil.ufc.resultado.controllers', [])
 	.controller('ResultadoCtrl',
-	['$scope', '$rootScope', '$state', '$stateParams', '$location', 'ResultadoService' , 'Facebook',
-		function ($scope, $rootScope, $state, $stateParams, $location, ResultadoService, Facebook){
+	['$scope', '$rootScope', '$state', '$stateParams', '$location', 'ResultadoService' , 'Facebook', 'Angularytics',
+		function ($scope, $rootScope, $state, $stateParams, $location, ResultadoService, Facebook, Angularytics){
 			var ids = $rootScope.idsCandidatos;
 			$scope.qtdeVotosPessoal = {};
 			$scope.qtdeVotosGlobal = {};
@@ -63,6 +63,7 @@ angular
 			};
 
 			$scope.facebook = function(){
+				Angularytics.trackEvent('Resultado', 'Abriu janela de compartilhamento');
 				Facebook.ui({
 					method: 'feed',
 					name: 'Clique para ver meu resultado',
@@ -71,6 +72,12 @@ angular
 					caption: 'Urna Fighter Combat - Projeto Brasil',
 					description: 'Veja quem venceu o combate de propostas. Dilma ou Aécio?',
 					message: 'Eu joguei o Urna Fighter Combat! Quer saber qual dos candidatos venceu a minha disputa?'
+				}, function(response){
+					if (response && !response.error_code) {
+						Angularytics.trackEvent('Resultado', 'Compartilhamento concluído')
+					} else {
+						Angularytics.trackEvent('Resultado', 'Erro no processo de compartilhamento')
+					}
 				});
 			};
 
