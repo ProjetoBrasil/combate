@@ -1,17 +1,15 @@
 <img src="images/com-cache/logo_ufc.png" class="resultado-logo" alt="Logo do Urna Fighter Combat">
 <div class="wrapper-resultado container">
-	<div class="coluna-resultado text-center pessoal">
-		<!-- <a ng-href="http://www.facebook.com/share.php?u={{linkCompartilhamento}}&title=BLABLABLA" class="btn btn-lg btn-share-button facebook">
-			<i class="fa fa-facebook"></i>
-			COMPARTILHAR
-		</a> -->
+	<div ng-hide="paginaCompartilhada">
 		<button class="btn btn-lg btn-share-button facebook" ng-click="facebook()">
 			<i class="fa fa-facebook"></i>
-			COMPARTILHAR
+			COMPARTILHAR SEU RESULTADO
 		</button>
+	</div>
+	<div class="coluna-resultado text-center pessoal">
+		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" class="avatar" ng-show="paginaCompartilhada">
 		<h3 class="titulo">
-			<img ng-src="{{avatarUrl}}" alt="" ng-show="hashUsuario">
-			{{ hashUsuario ? 'Resultado do Fulano':'Seu resultado'}}
+			{{ paginaCompartilhada ? nomeUsuario :'Seu resultado'}}
 		</h3>
 		<h5 class="sub-titulo">
 			{{qtdeVotosPessoal[dilma]}} x {{qtdeVotosPessoal[aecio]}}
@@ -55,10 +53,7 @@
 		</div>
 	</div>
 	<div class="coluna-resultado text-center geral">
-		<button class="btn btn-lg btn-share-button facebook" ng-click="facebook()">
-			<i class="fa fa-facebook"></i>
-			COMPARTILHAR
-		</button>
+		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" ng-show="paginaCompartilhada" style="visibility: hidden">
 		<h3 class="titulo">Resultado nacional</h3>
 		<h5 class="sub-titulo">
 			{{qtdeVotosGlobal[dilma]}} x {{qtdeVotosGlobal[aecio]}}
@@ -106,7 +101,7 @@
 	<img src="images/com-cache/controle-esquerda.png" class="esquerda" alt="Figura de um controle de fliperama">
 	<div class="centro">
 		<div class="botao-verde continuar-jogando pointer" ng-click="jogar()">
-			CONTINUAR JOGANDO
+			{{ paginaCompartilhada ? 'JOGAR' : 'CONTINUAR JOGANDO' }}
 		</div>
 	</div>
 	<img src="images/com-cache/controle-direita.png" class="direita" alt="Figura de botões de fliperama">
