@@ -1,13 +1,17 @@
 <img src="images/com-cache/logo_ufc.png" class="resultado-logo" alt="Logo do Urna Fighter Combat">
-<div class="wrapper-resultado container">
-	<div ng-hide="paginaCompartilhada">
-		<button class="btn btn-lg btn-share-button facebook" ng-click="facebook()">
+<div class="wrapper-resultado container" ng-class="{true : 'pag-compartilhada',  false : 'pag-nao-compartilhada'}[paginaCompartilhada]">
+	<div class="clearfix" ng-hide="paginaCompartilhada">
+		<button class="btn btn-lg btn-share-button facebook to-left" ng-click="facebook()">
 			<i class="fa fa-facebook"></i>
-			COMPARTILHAR SEU RESULTADO
+			COMPARTILHAR NO FACEBOOK
 		</button>
+		<a class="btn btn-lg btn-share-button twitter to-right" ng-href="https://twitter.com/intent/tweet?text=Veja%20o%20resultado%20do%20meu%20combate%20no%20Urna%20Fighter%20Combat&hashtags=UrnaFighterCombat&url={{linkTwitter(linkCompartilhamento)}}">
+			<i class="fa fa-twitter"></i>
+			COMPARTILHAR NO TWITTER
+		</a>
 	</div>
 	<div class="coluna-resultado text-center pessoal">
-		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" class="avatar" ng-show="paginaCompartilhada">
+		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" class="avatar" ng-show="paginaCompartilhada && avatarUrl">
 		<h3 class="titulo">
 			{{ paginaCompartilhada ? nomeUsuario :'Seu resultado'}}
 		</h3>
@@ -53,7 +57,7 @@
 		</div>
 	</div>
 	<div class="coluna-resultado text-center geral">
-		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" ng-show="paginaCompartilhada" style="visibility: hidden">
+		<img ng-src="{{avatarUrl}}" alt="Avatar do usuário" ng-show="paginaCompartilhada && avatarUrl" style="visibility: hidden">
 		<h3 class="titulo">Resultado nacional</h3>
 		<h5 class="sub-titulo">
 			{{qtdeVotosGlobal[dilma]}} x {{qtdeVotosGlobal[aecio]}}
