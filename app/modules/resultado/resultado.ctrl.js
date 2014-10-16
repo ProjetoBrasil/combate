@@ -43,7 +43,7 @@ angular
 				$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/#' + $location.url();
 				query = { hash : $scope.hashUsuario };
 				Facebook.api('/' + $scope.hashUsuario + '/picture', function(response) {
-					$scope.avatarUrl = response.data.url;
+					$scope.avatarUrl = response.data ? response.data.url : null;
 				});
 				ResultadoService.userName.get({
 					hash: $scope.hashUsuario
@@ -58,6 +58,10 @@ angular
 				});
 			}
 
+			$scope.linkTwitter = function(link){
+				return encodeURIComponent(link);
+			};
+
 			$scope.facebook = function(){
 				Facebook.ui({
 					method: 'feed',
@@ -66,7 +70,7 @@ angular
 					picture: 'http://combate.projetobrasil.org/images/com-cache/logo_ufc.5403714a.png',
 					caption: 'Urna Fighter Combat - Projeto Brasil',
 					description: 'Veja quem venceu o combate de propostas. Dilma ou Aécio?',
-					message: ''
+					message: 'Eu joguei o Urna Fighter Combat! Quer saber qual dos candidatos venceu a minha disputa?'
 				});
 			};
 
