@@ -39,14 +39,14 @@ angular
 			var query = {};
 
 			if($scope.hashUsuario){
-				$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/%23' + $location.url();
+				$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/#' + $location.url();
 				query = { hash : $scope.hashUsuario };
 				Facebook.api('/' + $scope.hashUsuario + '/picture', function(response) {
 					$scope.avatarUrl = response.data.url;
 				});
 			}else{
 				$scope.hashUsuario = userHash.get(function(){
-					$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/%23' + $location.url() + '/' + $scope.hashUsuario;
+					$scope.linkCompartilhamento = 'http://combate.projetobrasil.org/#' + $location.url() + '/' + $scope.hashUsuario;
 				});
 			}
 
@@ -55,8 +55,7 @@ angular
 					method: 'feed',
 					name: 'Urna Fighter Combat',
 					link: $scope.linkCompartilhamento,
-					picture: $scope.avatarUrl,
-					// picture: '//combate.projetobrasil.org/images/com-cache/logo_ufc.png',
+					picture: '//combate.projetobrasil.org/images/com-cache/logo_ufc.png',
 					caption: 'Projeto Brasil',
 					description: 'Veja meu resultado no Urna Fighter Combat e compare com a pontuação nacional',
 					message: ''
