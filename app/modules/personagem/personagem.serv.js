@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.personagem.services', [])
-	.factory('Personagens', ['$rootScope', '$document', 'PropostasServ', 'GerenciadorJogo',
-		function ($rootScope, $document, PropostasServ, Jogo) {
+	.factory('Personagens', ['$rootScope', '$document', 'PropostasServ', 'GerenciadorJogo', 'Audio',
+		function ($rootScope, $document, PropostasServ, Jogo, Audio) {
 
 		var gerenciador = {};
 		var personagens = {};
@@ -15,8 +15,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		var frameSize = { width: 476, height: 500 };
 		var tamFigurasGolpe = { height: 195 };
 
-		var queue = new createjs.LoadQueue();
-		queue.installPlugin(createjs.Sound);
+		var queue = Audio.loadQueue;
 
 		gerenciador.inicializa = function(){
 			gerenciador.reset();
@@ -31,7 +30,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				arena.addChild(p.sprites.ginga);
 			});
 
-			createjs.Sound.play("fundo", {loop:-1});
+			Audio.tocaAudio('fundo', -1);
 
 			Jogo.dialogRound();
 		};
@@ -74,9 +73,11 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				var imagemTema = PropostasServ.getNomePastaTema(tema);
 				manifest.push({id: tema, src: '/images/sem-cache/golpes/'+imagemTema+'.png'});
 			});
-			// Adiciona sons à lista de download
-			queue.loadFile({id:"fundo", src:"sounds/fundo.mp3"});
-			queue.loadFile({id:"ataque", src:"sounds/ataque.mp3"})
+			// Adiciona os arquivos de áudio à lista de download
+			var arquivosAudio = Audio.arquivosAudio;
+			_.each(arquivosAudio, function(arquivo) {
+				queue.loadFile(arquivo);
+			});
 
 			// Prepara sprites dos personagens
 			var ids = $rootScope.idsCandidatos;
@@ -195,8 +196,8 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 			function golpeia(scale, posX, angle, regX, regY){
 				if(scale >= 1){
-					createjs.Sound.play("ataque");
 					gerenciador.animaPow(id);
+					Audio.tocaAudio('porrada');
 					gerenciador.dano(id);
 					arena.removeChildAt(golpe.index);
 					sucesso();

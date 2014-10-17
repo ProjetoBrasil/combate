@@ -4,9 +4,11 @@ angular
 	.module('projetobrasil.ufc.home.controllers', [
 		'ngDialog'
 		])
-	.controller('HomeCtrl', function($scope, ngDialog, $state, UserLogin){
+	.controller('HomeCtrl', function($scope, ngDialog, $state, UserLogin, Audio){
 
 		var dialog;
+
+		Audio.tocaAudio('inicio')
 
 		$scope.openLoginModal = function(){
 			dialog = ngDialog.open({
@@ -19,6 +21,8 @@ angular
 
 		$scope.jogar = function(){
 			if(UserLogin.isUserLogged()){
+				Audio.paraAudio('inicio');
+				Audio.tocaAudio('brasil');
 				$state.go('jogo');
 			} else {
 				$scope.openLoginModal();
@@ -26,6 +30,8 @@ angular
 		};
 
 		$scope.$on('login', function(){
+			Audio.paraAudio('inicio');
+			Audio.tocaAudio('brasil');
 			$state.go('jogo');
 			dialog.close();
 		});
