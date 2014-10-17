@@ -17,7 +17,8 @@
     "ngDialog": "~0.3.0",
     "bootstrap-social": "~4.8.0",
     "angularytics": "~0.3.0",
-    "angular-facebook": "~0.2.3"
+    "angular-facebook": "~0.2.3",
+    "SoundJS": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

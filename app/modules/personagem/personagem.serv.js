@@ -15,6 +15,9 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 		var frameSize = { width: 476, height: 500 };
 		var tamFigurasGolpe = { height: 195 };
 
+		var queue = new createjs.LoadQueue();
+		queue.installPlugin(createjs.Sound);
+
 		gerenciador.inicializa = function(){
 			gerenciador.reset();
 			gerenciador.criaCanvas();
@@ -27,6 +30,8 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 			_.each(personagens, function(p){
 				arena.addChild(p.sprites.ginga);
 			});
+
+			createjs.Sound.play("fundo", {loop:-1});
 
 			Jogo.dialogRound();
 		};
@@ -61,7 +66,6 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				return;
 			}
 
-			var queue = new createjs.LoadQueue();
 			var manifest = [];
 
 			// Prepara imagens de ataque por tema
@@ -70,6 +74,9 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 				var imagemTema = PropostasServ.getNomePastaTema(tema);
 				manifest.push({id: tema, src: '/images/sem-cache/golpes/'+imagemTema+'.png'});
 			});
+			// Adiciona sons à lista de download
+			queue.loadFile({id:"fundo", src:"sounds/fundo.mp3"});
+			queue.loadFile({id:"ataque", src:"sounds/ataque.mp3"})
 
 			// Prepara sprites dos personagens
 			var ids = $rootScope.idsCandidatos;
@@ -188,6 +195,7 @@ angular.module('projetobrasil.ufc.personagem.services', [])
 
 			function golpeia(scale, posX, angle, regX, regY){
 				if(scale >= 1){
+					createjs.Sound.play("ataque");
 					gerenciador.animaPow(id);
 					gerenciador.dano(id);
 					arena.removeChildAt(golpe.index);
