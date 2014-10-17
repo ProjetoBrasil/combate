@@ -64,6 +64,31 @@ angular
 			} else {
 				return false;
 			}
+		},
+		login: function(user, success, error){
+			promise = $http.post($rootScope.apiBaseUrl+'user/login', user)
+				.success(function(data, status, headers) {
+					isUserLogged = true;
+					loggedUserData = data.user;
+					$rootScope.$broadcast('login');
+					success(data);
+				})
+				.error(function(erro){
+					error(erro);
+				});
+		},
+		cadastrar: function(user, success, error){
+			promise =  $http.post($rootScope.apiBaseUrl + 'user/register', user)
+			.success(function(data, status, headers) {
+				isUserLogged = true;
+				loggedUserData = data.user;
+				$rootScope.$broadcast('login');
+				success();
+				ga('send', 'event', 'form', 'register');
+			})
+			.error(function(erro){
+				error(erro);
+			});
 		}
 	};
 }]);
