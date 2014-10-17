@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('projetobrasil.ufc.jogo.services', [])
-	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout', 'UserLogin',
-	 function ($rootScope, $state, Angularytics, ngDialog, $timeout, UserLogin){
+	.factory('GerenciadorJogo', ['$rootScope', '$state', 'Angularytics', 'ngDialog', '$timeout', 'UserLogin', 'Audio',
+	 function ($rootScope, $state, Angularytics, ngDialog, $timeout, UserLogin, Audio){
 		var maxRounds = 3;
 
 		var gerenciador = {
@@ -78,6 +78,8 @@ angular.module('projetobrasil.ufc.jogo.services', [])
 			});
 
 			$timeout(function() {
+				Audio.paraAudio('fundo');
+				Audio.tocaAudio('fim');
 				ngDialog.close(finalDialog);
 				gerenciador.reiniciaJogo();
 				$state.go('resultado');

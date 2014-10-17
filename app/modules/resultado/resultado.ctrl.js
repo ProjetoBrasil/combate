@@ -3,8 +3,8 @@
 angular
 	.module('projetobrasil.ufc.resultado.controllers', [])
 	.controller('ResultadoCtrl',
-	['$scope', '$rootScope', '$state', '$stateParams', '$location', 'ResultadoService' , 'Facebook', 'Angularytics',
-		function ($scope, $rootScope, $state, $stateParams, $location, ResultadoService, Facebook, Angularytics){
+	['$scope', '$rootScope', '$state', '$stateParams', '$location', 'ResultadoService' , 'Facebook', 'Angularytics', 'Audio',
+		function ($scope, $rootScope, $state, $stateParams, $location, ResultadoService, Facebook, Angularytics, Audio){
 			var ids = $rootScope.idsCandidatos;
 			$scope.qtdeVotosPessoal = {};
 			$scope.qtdeVotosGlobal = {};
@@ -12,6 +12,7 @@ angular
 			$scope.dilma = ids[0];
 
 			$scope.jogar = function(){
+				Audio.tocaAudio('brasil');
 				$state.go('jogo');
 			};
 
