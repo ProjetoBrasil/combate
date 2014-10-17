@@ -31,6 +31,8 @@ angular
 		};
 
 		$scope.$on('login', function(){
+			Audio.paraAudio('inicio');
+			Audio.tocaAudio('brasil');
 			$state.go('jogo');
 			dialog.close();
 		});

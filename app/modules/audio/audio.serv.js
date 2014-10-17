@@ -44,7 +44,6 @@ angular.module('projetobrasil.ufc.audio.services', [])
 		 * antes de tocá-lo
 		 */
 		function carregaETocaAudio(audioId, loop) {
-			console.log('carregando');
 			var arquivoAudio = _.find(audio.arquivosAudio, function(obj){ return obj.id == audioId; });
 			function handleLoad(event) {
 				instancias[audioId] = createjs.Sound.play(arquivoAudio.id, {loop: loop});
