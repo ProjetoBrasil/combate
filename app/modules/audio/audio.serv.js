@@ -44,11 +44,11 @@ angular.module('projetobrasil.ufc.audio.services', [])
 		 * antes de tocá-lo
 		 */
 		function carregaETocaAudio(audioId, loop) {
-			var arquivoAudio = _.find(audio.arquivosAudio, function(obj){ return obj.id == audioId; });
-			function handleLoad(event) {
+			var arquivoAudio = _.find(audio.arquivosAudio, function(obj){ return obj.id === audioId; });
+			function handleLoad() {
 				instancias[audioId] = createjs.Sound.play(arquivoAudio.id, {loop: loop});
 			}
-			createjs.Sound.addEventListener("fileload", handleLoad);
+			createjs.Sound.addEventListener('fileload', handleLoad);
 			createjs.Sound.registerSound(arquivoAudio);
 		}
 

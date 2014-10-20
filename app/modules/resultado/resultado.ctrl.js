@@ -75,9 +75,9 @@ angular
 					message: 'Eu joguei o Urna Fighter Combat! Quer saber qual dos candidatos venceu a minha disputa?'
 				}, function(response){
 					if (response && !response.error_code) {
-						Angularytics.trackEvent('Resultado', 'Compartilhamento concluído')
+						Angularytics.trackEvent('Resultado', 'Compartilhamento concluído');
 					} else {
-						Angularytics.trackEvent('Resultado', 'Erro no processo de compartilhamento')
+						Angularytics.trackEvent('Resultado', 'Erro no processo de compartilhamento');
 					}
 				});
 			};

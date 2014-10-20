@@ -69,8 +69,8 @@ angular.module('projetobrasil.ufc.propostas.services', [])
 					propostas.popBuffer();
 				}
 				$rootScope.comunicandoComServidor = true;
-			}, function(error){
-				if (requisitaAteObterResposta == true){
+			}, function(){
+				if (requisitaAteObterResposta === true){
 					$timeout(function() {
 						propostas.atualizaBuffer(true, ++errorCount);
 					}, 200);

@@ -8,7 +8,7 @@ angular
 
 		var dialog;
 
-		Audio.tocaAudio('inicio')
+		Audio.tocaAudio('inicio');
 
 		$scope.openLoginModal = function(){
 			dialog = ngDialog.open({
@@ -73,6 +73,6 @@ angular
 
 			function loginSucesso(){
 				ngDialog.close();
-			};
+			}
 		}
 	]);
